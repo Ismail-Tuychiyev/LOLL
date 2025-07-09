@@ -1,0 +1,2900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Page</title>
+  <link rel="stylesheet" href="styles (2).css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <a href="Korzina.html"><img src="images/ChatGPT Image 21 июн. 2025 г., 10_33_10.png" alt="Logo" class="logo"  style="width: 70px; height: auto;" /></a>
+
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Mahsulotni izlash..." />
+        <button onclick="searchProduct()">Search</button>
+      </div>
+
+      <div class="cart-icon">
+        <a href="Korzina.html">
+          <img src="https://cdn-icons-png.flaticon.com/128/428/428173.png" alt="Cart" />
+          <span id="sonsav">0</span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>HUSH KELIBSIZ</h2>
+  </section>
+
+<!-- Popup modal (avval yashirin) -->
+<!-- Popup modal (yarim ekran, pastdan chiqadigan, zamonaviy ko'rinish) -->
+<!-- Overlay fon (orqani qoraytirish uchun) -->
+<div id="overlay" class="overlay" onclick="closePopup()"></div>
+<div id="variationPopup" class="popup-modal">
+  <div class="popup-content">
+    <div class="popup-main">
+      <div class="popup-img-circle">
+        <img id="popupProductImg" src="" alt="Mahsulot rasm" />
+      </div>
+      <div>
+        <h4 id="popupProductName" class="popup-name" style="color: #007aff; margin-bottom: 10px;"></h4>
+        <p id="popupProductPrice" class="price" style="color: #4caf50;"></p>
+      </div>
+    </div>
+    <p id="popupProductColor" class="product-color" style="color: #000;">Rang: -</p>
+    <div id="colorOptions" class="image-options"></div>
+
+    <div class="popup-bottom-bar">
+      <button id="addToCartBtn" class="add-to-cart">Savatga</button>
+      <button onclick="closePopup()" class="cancel-btn">Bekor qilish</button>
+    </div>
+  </div>
+</div>
+
+    
+    <div id="goToCartBar" style="display: none;" class="go-to-cart-bar">
+      <button onclick="goToCart()">🛒 Savatga o'tish</button>
+    </div>
+  </div>
+  <div id="toast" class="toast-message">Mahsulot savatga qo‘shildi!</div>
+</div>
+
+
+
+<style>
+
+.toast-message {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.9s ease;
+  z-index: 9999;
+  box-shadow: #000;
+
+}
+.toast-message.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup-name {
+  position: relative;
+  bottom: 70px;
+  left: 95px;
+}
+
+.price {
+  position: relative;
+  bottom: 70px;
+  left: 95px;
+}
+.product-color {
+
+  position: relative;
+  bottom: 70px;
+  left: 95px;
+
+}
+
+.popup-main {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.popup-img-circle {
+  position: relative;
+  right: 87px;
+  width: 170px;
+  height: 170px;
+  border-radius: 15%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+ 
+  margin-bottom: -90px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.popup-img-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.popup-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.selected-color-label {
+  text-align: center;
+  font-weight: 500;
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: #444;
+}
+
+  
+  #overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4); /* orqa fonni qoraytiradi */
+  z-index: 999; /* popup ostida, lekin asosiy content ustida */
+  display: none;
+}
+
+  .go-to-cart-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  z-index: 999;
+}
+
+.go-to-cart-bar button {
+  background-color: #a88bfa;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+  .popup {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    z-index: 9999;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    animation: slideUp 0.3s ease-in-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .main-image {
+    width: 180px;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .main-img {
+  max-width: 70%;
+  max-height: 140px;
+  object-fit: contain;
+  border-radius: 8px;
+  
+}
+
+  .product-details {
+    text-align: center;
+  }
+
+  .price {
+    font-weight: 600;
+    color: #000;
+    font-size: 18px;
+  }
+
+  .image-options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .image-options img {
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    border: 2px solid transparent;
+    cursor: pointer;
+  }
+
+  .image-options img.selected {
+    border-color: #007aff;
+  }
+
+  .add-to-cart {
+    background-color: #7b61ff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 90%;
+  }
+
+  .cancel-btn {
+    background: none;
+    color: #888;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  #variationPopup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-height: 60vh;
+  background-color: white;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  z-index: 9999;
+  padding: 20px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+#variationPopup.show {
+  transform: translateY(0);
+}
+
+
+
+</style>
+
+
+
+
+
+  <section class="products" id="productsContainer">
+    <div class="product-group" data-category="bottle">
+      <h2>Suv idishlar</h2>
+      <div class="products-list">
+
+
+
+
+          <div class="product-card">
+            <a href="product.html?id=25-3">
+              <img src="images/IMG_5459.JPG" alt="NIKE GREEN" />
+            </a>
+            <h3>Ikktalik suv idish</h3>
+            <p>79 000</p>
+            <button onclick="openVariationPopup('25-3')">Savatga</button>
+           
+          </div>
+          <div class="product-card">
+            <a href="product.html?id=25-9">
+              <img src="images/IMG_5464.JPG" alt="NIKE GREEN" />
+            </a>
+            <h3>Ikktalik suv idish</h3>
+            <p>49 000</p>
+            <button onclick="openVariationPopup('25-9')">Savatga</button>
+            
+          </div>
+          <div class="product-card">
+            <a href="product.html?id=25-5">
+              <img src="images/IMG_5521.JPG" alt="NIKE GREEN" />
+            </a>
+            <h3>Airup suv idishi</h3>
+            <p>149 000</p>
+            <button onclick="openVariationPopup('25-5')">Savatga</button>
+            
+            <div class="product-card">
+              <a href="product.html?id=25-1">
+                <img src="images/IMG_5466.JPG" alt="NIKE GREEN" />
+              </a>
+              <h3>Ayiqli suv idish</h3>
+              <p>59 000</p>
+              <button onclick="openVariationPopup('25-1')">Savatga</button>
+             
+            </div>
+          </div>
+          <div class="product-card">
+            <a href="product.html?id=25-2">
+              <img src="images/IMG_5473.JPG" alt="" />
+            </a>
+            <h3>Ikktalik suv idish</h3>
+            <p>79 000</p>
+            <button onclick="openVariationPopup('25-2')">Savatga</button>
+            
+          </div>
+      </div>
+  
+      <div class="extra-items">
+        <div class="product-card">
+          <a href="product.html?id=25-4">
+            <img src="images/IMG_5476.JPG" alt="NIKE GREEN" />
+          </a>
+          <h3>Ikktalik suv idish</h3>
+          <p>79 000</p>
+          <button onclick="openVariationPopup('25-4')">Savatga</button>
+         
+        </div>
+        <div class="product-card">
+          <a href="product.html?id=25-6">
+            <img src="images/IMG_5481.JPG" alt="NIKE GREEN" />
+          </a>
+          <h3>Raqamli suv idish</h3>
+          <p>69 000</p>
+          <button onclick="openVariationPopup('25-6')">Savatga</button>
+          
+        </div>
+        
+        <div class="product-card">
+          <a href="product.html?id=32-35">
+            <img src="images/IMG_5486.JPG" alt="NIKE GREEN" />
+          </a>
+          <h3>Muzlik suv idish</h3>
+          <p>39 000</p>
+          <button onclick="openVariationPopup('32-35')">Savatga</button>
+        
+        </div>
+        
+        
+        <div class="product-card">
+          <a href="product.html?id=32-78">
+            <img src="images/IMG_5493.JPG" alt="NIKE GREEN" />
+          </a>
+          <h3>Disney suv idishi</h3>
+          <p>39 000</p>
+          <button onclick="openVariationPopup('32-78')">Savatga</button>
+         
+        </div>
+        
+        
+        <div class="product-card">
+          <a href="product.html?id=32-79">
+            <img src="images/IMG_5496.JPG" alt="NIKE GREEN" />
+          </a>
+          <h3>Ponchik suv idishi</h3>
+          <p>39 000</p>
+          <button onclick="openVariationPopup('32-79')">Savatga</button>
+         
+        </div>
+        
+        
+        <div class="product-card">
+          <a href="product.html?id=32-80">
+            <img src="images/IMG_5500.JPG" alt="NIKE GREEN" />
+          </a>
+          <h3>Mishka suv idishi</h3>
+          <p>39 000</p>
+          <button onclick="openVariationPopup('32-80')">Savatga</button>
+         
+        </div>
+        
+        
+        <div class="product-card">
+          <a href="product.html?id=25-8">
+            <img src="images/IMG_5506.JPG" alt="NIKE GREEN" />
+          </a>
+          <h3>Maroshnilik suv idish</h3>
+          <p>79 000</p>
+          <button onclick="openVariationPopup('25-8')">Savatga</button>
+         
+        </div>
+        
+        
+        
+        <div class="product-card">
+          <a href="product.html?id=25-7">
+            <img src="images/IMG_5508.JPG" alt="NIKE GREEN" />
+          </a>
+          <h3>Oreolik suv idish</h3>
+          <p>79 000</p>
+          <button onclick="openVariationPopup('25-7')">Savatga</button>
+         
+        </div>
+        
+        
+        <div class="product-card">
+          <a href="product.html?id=32-33">
+            <img src="images/IMG_5511.JPG" alt="NIKE GREEN" />
+          </a>
+          <h3>Stitch suv idish</h3>
+          <p>39 000</p>
+          <button onclick="openVariationPopup('32-33')">Savatga</button>
+          
+        </div>
+        
+        
+        <div class="product-card">
+          <a href="product.html?id=32-34">
+            <img src="images/IMG_5517.JPG" alt="NIKE GREEN" />
+          </a>
+          <h3>Panda suv idish</h3>
+          <p>39 000</p>
+          <button onclick="openVariationPopup('32-34')">Savatga</button>
+         
+        </div>
+        
+        
+        <div class="product-card">
+          <a href="product.html?id=25-5">
+            <img src="images/IMG_5521.JPG" alt="NIKE GREEN" />
+          </a>
+          <h3>Airup suv idishi</h3>
+          <p>149 000</p>
+          <button onclick="openVariationPopup('25-5')">Savatga</button>
+          
+        </div>
+      </div>
+  
+      <button class="see-more">Ko‘proq ko‘rsat ▼</button>
+    </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="product-group" data-category="dishes">
+      <h2>Bolalar idish toplami</h2>
+      <div class="products-list">
+
+
+      <div class="product-card" data-category="dishes">
+        <a href="product.html?id=A-8">
+          <img src="images/IMG_5662.JPG" alt="NIKE GREEN" />
+        </a>
+        <h3>Disney</h3>
+        <p>59 000</p>
+        <button onclick="openVariationPopup('A-8')">Savatga</button>
+        
+      </div>
+      
+      
+      <div class="product-card" data-category="dishes">
+        <a href="product.html?id=A-8">
+          <img src="images/IMG_5660.JPG" alt="" />
+        </a>
+        <h3>Disney</h3>
+        <p>59 000</p>
+        <button onclick="openVariationPopup('A-8')">Savatga</button>
+      </div>
+      
+      
+      
+      <div class="product-card" data-category="dishes">
+        <a href="product.html?id=A-9">
+          <img src="images/IMG_5659.JPG" alt="" />
+        </a>
+        <h3>Chaqmoq makvin</h3>
+        <p>59 000</p>
+        <button onclick="openVariationPopup('A-9')">Savatga</button>
+      </div>
+      
+      
+      <div class="product-card" data-category="dishes">
+        <a href="product.html?id=A-11">
+          <img src="images/IMG_5658.JPG" alt="" />
+        </a>
+        <h3>Hello Kitty</h3>
+        <p>59 000</p>
+        <button onclick="openVariationPopup('A-11')">Savatga</button>
+      </div>
+      
+    </div>
+
+    <div class="extra-items">
+      
+      <div class="product-card" data-category="dishes">
+        <a href="product.html?id=A-3">
+          <img src="images/IMG_5657.JPG" alt="" />
+        </a>
+        <h3>Stitch</h3>
+        <p>59 000</p>
+        <button onclick="openVariationPopup('A-3')">Savatga</button>
+      </div>
+      
+      
+      
+      <div class="product-card" data-category="dishes">
+        <a href="product.html?id=A-6">
+          <img src="images/IMG_5656.JPG" alt="" />
+        </a>
+        <h3>Makvin</h3>
+        <p>59 000</p>
+        <button onclick="openVariationPopup('A-6')">Savatga</button>
+      </div>
+      
+        
+      
+      <div class="product-card" data-category="dishes">
+        <a href="product.html?id=A-10">
+          <img src="images/IMG_5655.JPG" alt="" />
+        </a>
+        <h3>Super Mario</h3>
+        <p>59 000</p>
+        <button onclick="openVariationPopup('A-10')">Savatga</button>
+      </div>
+      
+      
+      
+      
+      <div class="product-card" data-category="dishes">
+        <a href="product.html?id=A-12">
+          <img src="images/IMG_5654.JPG" alt="" />
+        </a>
+        <h3>Frozen</h3>
+        <p>59 000</p>
+        <button onclick="openVariationPopup('A-12')">Savatga</button>
+      </div>
+      
+      
+      <div class="product-card" data-category="dishes">
+        <a href="product.html?id=A-8">
+          <img src="images/IMG_5653.JPG" alt="" />
+        </a>
+        <h3>Disney</h3>
+        <p>59 000</p>
+        <button onclick="openVariationPopup('A-8')">Savatga</button>
+      </div>
+      
+      
+      
+      <div class="product-card" data-category="dishes">
+        <a href="product.html?id=A-7">
+          <img src="images/IMG_5651.JPG" alt="" />
+        </a>
+        <h3>Spiderman</h3>
+        <p>59 000</p>
+        <button onclick="openVariationPopup('A-7')">Savatga</button>
+      </div>
+      
+      <div class="product-card" data-category="dishes">
+        <a href="product.html?id=A-4">
+          <img src="images/IMG_5652.JPG" alt="" />
+        </a>
+        <h3>Malika Sofia</h3>
+        <p>59 000</p>
+        <button onclick="openVariationPopup('A-4')">Savatga</button>
+      </div>
+      
+      <div class="product-card" data-category="dishes">
+        <a href="product.html?id=A-1">
+          <img src="images/IMG_5650.JPG" alt="" />
+        </a>
+        <h3>Disney Minnte</h3>
+        <p>59 000</p>
+        <button onclick="openVariationPopup('A-1')">Savatga</button>
+      </div>
+      
+      <div class="product-card" data-category="dishes">
+        <a href="product.html?id=A-2">
+          <img src="images/IMG_5649.JPG" alt="" />
+        </a>
+        <h3>Kuromi</h3>
+        <p>59 000</p>
+        <button onclick="openVariationPopup('A-2')">Savatga</button>
+      </div>
+      
+
+<div>
+
+      <button class="see-more">Ko‘proq ko‘rsat ▼</button>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="product-group" data-category="launch">
+      <h2>Lounch box</h2>
+      <div class="products-list">
+          <div class="product-card"   data-category="launch" >
+            <a href="product.html?id=32-24">
+              <img src="images/IMG_5666.JPG" alt="" />
+            </a>
+            <h3>Launch box</h3>
+            <p>44 000</p>
+            <button onclick="openVariationPopup('32-24')">Savatga</button>
+          </div>
+    
+          <div class="product-card" data-category="launch">
+            <a href="product.html?id=32-15">
+              <img src="images/IMG_5670.JPG" alt="" />
+            </a>
+            <h3>Launch box GOURMET</h3>
+            <p>59 000</p>
+            <button onclick="openVariationPopup('32-15')">Savatga</button>
+          </div>
+    
+          <div class="product-card" data-category="launch">
+            <a href="product.html?id=32-14">
+              <img src="images/IMG_5674.JPG" alt="" />
+            </a>
+            <h3>Ayiq Launch box</h3>
+            <p>59 000</p>
+            <button onclick="openVariationPopup('32-14')">Savatga</button>
+          </div>
+    
+          <div class="product-card" data-category="launch">
+            <a href="product.html?id=32-17">
+              <img src="images/IMG_5676.JPG" alt="" />
+            </a>
+            <h3>Panda Launch box</h3>
+            <p>39 000</p>
+            <button onclick="openVariationPopup('32-17')">Savatga</button>
+          </div>
+      </div>
+  
+      <div class="extra-items" data-category="launch">
+        <div class="product-card">
+          <a href="product.html?id=32-25">
+            <img src="images/IMG_5678.JPG" alt="" />
+          </a>
+          <h3>Launch box</h3>
+          <p>39 000</p>
+          <button onclick="openVariationPopup('32-25')">Savatga</button>
+        </div>
+
+
+        <div class="product-card" data-category="launch">
+          <a href="product.html?id=32-25">
+            <img src="images/IMG_5678.JPG" alt="" />
+          </a>
+          <h3>Launch box</h3>
+          <p>39 000</p>
+          <button onclick="openVariationPopup('32-25')">Savatga</button>
+        </div>
+        
+        <div class="product-card" data-category="launch">
+          <a href="product.html?id=32-27">
+            <img src="images/IMG_5681.JPG" alt="" />
+          </a>
+          <h3>Gobbler Launch box</h3>
+          <p>36 000</p>
+          <button onclick="openVariationPopup('32-27')">Savatga</button>
+        </div>
+        
+        
+        
+        
+        <div class="product-card" data-category="launch">
+          <a href="product.html?id=32-6">
+            <img src="images/IMG_5684.JPG" alt="" />
+          </a>
+          <h3>Launch box burger</h3>
+          <p>39 000</p>
+          <button onclick="openVariationPopup('32-6')">Savatga</button>
+        </div>
+        
+        
+        
+        <div class="product-card" data-category="launch">
+          <a href="product.html?id=32-12">
+            <img src="images/IMG_5688.JPG" alt="" />
+          </a>
+          <h3>Launch box 2x</h3>
+          <p>39 000</p>
+          <button onclick="openVariationPopup('32-12')">Savatga</button>
+        </div>
+        
+        
+        
+        
+        <div class="product-card " data-category="launch">
+          <a href="product.html?id=32-5">
+            <img src="images/IMG_5693.JPG" alt="" />
+          </a>
+          <h3>Launch box 2x</h3>
+          <p>39 000</p>
+          <button onclick="openVariationPopup('32-5')">Savatga</button>
+        </div>
+        
+        <div class="product-card" data-category="launch">
+          <a href="product.html?id=32-9">
+            <img src="images/IMG_5696.JPG" alt="" />
+          </a>
+          <h3>Launch box 2x</h3>
+          <p>39 000</p>
+          <button onclick="openVariationPopup('32-9')">Savatga</button>
+        </div>
+        
+        <div class="product-card" data-category="launch">
+          <a href="product.html?id=32-10">
+            <img src="images/IMG_5700.JPG" alt="" />
+          </a>
+          <h3>Launch box 2x</h3>
+          <p>39 000</p>
+          <button onclick="openVariationPopup('32-10')">Savatga</button>
+        </div>
+        
+        
+        
+        <div class="product-card" data-category="launch">
+          <a href="product.html?id=32-11">
+            <img src="images/IMG_5704.JPG" alt="" />
+          </a>
+          <h3>Launch box 2x</h3>
+          <p>39 000</p>
+          <button onclick="openVariationPopup('32-11')">Savatga</button>
+        </div>
+      </div>
+  
+      <button class="see-more">Ko‘proq ko‘rsat ▼</button>
+    </div>
+
+
+
+
+
+
+    <div class="product-group" data-category="Vinchiklar">
+      <h2>Vinchiklar</h2>
+      <div class="products-list">
+        <div class="product-card" data-category="Vinchiklar">
+          <a href="product.html?id=13-67">
+            <img src="images/IMG_5787.JPG" alt="" />
+          </a>
+          <h3>Vinchik</h3>
+          <p>16 000</p>
+          <button onclick="openVariationPopup('13-67')">Savatga</button>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <div class="product-card" data-category="Vinchiklar">
+          <a href="product.html?id=13-75">
+            <img src="images/IMG_5791.JPG" alt="" />
+          </a>
+          <h3>Vinchik rangli 24sm</h3>
+          <p>9 000</p>
+          <button onclick="openVariationPopup('13-75')">Savatga</button>
+        </div>
+        
+        <div class="product-card" data-category="Vinchiklar">
+          <a href="product.html?id=13-75o">
+            <img src="images/IMG_5801.JPG" alt="" />
+          </a>
+          <h3>Vinchik rangli 30sm</h3>
+          <p>9 000</p>
+          <button onclick="openVariationPopup('13-75o')">Savatga</button>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        <div class="product-card" data-category="Vinchiklar">
+          <a href="product.html?id=9-48">
+            <img src="images/IMG_5802.JPG" alt="" />
+          </a>
+          <h3>Geliviy Vinchik rangli</h3>
+          <p>15 000</p>
+          <button onclick="openVariationPopup('9-48')">Savatga</button>
+        </div>
+        
+        
+        
+        
+        <div class="product-card" data-category="Vinchiklar">
+          <a href="product.html?id=13-75">
+            <img src="images/IMG_5794.JPG" alt="" />
+          </a>
+          <h3>Vinchik </h3>
+          <p>14 000</p>
+          <button onclick="openVariationPopup('13-75')">Savatga</button>
+        </div>
+      </div>
+  
+      <div class="extra-items">
+        <div class="product-card" data-category="Vinchiklar">
+          <a href="product.html?id=13-77">
+            <img src="images/IMG_5796.JPG" alt="" />
+          </a>
+          <h3>Vinchik katta</h3>
+          <p>17 000</p>
+          <button onclick="openVariationPopup('13-77')">Savatga</button>
+        </div>
+        
+        
+        <div class="product-card" data-category="Vinchiklar">
+          <a href="product.html?id=9-48">
+            <img src="images/IMG_5804.JPG" alt="" />
+          </a>
+          <h3>Selekon Vinchik</h3>
+          <p>14 000</p>
+          <button onclick="openVariationPopup('9-48')">Savatga</button>
+        </div>
+        
+        <div class="product-card" data-category="Vinchiklar">
+          <a href="product.html?id=9-50">
+            <img src="images/IMG_5805.JPG" alt="" />
+          </a>
+          <h3>Vinchik Temir</h3>
+          <p>20 000</p>
+          <button onclick="openVariationPopup('9-50')">Savatga</button>
+        </div>
+        
+        
+        
+        <div class="product-card" data-category="Vinchiklar">
+          <a href="product.html?id=13-66">
+            <img src="images/IMG_5807.JPG" alt="" />
+          </a>
+          <h3>Vinchik Purjinalik</h3>
+          <p>18 000</p>
+          <button onclick="openVariationPopup('13-66')">Savatga</button>
+        </div>
+        
+        
+        
+        <div class="product-card" data-category="Vinchiklar">
+          <a href="product.html?id=20-17">
+            <img src="images/IMG_5808.JPG" alt="" />
+          </a>
+          <h3>Vinchik Tilla</h3>
+          <p>29 000</p>
+          <button onclick="openVariationPopup('20-17')">Savatga</button>
+        </div>
+        
+        
+        
+        <div class="product-card" data-category="Vinchiklar">
+          <a href="product.html?id=20-20">
+            <img src="images/IMG_5809.JPG" alt="" />
+          </a>
+          <h3>Vinchik Tilla</h3>
+          <p>19 000</p>
+          <button onclick="openVariationPopup('20-20')">Savatga</button>
+        </div>
+        
+      </div>
+  
+      <button class="see-more">Ko‘proq ko‘rsat ▼</button>
+    </div>
+
+
+    <div class="product-group" data-category="Chipsilar">
+      <h2>Chipsilar</h2>
+      <div class="products-list">
+        
+
+
+        <div class="product-card"  data-category="Chipsilar">
+          <a href="product.html?id=13-63">
+            <img src="images/IMG_5810.JPG" alt="" />
+          </a>
+          <h3>Chipsi Qora</h3>
+          <p>16 000</p>
+          <button onclick="openVariationPopup('20-20')">Savatga</button>
+        </div>
+        
+        
+        <div class="product-card" data-category="Chipsilar">
+          <a href="product.html?id=13-58">
+            <img src="images/IMG_5821.JPG" alt="" />
+          </a>
+          <h3>Chipsi Selekon</h3>
+          <p>15 000</p>
+          <button onclick="openVariationPopup('13-58')">Savatga</button>
+        </div>
+        
+        <div class="product-card" data-category="Chipsilar">
+          <a href="product.html?id=13-58">
+            <img src="images/IMG_5820.JPG" alt="" />
+          </a>
+          <h3>Chipsi Selekon</h3>
+          <p>15 000</p>
+          <button onclick="openVariationPopup('13-58')">Savatga</button>
+        </div>
+        
+        <div class="product-card" data-category="Chipsilar">
+          <a href="product.html?id=13-58">
+            <img src="images/IMG_5817.JPG" alt="" />
+          </a>
+          <h3>Chipsi Selekon</h3>
+          <p>15 000</p>
+          <button onclick="openVariationPopup('13-58')">Savatga</button>
+        </div>
+        
+        <div class="product-card" data-category="Chipsilar">
+          <a href="product.html?id=13-58">
+            <img src="images/IMG_5815.JPG" alt="" />
+          </a>
+          <h3>Chipsi Selekon</h3>
+          <p>15 000</p>
+          <button onclick="openVariationPopup('13-58')">Savatga</button>
+        </div>
+
+
+
+      </div>
+  
+      <div class="extra-items" data-category="Chipsilar">
+        <div class="product-card">
+          <a href="product.html?id=13-58">
+            <img src="images/IMG_5815.JPG" alt="" />
+          </a>
+          <h3>Chipsi Selekon</h3>
+          <p>15 000</p>
+          <button onclick="openVariationPopup('13-58')">Savatga</button>
+        </div>
+
+      </div>
+  
+      <button class="see-more">Ko‘proq ko‘rsat ▼</button>
+    </div>
+
+
+
+
+
+    <div class="product-group" data-category="Melichofkalar">
+      <h2>Lounch box</h2>
+      <div class="products-list">
+       
+        <div class="product-card" data-category="Melichofkalar">
+          <a href="product.html?id=13-89">
+            <img src="images/IMG_5823.JPG" alt="" />
+          </a>
+          <h3>Pizza rezka</h3>
+          <p>19 000</p>
+          <button onclick="openVariationPopup('13-89')">Savatga</button>
+        </div>
+        
+        
+        
+        <div class="product-card" data-category="Melichofkalar">
+          <a href="product.html?id=13-96">
+            <img src="images/IMG_5834.JPG" alt="" />
+          </a>
+          <h3>Economka</h3>
+          <p>16 000</p>
+          <button onclick="openVariationPopup('13-96')">Savatga</button>
+        </div>
+        
+        
+        <div class="product-card" data-category="Melichofkalar">
+          <a href="product.html?id=13-101">
+            <img src="images/IMG_5826.JPG" alt="" />
+          </a>
+          <h3>Hamir keskich</h3>
+          <p>18 000</p>
+          <button onclick="openVariationPopup('13-101')">Savatga</button>
+        </div>
+        
+        <div class="product-card" data-category="Melichofkalar">
+          <a href="product.html?id=13-93">
+            <img src="images/IMG_5829.JPG" alt="" />
+          </a>
+          <h3>Qirgich</h3>
+          <p>16 000</p>
+          <button onclick="openVariationPopup('13-93')">Savatga</button>
+        </div>
+        
+        
+
+
+      </div>
+     
+
+
+      
+
+      
+      <div class="extra-items">
+        <div class="product-card" data-category="Melichofkalar">
+          <a href="product.html?id=13-98">
+            <img src="images/IMG_5827.JPG" alt="" />
+          </a>
+          <h3>Sita</h3>
+          <p>16 000</p>
+          <button onclick="openVariationPopup('13-98')">Savatga</button>
+        </div>
+        
+        
+        
+        <div class="product-card" data-category="Melichofkalar">
+          <a href="product.html?id=13-90">
+            <img src="images/IMG_5825.JPG" alt="" />
+          </a>
+          <h3>Pitsa shpatel</h3>
+          <p>18 000</p>
+          <button onclick="openVariationPopup('13-90')">Savatga</button>
+        </div>
+        
+        <div class="product-card" data-category="Melichofkalar">
+          <a href="product.html?id=13-99">
+            <img src="images/IMG_5828.JPG" alt="" />
+          </a>
+          <h3>Hamir keskich kichkina</h3>
+          <p>16 000</p>
+          <button onclick="openVariationPopup('13-99')">Savatga</button>
+        </div>
+  
+  
+  
+        <div class="product-card" data-category="Melichofkalar">
+          <a href="product.html?id=13-94">
+            <img src="images/IMG_5830.JPG" alt="" />
+          </a>
+          <h3>Qirgich</h3>
+          <p>16 000</p>
+          <button onclick="openVariationPopup('13-94')">Savatga</button>
+        </div>
+        
+        
+        
+        
+        <div class="product-card" data-category="Melichofkalar">
+          <a href="product.html?id=13-100">
+            <img src="images/IMG_5833.JPG" alt="" />
+          </a>
+          <h3>Buranda</h3>
+          <p>16 000</p>
+          <button onclick="openVariationPopup('13-100')">Savatga</button>
+        </div>
+        
+        
+        <div class="product-card" data-category="Melichofkalar">
+          <a href="product.html?id=13-96">
+            <img src="images/IMG_5834.JPG" alt="" />
+          </a>
+          <h3>Economka</h3>
+          <p>16 000</p>
+          <button onclick="openVariationPopup('13-96')">Savatga</button>
+        </div>
+        
+        <div class="product-card" data-category="Melichofkalar">
+          <a href="product.html?id=13-95">
+            <img src="images/IMG_5835.JPG" alt="" />
+          </a>
+          <h3>Economka</h3>
+          <p>16 000</p>
+          <button onclick="openVariationPopup('13-95')">Savatga</button>
+        </div>
+        
+        
+        <div class="product-card" data-category="Melichofkalar">
+          <a href="product.html?id=13-91">
+            <img src="images/IMG_5836.JPG" alt="" />
+          </a>
+          <h3>Hamir keskich</h3>
+          <p>27 000</p>
+          <button onclick="openVariationPopup('13-91')">Savatga</button>
+        </div>
+        
+        
+        
+   
+
+
+
+
+
+
+<div class="product-card" data-category="Melichofkalar">
+  <a href="product.html?id=9-16">
+    <img src="images/IMG_5841.JPG" alt="" />
+  </a>
+  <h3>Konserva ochgich</h3>
+  <p>49 000</p>
+  <button onclick="openVariationPopup('9-16')">Savatga</button>
+</div>
+
+
+<div class="product-card" data-category="Melichofkalar">
+  <a href="product.html?id=9-13">
+    <img src="images/IMG_5842.JPG" alt="" />
+  </a>
+  <h3>Economka</h3>
+  <p>27 000</p>
+  <button onclick="openVariationPopup('9-13')">Savatga</button>
+</div>
+
+
+<div class="product-card" data-category="Melichofkalar">
+  <a href="product.html?id=9-18">
+    <img src="images/IMG_5843.JPG" alt="" />
+  </a>
+  <h3>Bolga</h3>
+  <p>47 000</p>
+  <button onclick="openVariationPopup('9-18')">Savatga</button>
+</div>
+
+
+
+
+
+<div class="product-card" data-category="Melichofkalar">
+  <a href="product.html?id=9-6">
+    <img src="images/IMG_5845.JPG" alt="" />
+  </a>
+  <h3>Bolga qora rangli</h3>
+  <p>47 000</p>
+  <button onclick="openVariationPopup('9-6')">Savatga</button>
+</div>
+
+
+
+
+
+      </div>
+  
+      <button class="see-more">Ko‘proq ko‘rsat ▼</button>
+    </div>
+
+
+
+    <div class="product-group" data-category="Muz idishlar">
+      <h2>Muz idishlar</h2>
+      <div class="products-list">
+       
+
+
+        <div class="product-card" data-category="Muz idishlar">
+          <a href="product.html?id=13-79">
+            <img src="images/IMG_6297.JPG" alt="" />
+          </a>
+          <h3>Muz chalar</h3>
+          <p>15 000</p>
+          <button onclick="openVariationPopup('13-79')">Savatga</button>
+        </div>
+        
+        
+        
+        
+        
+        <div class="product-card" data-category="Muz idishlar">
+          <a href="product.html?id=20-48">
+            <img src="images/IMG_6012.JPG" alt="" />
+          </a>
+          <h3>Muz idish</h3>
+          <p>55 000</p>
+          <button onclick="openVariationPopup('20-48')">Savatga</button>
+        </div>
+        
+        
+        
+        
+        <div class="product-card" data-category="Muz idishlar">
+          <a href="product.html?id=20-46">
+            <img src="images/IMG_6017.JPG" alt="" />
+          </a>
+          <h3>Muz idish</h3>
+          <p>9 000</p>
+          <button onclick="openVariationPopup('20-46')">Savatga</button>
+        </div>
+        
+        
+        <div class="product-card" data-category="Muz idishlar">
+          <a href="product.html?id=32-67">
+            <img src="images/IMG_6021.JPG" alt="" />
+          </a>
+          <h3>Muz idish</h3>
+          <p>9 000</p>
+          <button onclick="openVariationPopup('32-67')">Savatga</button>
+        </div>
+        
+
+      </div>
+  
+      
+        
+
+
+      <div class="extra-items">
+       
+
+        <div class="product-card" data-category="Muz idishlar">
+          <a href="product.html?id=20-39">
+            <img src="images/IMG_6280.JPG" alt="" />
+          </a>
+          <h3>Muzqaymoq Sharik</h3>
+          <p>35 000</p>
+          <button onclick="openVariationPopup('20-39')">Savatga</button>
+        </div>
+        
+        
+        <div class="product-card" data-category="Muz idishlar">
+          <a href="product.html?id=20-97">
+            <img src="images/IMG_6277.JPG" alt="" />
+          </a>
+          <h3>Muzqaymoq sharik</h3>
+          <p>19 000</p>
+          <button onclick="openVariationPopup('20-97')">Savatga</button>
+        </div>
+        
+  
+        
+        
+      
+
+      </div>
+  
+      <button class="see-more">Ko‘proq ko‘rsat ▼</button>
+    </div>
+
+
+
+
+
+
+
+    <div class="product-group" data-category="Podchayniklar">
+      <h2>Choynak tagi uchun</h2>
+      <div class="products-list">
+
+
+        <div class="product-card" data-category="Podchayniklar">
+          <a href="product.html?id=4-20">
+            <img src="images/IMG_6223.JPG" alt="" />
+          </a>
+          <h3>Podchaynik</h3>
+          <p>15 000</p>
+          <button onclick="openVariationPopup('4-20')">Savatga</button>
+        </div>
+
+        <div class="product-card" data-category="Podchayniklar">
+          <a href="product.html?id=8-2">
+            <img src="images/IMG_6202.JPG" alt="" />
+          </a>
+          <h3>Podchaynik</h3>
+          <p>9 000</p>
+          <button onclick="openVariationPopup('8-2')">Savatga</button>
+        </div>
+
+
+        <div class="product-card" data-category="Podchayniklar">
+          <a href="product.html?id=4-16">
+            <img src="images/IMG_6211.JPG" alt="" />
+          </a>
+          <h3>Podchaynik</h3>
+          <p>9 000</p>
+          <button onclick="openVariationPopup('4-16')">Savatga</button>
+        </div>
+
+        <div class="product-card" data-category="Podchayniklar">
+          <a href="product.html?id=13-126">
+            <img src="images/IMG_6212.JPG" alt="" />
+          </a>
+          <h3>Podchaynik kvadratlik</h3>
+          <p>12 000</p>
+          <button onclick="openVariationPopup('13-126')">Savatga</button>
+        </div>
+
+        
+
+      </div>
+  
+      
+        
+
+
+      <div class="extra-items">
+
+        <div class="product-card" data-category="Podchayniklar">
+          <a href="product.html?id=8-1">
+            <img src="images/IMG_6203.JPG" alt="" />
+          </a>
+          <h3>Podchaynik</h3>
+          <p>9 000</p>
+          <button onclick="openVariationPopup('8-1')">Savatga</button>
+        </div>
+      
+        <div class="product-card" data-category="Podchayniklar">
+          <a href="product.html?id=4-19">
+            <img src="images/IMG_6226.JPG" alt="" />
+          </a>
+          <h3>Podchaynik</h3>
+          <p>16 000</p>
+          <button onclick="openVariationPopup('4-19')">Savatga</button>
+        </div>
+
+
+        <div class="product-card" data-category="Podchayniklar">
+          <a href="product.html?id=13-124">
+            <img src="images/IMG_6227.JPG" alt="" />
+          </a>
+          <h3>Podchaynik</h3>
+          <p>16 000</p>
+          <button onclick="openVariationPopup('13-124')">Savatga</button>
+        </div>
+
+        <div class="product-card" data-category="Podchayniklar">
+          <a href="product.html?id=4-15">
+            <img src="images/IMG_4062.JPG" alt="" />
+          </a>
+          <h3>Podchaynik</h3>
+          <p>16 000</p>
+          <button onclick="openVariationPopup('4-15')">Savatga</button>
+        </div>
+
+       
+        
+
+      </div>
+  
+      <button class="see-more">Ko‘proq ko‘rsat ▼</button>
+    </div>
+
+
+
+    <div class="product-group" data-category="Pichoqlar">
+      <h2>Choynak tagi uchun</h2>
+      <div class="products-list">
+
+
+     
+        <div class="product-card" data-category="Pichoqlar">
+          <a href="product.html?id=13-145">
+            <img src="images/IMG_5965.JPG" alt="" />
+          </a>
+          <h3>Chopqi</h3>
+          <p>89 000</p>
+          <button onclick="openVariationPopup('13-145')">Savatga</button>
+        </div>
+
+         
+        <div class="product-card" data-category="Pichoqlar">
+          <a href="product.html?id=13-108">
+            <img src="images/IMG_5957.JPG" alt="" />
+          </a>
+          <h3>Pichoq</h3>
+          <p>19 000</p>
+          <button onclick="openVariationPopup('13-108')">Savatga</button>
+        </div>
+
+        <div class="product-card" data-category="Pichoqlar">
+          <a href="product.html?id=21-19">
+            <img src="images/IMG_5962.JPG" alt="" />
+          </a>
+          <h3>Chopqi</h3>
+          <p>124 000</p>
+          <button onclick="openVariationPopup('21-19')">Savatga</button>
+        </div>
+
+        <div class="product-card" data-category="Pichoqlar">
+          <a href="product.html?id=13-138">
+            <img src="images/IMG_5955.JPG" alt="" />
+          </a>
+          <h3>Pichoq nabor</h3>
+          <p>27 000</p>
+          <button onclick="openVariationPopup('13-138')">Savatga</button>
+        </div>
+
+        
+
+      </div>
+  
+      
+        
+
+
+      <div class="extra-items">
+
+        <div class="product-card" data-category="Pichoqlar">
+          <a href="product.html?id=13-111">
+            <img src="images/IMG_5963.JPG" alt="" />
+          </a>
+          <h3>Chopqi</h3>
+          <p>49 000</p>
+          <button onclick="openVariationPopup('13-111')">Savatga</button>
+        </div>
+          
+
+      </div>
+  
+      <button class="see-more">Ko‘proq ko‘rsat ▼</button>
+    </div>
+
+
+    <div class="product-group" data-category="Ezgich">
+      <h2>Ezgich</h2>
+      <div class="products-list">
+
+        <div class="product-card" data-category="Ezgich">
+          <a href="product.html?id=9-45">
+            <img src="images/IMG_5967.JPG" alt="" />
+          </a>
+          <h3>Puyrak Ezgich</h3>
+          <p>45 000</p>
+          <button onclick="openVariationPopup('9-45')">Savatga</button>
+        </div>
+    
+
+        <div class="product-card" data-category="Ezgich">
+          <a href="product.html?id=20-24">
+            <img src="images/IMG_5966.JPG" alt="" />
+          </a>
+          <h3>Koklet qolib</h3>
+          <p>25 000</p>
+          <button onclick="openVariationPopup('20-24')">Savatga</button>
+        </div>
+
+        <div class="product-card" data-category="Ezgich">
+          <a href="product.html?id=9-32">
+            <img src="images/IMG_5969.JPG" alt="" />
+          </a>
+          <h3>Puyrak Ezgich</h3>
+          <p>45 000</p>
+          <button onclick="openVariationPopup('9-32')">Savatga</button>
+        </div>
+
+
+        <div class="product-card" data-category="Ezgich">
+          <a href="product.html?id=13-36">
+            <img src="images/IMG_5975.JPG" alt="" />
+          </a>
+          <h3>Limon ezgich</h3>
+          <p>22 000</p>
+          <button onclick="openVariationPopup('13-36')">Savatga</button>
+        </div>
+        
+
+        
+
+      </div>
+  
+      
+        
+
+
+      <div class="extra-items">
+
+    
+          
+        <div class="product-card" data-category="Ezgich">
+          <a href="product.html?id=13-48">
+            <img src="images/IMG_5968.JPG" alt="" />
+          </a>
+          <h3>Puyrak Ezgich</h3>
+          <p>22 000</p>
+          <button onclick="openVariationPopup('13-48')">Savatga</button>
+        </div>
+        <div class="product-card" data-category="Ezgich">
+          <a href="product.html?id=9-15">
+            <img src="images/IMG_5837.JPG" alt="" />
+          </a>
+          <h3>Chisnok ezgich</h3>
+          <p>39 000</p>
+          <button onclick="openVariationPopup('9-15')">Savatga</button>
+        </div>
+        
+        
+        
+        <div class="product-card" data-category="Ezgich">
+          <a href="product.html?id=9-2">
+            <img src="images/IMG_5839.JPG" alt="" />
+          </a>
+          <h3>Chisnok ezgich</h3>
+          <p>39 000</p>
+          <button onclick="openVariationPopup('9-2')">Savatga</button>
+        </div>
+        
+        
+        
+        <div class="product-card" data-category="Ezgich">
+          <a href="product.html?id=9-17">
+            <img src="images/IMG_5840.JPG" alt="" />
+          </a>
+          <h3>Yong'oq chaqgich</h3>
+          <p>59 000</p>
+          <button onclick="openVariationPopup('9-17')">Savatga</button>
+        </div>
+      </div>
+  
+      <button class="see-more">Ko‘proq ko‘rsat ▼</button>
+    </div>
+
+
+
+
+    <div class="product-group" data-category="Pichoqlar">
+      <h2>Choynak tagi uchun</h2>
+      <div class="products-list">
+
+
+     
+        <div class="product-card" data-category="Pichoqlar">
+          <a href="product.html?id=13-145">
+            <img src="images/IMG_5965.JPG" alt="" />
+          </a>
+          <h3>Chopqi</h3>
+          <p>89 000</p>
+          <button onclick="openVariationPopup('13-145')">Savatga</button>
+        </div>
+
+         
+        <div class="product-card" data-category="Pichoqlar">
+          <a href="product.html?id=13-108">
+            <img src="images/IMG_5957.JPG" alt="" />
+          </a>
+          <h3>Chopqi</h3>
+          <p>19 000</p>
+          <button onclick="openVariationPopup('13-108')">Savatga</button>
+        </div>
+
+        <div class="product-card" data-category="Pichoqlar">
+          <a href="product.html?id=21-19">
+            <img src="images/IMG_5962.JPG" alt="" />
+          </a>
+          <h3>Chopqi</h3>
+          <p>124 000</p>
+          <button onclick="openVariationPopup('21-19')">Savatga</button>
+        </div>
+
+        <div class="product-card" data-category="Pichoqlar">
+          <a href="product.html?id=13-138">
+            <img src="images/IMG_5955.JPG" alt="" />
+          </a>
+          <h3>Chopqi</h3>
+          <p>27 000</p>
+          <button onclick="openVariationPopup('13-138')">Savatga</button>
+        </div>
+
+        
+
+      </div>
+  
+      
+        
+
+
+      <div class="extra-items">
+
+        <div class="product-card" data-category="Pichoqlar">
+          <a href="product.html?id=13-111">
+            <img src="images/IMG_5963.JPG" alt="" />
+          </a>
+          <h3>Chopqi</h3>
+          <p>49 000</p>
+          <button onclick="openVariationPopup('13-111')">Savatga</button>
+        </div>
+          
+
+      </div>
+  
+      <button class="see-more">Ko‘proq ko‘rsat ▼</button>
+    </div>
+
+
+    <div class="product-group" data-category="Qolqop">
+      <h2>Qolqop</h2>
+      <div class="products-list">
+
+        
+
+        <div class="product-card" data-category="Qolqop">
+          <a href="product.html?id=20-105">
+            <img src="images/IMG_5981.JPG" alt="" />
+          </a>
+          <h3>Qolqop</h3>
+          <p>33 000</p>
+          <button onclick="openVariationPopup('20-105')">Savatga</button>
+        </div>
+
+        <div class="product-card" data-category="Qolqop">
+          <a href="product.html?id=20-106">
+            <img src="images/IMG_5984.JPG" alt="" />
+          </a>
+          <h3>Qolqop</h3>
+          <p>35 000</p>
+          <button onclick="openVariationPopup('20-106')">Savatga</button>
+        </div>
+
+
+        <div class="product-card" data-category="Qolqop">
+          <a href="product.html?id=9-38">
+            <img src="images/IMG_5988.JPG" alt="" />
+          </a>
+          <h3>Qolqop</h3>
+          <p>42 000</p>
+          <button onclick="openVariationPopup('9-38')">Savatga</button>
+        </div>
+
+
+        <div class="product-card" data-category="Qolqop">
+          <a href="product.html?id=20-105">
+            <img src="images/IMG_5982.JPG" alt="" />
+          </a>
+          <h3>Qolqop</h3>
+          <p>42 000</p>
+          <button onclick="openVariationPopup('9-38')">Savatga</button>
+        </div>
+
+        
+
+      </div>
+  
+      
+        
+
+
+      <div class="extra-items">
+
+    
+          
+        
+      </div>
+  
+      <button class="see-more">Ko‘proq ko‘rsat ▼</button>
+    </div>
+
+
+
+
+
+  </section>
+
+
+  
+  
+
+  
+
+<!-- Suv idishlar -->
+
+
+
+
+<!-- Launch box  -->
+
+
+
+
+
+
+
+
+<!-- oshhona buyumlari -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Duplicate product cards as needed -->
+  </section>
+  
+
+  <script>
+    // Savatga o'tish barni ko‘rsatish
+    function showGoToCartBar() {
+      const bar = document.getElementById("goToCartBar");
+      bar.style.display = "flex";
+  
+      // Avto yo‘qolishini xohlasang bu kodni och:
+      // setTimeout(() => {
+      //   bar.style.display = "none";
+      // }, 4000);
+    }
+  
+    // Sahifani savatga yo‘naltirish
+    function goToCart() {
+      window.location.href = "Korzina.html";
+    }
+  </script>
+  
+<script>
+  // Global variables to track selected product and variation
+let selectedVariation = null;
+let currentProduct = null;
+let currentCode = null;
+
+// Open the popup and display product information
+function openVariationPopup(code) {
+  const product = productMap[code];
+  currentProduct = product;
+  currentCode = code;
+
+  // Set main image, name, and price
+  document.getElementById("popupProductImg").src =
+    product.variations?.[0]?.img || product.img?.[0] || "";
+  document.getElementById("popupProductName").textContent = product.name;
+  document.getElementById("popupProductPrice").textContent =
+    product.price.toLocaleString() + " so'm";
+
+  // Set up variation options if available
+  const colorOptionsContainer = document.getElementById("colorOptions");
+  colorOptionsContainer.innerHTML = "";
+
+  if (product.variations && Array.isArray(product.variations)) {
+    selectedVariation = product.variations[0]; // Default selection
+
+    product.variations.forEach((variation) => {
+      const imgEl = document.createElement("img");
+      imgEl.src = variation.img;
+      imgEl.alt = variation.color;
+      imgEl.style.width = "60px";
+      imgEl.style.height = "60px";
+      imgEl.style.objectFit = "cover";
+      imgEl.style.margin = "5px";
+      imgEl.style.cursor = "pointer";
+      imgEl.title = variation.color;
+
+      imgEl.onclick = () => {
+        document.getElementById("popupProductImg").src = variation.img;
+        selectedVariation = variation;
+
+        // Highlight selected image
+        document.getElementById("popupProductColor").textContent = "Rang: " + variation.color;
+
+  // Highlight selected image
+  document.querySelectorAll(".image-options img").forEach((img) => {
+    img.classList.remove("selected");
+  });
+  imgEl.classList.add("selected");
+};
+
+selectedVariation = product.variations[0];
+document.getElementById("popupProductColor").textContent =
+  "Rang: " + selectedVariation.color;
+
+      colorOptionsContainer.appendChild(imgEl);
+    });
+  } else {
+    selectedVariation = { img: product.img[0], color: "" };
+  }
+
+  openPopup();
+}
+
+
+
+// Display popup and overlay
+function openPopup() {
+  const popup = document.getElementById("variationPopup");
+  const overlay = document.getElementById("overlay");
+  overlay.style.display = "block";
+  popup.classList.add("show");
+}
+
+// Hide popup and overlay
+function closePopup() {
+  const popup = document.getElementById("variationPopup");
+  const overlay = document.getElementById("overlay");
+  popup.classList.remove("show");
+  overlay.style.display = "none";
+}
+
+// Handle add to cart button click
+document.addEventListener("DOMContentLoaded", () => {
+  const addBtn = document.getElementById("addToCartBtn");
+  addBtn.addEventListener("click", () => {
+  if (!selectedVariation || !currentProduct || !currentCode) return;
+  addCartWithVariation(currentProduct, selectedVariation, currentCode);
+
+  // Avval 'Savatga o‘tish' chiqsin
+  showGoToCartBar();
+
+  // Keyin 300ms kutib, popup yopilsin
+  setTimeout(() => {
+    closePopup();
+  }, 300);
+});
+});
+
+// Add selected variation to cart
+function addCartWithVariation(product, variation, code) {
+  addToCart(
+    product.name,
+    product.price,
+    variation.img,
+    code,
+    variation.color
+  );
+  showGoToCartBar(); // bu joy yangi qo‘shiladi
+}
+
+function showToast(message = "Mahsulot savatga qo‘shildi!") {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3000); // 3 soniya ko‘rinib turadi
+}
+
+
+document.getElementById("addToCartBtn").addEventListener("click", function () {
+  // Mahsulot savatga qo‘shiladi...
+  
+  showToast(); // mana shu joyda xabar chiqadi
+});
+
+
+
+</script>
+  
+
+
+
+  
+
+
+
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('productsContainer');
+      const cards     = Array.from(container.querySelectorAll('.product-card'));
+  
+      // 1️⃣ Group cards by category
+      const cats = [...new Set(cards.map(c => c.dataset.category))];
+  
+      const titles = {
+        bottle: 'Suv idishlar',
+        launch: 'Lounch box',
+         dihes: 'Bolalar idish toplami',
+         Vinchiklar:'Vinchiklar',
+         Chipsilar: 'Chipsilar',
+         Melichofkalar: 'Melichofkalar',
+         Muzidishlar:'Muz idishlar',
+         Podchayniklar: 'Podchayniklar',
+         Pichoqlar: 'Pichoqlar',
+         Ezgich:'Ezgichlar',
+         Qolqop: 'Qolqoplar'
+         
+      };
+  
+      // 2️⃣ Clear original cards
+      container.innerHTML = '';
+  
+      cats.forEach(cat => {
+        const group = document.createElement('div');
+        group.className = 'product-group';
+  
+        const h2 = document.createElement('h2');
+        h2.textContent = titles[cat] || cat;
+        group.appendChild(h2);
+  
+        const visible = document.createElement('div');
+        visible.className = 'products-list';
+  
+        const extra = document.createElement('div');
+        extra.className = 'extra-items';
+  
+        cards
+          .filter(c => c.dataset.category === cat)
+          .forEach((card, i) => {
+            if (i < 4) visible.appendChild(card);
+            else       extra.appendChild(card);
+          });
+  
+        const btn = document.createElement('button');
+        btn.className = 'see-more';
+        btn.textContent = 'Ko‘proq ko‘rsat ▼';
+        btn.addEventListener('click', () => {
+          const opening = !extra.classList.contains('expanded');
+          if (opening) {
+            extra.classList.add('expanded');
+            extra.style.maxHeight = extra.scrollHeight + 'px';
+            btn.textContent = 'Kamroq ko‘rsat ▲';
+          } else {
+            extra.classList.remove('expanded');
+            extra.style.maxHeight = '0';
+            btn.textContent = 'Ko‘proq ko‘rsat ▼';
+          }
+        });
+  
+        group.append(visible, extra, btn);
+        container.appendChild(group);
+      });
+    });
+  </script>
+  
+    
+
+ <script>
+  // Load existing cart
+  let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  document.getElementById("sonsav").textContent = cartItems.length;
+
+  // ✅ Correct single addToCart function
+  function addToCart(name = "Mahsulot", price = 39900, img = "", code = "Noma'lum") {
+    let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    cartItems.push({ name, price, img, code, quantity: 1 });
+
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    document.getElementById("sonsav").textContent = cartItems.length;
+    localStorage.setItem("cart", cartItems.length);
+    localStorage.setItem("cartQuantity", cartItems.length);
+  }
+
+  function searchProduct() {
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    const container = document.getElementById("productsContainer");
+    const cards = Array.from(container.getElementsByClassName("product-card"));
+
+    const matching = [];
+    const nonMatching = [];
+
+    cards.forEach(card => {
+      const title = card.querySelector("h3").textContent.toLowerCase();
+      if (title.includes(input)) {
+        matching.push(card);
+      } else {
+        nonMatching.push(card);
+      }
+    });
+
+    container.innerHTML = "";
+    matching.forEach(card => container.appendChild(card));
+    nonMatching.forEach(card => container.appendChild(card));
+  }
+
+  function markAsClicked(buttonElement) {
+    buttonElement.classList.add('clicked');
+    buttonElement.textContent = 'Qoshildi';
+  }
+
+  // Hide/show on scroll for user button
+  let lastScrollTop = 0;
+  const userBtn = document.getElementById("userButton");
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > lastScrollTop) {
+      userBtn.classList.add("hide");
+    } else {
+      userBtn.classList.remove("hide");
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  });
+</script>
+
+
+<script>
+  const productMap = {
+ "25-3": {
+  name: "IKKTALIK SUV IDISH",
+  price: 79000,
+  variations: [
+    { color: "QIZIL", img: "images/IMG_5459.JPG" },
+    { color: "QIZIL", img: "images/IMG_5526.JPG" },
+    { color: "PUSHTI", img: "images/IMG_5460.JPG" },
+    { color: "PUSHTI", img: "images/IMG_5527.JPG" },
+    { color: "SARIQ", img: "images/IMG_5461.JPG" },
+    { color: "SARIQ", img: "images/IMG_5528.JPG" }
+  ],
+  description: "",
+  video: "videomichoq.html",
+  code: "25-3"
+},
+  "25-9": {
+  name: "IKKTALIK SUV IDISH",
+  price: 49000,
+  variations: [
+    { color: "QIZIL", img: "images/IMG_5531.JPG" },
+    { color: "OLOVRANG", img: "images/IMG_5464.JPG" },
+    { color: "QORA", img: "images/IMG_5463.JPG" },
+    { color: "QASHIL", img: "images/IMG_5530.JPG" }
+  ],
+  description: "",
+  video: "videomichoq.html",
+  code: "25-9"
+},
+
+"25-1": {
+  "name": "Ayiqli suv idish",
+  "price": 59000,
+  "variations": [
+    { "color": "Yashil", "img": "images/IMG_5466.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5534.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5535.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5467.JPG" },
+    { "color": "Syohrang", "img": "images/IMG_5536.JPG" },
+    { "color": "Syohrang", "img": "images/IMG_5469.JPG" },
+    { "color": "Kok", "img": "images/IMG_5471.JPG" },
+    { "color": "Kok", "img": "images/IMG_5537.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "25-1"
+},
+"25-2": {
+  "name": "IKKTALIK SUV IDISH",
+  "price": 79000,
+  "variations": [
+    { "color": "Syohrang", "img": "images/IMG_5473.JPG" },
+    { "color": "Syohrang", "img": "images/IMG_5539.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5472.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5538.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5540.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5474.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "25-2"
+},
+
+  "25-4": {
+  name: "IKKTALIK SUV IDISH",
+  price: 79000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5476.JPG" },
+    { "color": "Kok", "img": "images/IMG_5542.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5479.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5543.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5480.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5544.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5475.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5541.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "25-4"
+},
+
+  "25-6": {
+  "name": "Raqamli suv idish",
+  "price": 69000,
+  "variations": [
+    { "color": "Oq", "img": "images/IMG_5481.JPG" },
+    { "color": "Oq", "img": "images/IMG_5545.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5482.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5546.JPG" },
+    { "color": "Kok", "img": "images/IMG_5484.JPG" },
+    { "color": "Kok", "img": "images/IMG_5547.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "25-6"
+},
+
+  "32-35": {
+  "name": "Muzlik suv idish",
+  "price": 39000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5486.JPG" },
+    { "color": "Kok", "img": "images/IMG_5549.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5548.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5485.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5550.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5487.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-35"
+},
+
+  "32-78": {
+  "name": "Disney suv idishi",
+  "price": 39000,
+  "variations": [
+    { "color": "Qizil", "img": "images/IMG_5493.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5556.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5492.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5555.JPG" },
+    { "color": "Kok", "img": "images/IMG_5495.JPG" },
+    { "color": "Kok", "img": "images/IMG_5558.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-78"
+},
+
+  "32-79": {
+  "name": "Ponchik suv idishi",
+  "price": 39000,
+  "variations": [
+    { "color": "Yashil", "img": "images/IMG_5496.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5559.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5498.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5560.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-79"
+},
+
+  "32-80": {
+  "name": "Mishka suv idishi",
+  "price": 39000,
+  "variations": [
+    { "color": "Sariq", "img": "images/IMG_5500.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5562.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5501.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5564.JPG" },
+    { "color": "Kok", "img": "images/IMG_5503.JPG" },
+    { "color": "Kok", "img": "images/IMG_5566.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-80"
+},
+
+  "25-8": {
+  "name": "Maroshnilik suv idish",
+  "price": 79000,
+  "variations": [
+    { "color": "Pushti", "img": "images/IMG_5506.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5569.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5504.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5567.JPG" },
+    { "color": "Kok", "img": "images/IMG_5505.JPG" },
+    { "color": "Kok", "img": "images/IMG_5568.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "25-8"
+},
+
+  "25-7": {
+  "name": "Oreolik suv idish",
+  "price": 79000,
+  "variations": [
+    { "color": "Pushti", "img": "images/IMG_5508.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5571.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5507.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5570.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5509.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5572.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "25-7"
+},
+
+  "32-33": {
+  "name": "Stitch suv idish",
+  "price": 39000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5511.JPG" },
+    { "color": "Kok", "img": "images/IMG_5574.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5513.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5575.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-33"
+},
+
+  "32-34": {
+  "name": "Panda suv idish",
+  "price": 39000,
+  "variations": [
+    { "color": "Pushti", "img": "images/IMG_5517.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5578.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5576.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5515.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5516.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5577.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-34"
+},
+
+"25-5": {
+  "name": "Airup suv idishi",
+  "price": 149000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5521.JPG" },
+    { "color": "Kok", "img": "images/IMG_5580.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5522.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5581.JPG" },
+    { "color": "Syohrang", "img": "images/IMG_5523.JPG" },
+    { "color": "Syohrang", "img": "images/IMG_5582.JPG" },
+    { "color": "Qora", "img": "images/IMG_5524.JPG" },
+    { "color": "Qora", "img": "images/IMG_5584.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "25-5"
+},
+
+
+
+
+
+
+
+
+  "A-8": {
+  "name": "Disney",
+  "price": 59000,
+  "variations": [
+    { "color": "Pushti", "img": "images/IMG_5662.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5602.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-8"
+},
+
+"A-9": {
+  "name": "Chaqmoq makvin",
+  "price": 59000,
+  "variations": [
+    { "color": "Sariq", "img": "images/IMG_5659.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5604.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-9"
+},
+
+"A-11": {
+  "name": "Hello Kitty",
+  "price": 59000,
+  "variations": [
+    { "color": "Pushti", "img": "images/IMG_5658.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5605.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-11"
+},
+
+"A-3": {
+  "name": "Stitch",
+  "price": 59000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5657.JPG" },
+    { "color": "Kok", "img": "images/IMG_5598.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-3"
+},
+
+"A-6": {
+  "name": "Makvin",
+  "price": 59000,
+  "variations": [
+    { "color": "Sariq", "img": "images/IMG_5656.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5599.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-6"
+},
+
+"A-10": {
+  "name": "Super Mario",
+  "price": 59000,
+  "variations": [
+    { "color": "Qizil", "img": "images/IMG_5655.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5600.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-10"
+},
+"A-12": {
+  "name": "Frozen",
+  "price": 59000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5654.JPG" },
+    { "color": "Kok", "img": "images/IMG_5601.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-12"
+},
+
+"A-7": {
+  "name": "Spiderman",
+  "price": 59000,
+  "variations": [
+    { "color": "Qizil", "img": "images/IMG_5651.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5589.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-7"
+},
+
+"A-4": {
+  "name": "Malika Sofia",
+  "price": 59000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5652.JPG" },
+    { "color": "Kok", "img": "images/IMG_5591.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-4"
+},
+
+"A-1": {
+  "name": "Disney Minnte",
+  "price": 59000,
+  "variations": [
+    { "color": "Pushti", "img": "images/IMG_5650.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5590.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-1"
+},
+
+"A-2": {
+  "name": "Kuromi",
+  "price": 59000,
+  "variations": [
+    { "color": "Syohrang", "img": "images/IMG_5649.JPG" },
+    { "color": "Syohrang", "img": "images/IMG_5588.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-2"
+},
+
+
+
+
+
+
+
+"32-24": {
+  "name": "Launch box",
+  "price": 44000,
+  "variations": [
+    { "color": "Pushti", "img": "images/IMG_5607.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5666.JPG" },
+    { "color": "Kok", "img": "images/IMG_5606.JPG" },
+    { "color": "Kok", "img": "images/IMG_5665.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-24"
+},
+
+
+"32-15": {
+  "name": "Launch box GOURMET",
+  "price": 59000,
+  "variations": [
+    { "color": "Qizil", "img": "images/IMG_5670.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5611.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5668.JPG" },
+    { "color": "Kok", "img": "images/IMG_5613.JPG" },
+    { "color": "Kok", "img": "images/IMG_5672.JPG" },
+    { "color": "Kok", "img": "images/IMG_5671.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-15"
+},
+
+"32-14": {
+  "name": "Ayiq Launch box",
+  "price": 59000,
+  "variations": [
+    { "color": "Oq ayiqlik", "img": "images/IMG_5674.JPG" },
+    { "color": "Oq ayiqlik", "img": "images/IMG_5614.JPG" },
+    { "color": "Jigarang ayiqlik", "img": "images/IMG_5675.JPG" },
+    { "color": "Jigarang ayiqlik", "img": "images/IMG_5615.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-14"
+},
+
+"32-17": {
+  "name": "Panda Launch box",
+  "price": 39000,
+  "variations": [
+    { "color": "Qora", "img": "images/IMG_5676.JPG" },
+    { "color": "Qora", "img": "images/IMG_5616.JPG" },
+    { "color": "Jigarang", "img": "images/IMG_5677.JPG" },
+    { "color": "Jigarang", "img": "images/IMG_5617.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-17"
+},
+
+"32-25": {
+  "name": "Launch box",
+  "price": 39000,
+  "variations": [
+    { "color": "Pushti", "img": "images/IMG_5678.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5618.JPG" },
+    { "color": "Kok", "img": "images/IMG_5679.JPG" },
+    { "color": "Kok", "img": "images/IMG_5619.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5680.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5620.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-25"
+},
+
+"32-27": {
+  "name": "Gobbler Launch box",
+  "price": 36000,
+  "variations": [
+    { "color": "Yashil", "img": "images/IMG_5681.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5621.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5682.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5622.JPG" },
+    { "color": "Kok", "img": "images/IMG_5683.JPG" },
+    { "color": "Kok", "img": "images/IMG_5623.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-27"
+},
+
+"32-3": {
+  "name": "Launch box",
+  "price": 36000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5679.JPG" },
+    { "color": "", "img": "images/IMG_5685.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-3"
+},
+
+"32-6": {
+  "name": "Launch box burger",
+  "price": 39000,
+  "variations": [
+    { "color": "Jigarang", "img": "images/IMG_5684.JPG" },
+    { "color": "Qaymoqrang", "img": "images/IMG_5627.JPG" },
+    { "color": "Qaymoqrang", "img": "images/IMG_5685.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-6"
+},
+
+"32-12": {
+  "name": "Launch box",
+  "price": 39000,
+  "variations": [
+    { "color": "Syohrang", "img": "images/IMG_5688.JPG" },
+    { "color": "Syohrang", "img": "images/IMG_5631.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5686.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5629.JPG" },
+    { "color": "Kok", "img": "images/IMG_5687.JPG" },
+    { "color": "Kok", "img": "images/IMG_5630.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-12"
+},
+
+"32-13": {
+  "name": "Launch box 2x",
+  "price": 39000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5684.JPG" },
+    { "color": "", "img": "images/IMG_5637.JPG" },
+    { "color": "", "img": "" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-13"
+},
+
+"32-5": {
+  "name": "Launch box 2x",
+  "price": 39000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5693.JPG" },
+    { "color": "Kok", "img": "images/IMG_5636.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5637.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5694.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5638.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5695.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-5"
+},
+
+"32-9": {
+  "name": "Launch box 2x",
+  "price": 39000,
+  "variations": [
+    { "color": "Sariq", "img": "images/IMG_5696.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5639.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5641.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5640.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5697.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-9"
+},
+
+"32-10": {
+  "name": "Launch box 2x",
+  "price": 39000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5700.JPG" },
+    { "color": "Kok", "img": "images/IMG_5643.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5699.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5642.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-10"
+},
+
+"32-11": {
+  "name": "Launch box 2x",
+  "price": 39000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5704.JPG" },
+    { "color": "Kok", "img": "images/IMG_5646.JPG" },
+    { "color": "Olovrang", "img": "images/IMG_5706.JPG" },
+    { "color": "Olovrang", "img": "images/IMG_5648.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-11"
+},
+
+"13-63": {
+  "name": "Chipsi Qora",
+  "price": 16000,
+  "variations": [
+    { "color": "Qora", "img": "images/IMG_5810.JPG" },
+    { "color": "Qora", "img": "images/IMG_6462.JPG" },
+    
+  ],
+  "description": "",
+  "video": "", // If you have a video, add the link here
+  "code": "13-63"
+},
+
+
+"13-58": {
+  "name": "Chipsi Selekon",
+  "price": 15000,
+  "variations": [
+    { "color": "Qizil", "img": "images/IMG_5820.JPG" },
+    { "color": "Qizil", "img": "images/IMG_6466.JPG" },
+    { "color": "Kok", "img": "images/IMG_5821.JPG" },
+    { "color": "Kok", "img": "images/IMG_6467.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5815.JPG" },
+    { "color": "Yashil", "img": "images/IMG_6464.JPG" },
+    { "color": "Oq", "img": "images/IMG_5817.JPG" },
+    { "color": "Oq", "img": "images/IMG_6465.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-58"
+},
+
+"13-89": {
+  "name": "Pizza rezka",
+  "price": 19000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5823.JPG" },
+    { "color": "Standart", "img": "images/IMG_6468.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-89"
+},
+
+"13-96": {
+  "name": "Economka",
+  "price": 16000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5834.JPG" },
+    { "color": "Standart", "img": "images/IMG_6478.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-96"
+},
+
+"13-101": {
+  "name": "Hamir keskich",
+  "price": 18000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5826.JPG" },
+    { "color": "Standart", "img": "images/IMG_6471.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-101"
+},
+
+"13-93": {
+  "name": "Qirgich",
+  "price": 16000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5829.JPG" },
+    { "color": "Standart", "img": "images/IMG_6474.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-93"
+},
+
+"13-98": {
+  "name": "Sita",
+  "price": 16000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5827.JPG" },
+    { "color": "Standart", "img": "images/IMG_6472.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-98"
+},
+
+
+"13-98": {
+  "name": "Sita",
+  "price": 16000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5827.JPG" },
+    { "color": "Standart", "img": "images/IMG_6472.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-98"
+},
+
+"13-90": {
+  "name": "Pitsa shpatel",
+  "price": 18000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5825.JPG" },
+    { "color": "Standart", "img": "images/IMG_6470.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-90"
+},
+
+"13-99": {
+  "name": "Hamir keskich kichkina",
+  "price": 16000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5828.JPG" },
+    { "color": "Standart", "img": "images/IMG_6473.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-99"
+},
+
+"13-94": {
+  "name": "Qirgich",
+  "price": 16000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5830.JPG" },
+    { "color": "Standart", "img": "images/IMG_6475.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-94"
+},
+
+"13-100": {
+  "name": "Buranda",
+  "price": 16000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5833.JPG" },
+    { "color": "Standart", "img": "images/IMG_6477.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-100"
+},
+
+"13-96": {
+  "name": "Economka",
+  "price": 16000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5834.JPG" },
+    { "color": "Standart", "img": "images/IMG_6479.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-96"
+},
+
+"13-91": {
+  "name": "Hamir keskich",
+  "price": 27000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5836.JPG" },
+    { "color": "Standart", "img": "images/IMG_6480.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-91"
+},
+
+
+"13-75": {
+  "name": "Vinchik rangli 24sm",
+  "price": 9000,
+  "variations": [
+    { "color": "Siyohrang", "img": "images/IMG_5791.JPG" },
+    { "color": "Siyohrang", "img": "images/IMG_6443.JPG" },
+    { "color": "Pushti", "img": "images/IMG_6445.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5794.JPG" },
+  ],
+  "video": "",
+  "code": "13-75"
+},
+
+"13-67": {
+  "name": "Vinchik",
+  "price": 16000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5787.JPG" },
+    { "color": "Standart", "img": "images/IMG_6440.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-67"
+},
+
+"13-75o": {
+  "name": "Vinchik rangli 30sm",
+  "price": 9000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5801.JPG" },
+    { "color": "Kok", "img": "images/IMG_6452.JPG" },
+    { "color": "Syohrang", "img": "images/IMG_5800.JPG" },
+    { "color": "Syohrang", "img": "images/IMG_6451.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5799.JPG" },
+    { "color": "Pushti", "img": "images/IMG_6450.JPG" },
+
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-75o"
+},
+
+"9-48": {
+  "name": "Geliviy Vinchik rangli",
+  "price": 15000,
+  "variations": [
+    { "color": "Kulrang", "img": "images/IMG_5802.JPG" },
+    { "color": "Qora", "img": "images/IMG_5803.JPG" },
+    { "color": "Qora", "img": "images/IMG_6454.JPG" },
+    { "color": "Kok", "img": "images/IMG_5804.JPG" },
+    { "color": "Kok", "img": "images/IMG_6455.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "9-48"
+}
+
+
+  };
+  </script>
+  
+
+</body>
+</html>
+

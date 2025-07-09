@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Liked Products</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h2 {
+      margin-bottom: 16px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background-color: #f2f2f2;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .empty {
+      color: #777;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🛒 Liked Products</h2>
+  <ul id="likedList">
+    <li class="empty">No products liked yet.</li>
+  </ul>
+
+  <script>
+    function loadLikedProducts() {
+      const liked = JSON.parse(localStorage.getItem("likedProducts")) || [];
+      const list = document.getElementById("likedList");
+      list.innerHTML = "";
+
+      if (liked.length === 0) {
+        list.innerHTML = '<li class="empty">No products liked yet.</li>';
+        return;
+      }
+
+      liked.forEach(product => {
+        const li = document.createElement("li");
+        li.textContent = product;
+        list.appendChild(li);
+      });
+    }
+
+    loadLikedProducts();
+  </script>
+
+
+
+
+<div class="bottom-nav">
+    <a href="index.html" class="nav-item">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/022/013/913/small_2x/home-icon-illustration-image-vector.jpg" alt="Home">
+        
+    </a>
+    <a href="#" class="nav-item">
+        <img src="https://png.pngtree.com/png-vector/20190115/ourmid/pngtree-vector-search-icon-png-image_320926.jpg" alt="Catalog">
+        
+    </a>
+    <a href="Korzina.html" class="nav-item" >
+        <img src="https://superawesomevectors.com/wp-content/uploads/2016/02/shopping-basket-icon-800x566.jpg" alt="Cart">
+        
+    </a>
+    <a href="#" class="nav-item">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/017/170/182/small_2x/love-heart-icon-black-silhouette-isolated-on-white-background-vector.jpg" alt="Fast">
+        
+    </a>
+    <a href="shaxsiy.html" class="nav-item" >
+        <img src="https://e7.pngegg.com/pngimages/906/448/png-clipart-silhouette-person-person-with-helmut-animals-logo.png" alt="Profile">
+        
+    </a>
+</div> 
+
+<style>
+    .bottom-nav {
+    position: fixed;
+    bottom: 10px; /* Slightly lifted for modern effect */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 600px;
+    background: rgba(0, 0, 0, 0.115); /* Glass effect */
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 12px 0;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    
+}
+
+.bottom-nav a {
+    text-align: center;
+    font-size: 14px;
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.bottom-nav a:hover {
+    transform: translateY(-3px);
+    color: #050403;
+}
+
+.bottom-nav img {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 5px;
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+    border-radius: 10px;
+}
+
+
+
+body {
+    padding-bottom: 80px;
+    background: linear
+}
+
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 3 equal columns */
+    gap: 5px; /* Space between cards */
+    
+}
+</style>
+
+
+
+
+
+
+
+
+</body>
+</html>

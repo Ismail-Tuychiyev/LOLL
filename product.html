@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mahsulot Tafsilotlari</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+ @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+body {
+  background: #f9f9f9;
+  color: #222;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  padding: 0px;
+}
+
+.product-detail {
+  background: #fff;
+  border-radius: 18px;
+  padding: 30px;
+  max-width: 920px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.08);
+  animation: fadeIn 0.8s ease forwards;
+  opacity: 0;
+}
+
+.main-image {
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.image-scroll {
+  margin-left: 35px;
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  width: 100%;
+  justify-content: flex-start;
+  padding: 10px 16px; /* chap va o‘ng bo‘sh joy */
+  box-sizing: border-box;
+  scroll-snap-type: x mandatory;
+}
+
+
+
+
+.image-scroll img {
+  height: 84px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  scroll-snap-align: start;
+}
+
+.image-scroll img:hover {
+  transform: scale(1.10);
+  
+}
+
+.details {
+  text-align: center;
+}
+
+.details h1 {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.price {
+  color: #27ae60;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.description {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+  max-width: 700px;
+  color: #555;
+}
+
+.color-options {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.color-options span {
+  display: inline-block;
+  margin: 6px 6px;
+  padding: 10px 18px;
+  border: 2px solid #ddd;
+  border-radius: 19px;
+  background: #f4f4f4;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-size: 14px;
+}
+
+.color-options span.selected {
+  background-color: #eaf2ff;
+  border-color: #000000;
+  font-weight: 600;
+}
+
+.details button {
+  padding: 14px 28px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.details button:hover {
+  background-color: #005ecb;
+}
+
+.details .video-link {
+  font-size: 14px;
+  color: #0077ff;
+  text-decoration: underline;
+}
+
+.back-link {
+  display: block;
+  margin-top: 40px;
+  text-align: center;
+  color: #007bff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .product-detail {
+    padding: 20px;
+  }
+
+  .details h1 {
+    font-size: 22px;
+  }
+
+  .price {
+    font-size: 20px;
+  }
+
+  .details button {
+    width: 100%;
+  }
+}
+
+#cartCount {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-weight: bold;
+  display: none; /* Boshlanishda yashirin */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.color-label {
+  
+
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0px 0 0px;
+  text-align: center;
+}
+
+.image-scroll img.selected-image {
+  border: 2px solid #000;
+  transform: scale(1.05);
+}
+
+
+
+    
+  </style>
+</head>
+<body>
+
+  <header style="background: #111; color: white; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; position: relative;">
+    <div style="font-size: 22px; font-weight: bold; color: #00bfff;">
+      HomeEase
+    </div>
+  
+    <!-- Agar qidiruv kerak bo'lsa, o'rtaga qo'yiladi -->
+    <!-- <input type="text" placeholder="Mahsulotni izlash..." style="padding: 6px; border-radius: 4px; border: none; width: 140px;"> -->
+  
+    <div style="position: relative;">
+      <a href="Korzina.html">
+        <img src="https://cdn-icons-png.flaticon.com/128/428/428173.png" alt="Cart" style="width: 30px; height: 30px;">
+        <span id="cartCount">0</span>
+      </a>
+    </div>
+  </header>
+  
+
+
+  <div class="container">
+    <div class="product-detail fade-in" id="productDetail"></div>
+  </div>
+
+
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+      const cartCount = document.getElementById('cartCount');
+  
+      if (cartItems.length > 0) {
+        cartCount.textContent = cartItems.length;
+        cartCount.style.display = 'inline-block';
+      } else {
+        cartCount.style.display = 'none';
+      }
+    });
+  </script>
+  
+  
+  
+
+
+
+  <script>
+    
+
+    const productMap = {
+  "25-3": {
+  name: "IKKTALIK SUV IDISH",
+  price: 79000,
+  variations: [
+    { color: "QIZIL", img: "images/IMG_5459.JPG" },
+    { color: "QIZIL", img: "images/IMG_5526.JPG" },
+    { color: "PUSHTI", img: "images/IMG_5460.JPG" },
+    { color: "PUSHTI", img: "images/IMG_5527.JPG" },
+    { color: "SARIQ", img: "images/IMG_5461.JPG" },
+    { color: "SARIQ", img: "images/IMG_5528.JPG" }
+  ],
+  description: "",
+  video: "videomichoq.html",
+  code: "25-3"
+},
+  "25-9": {
+  name: "IKKTALIK SUV IDISH",
+  price: 49000,
+  variations: [
+    { color: "QIZIL", img: "images/IMG_5531.JPG" },
+    { color: "OLOVRANG", img: "images/IMG_5464.JPG" },
+    { color: "QORA", img: "images/IMG_5463.JPG" },
+    { color: "QASHIL", img: "images/IMG_5530.JPG" }
+  ],
+  description: "",
+  video: "videomichoq.html",
+  code: "25-9"
+},
+
+"25-1": {
+  "name": "Ayiqli suv idish",
+  "price": 59000,
+  "variations": [
+    { "color": "Yashil", "img": "images/IMG_5466.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5534.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5535.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5467.JPG" },
+    { "color": "Syohrang", "img": "images/IMG_5536.JPG" },
+    { "color": "Syohrang", "img": "images/IMG_5469.JPG" },
+    { "color": "Kok", "img": "images/IMG_5471.JPG" },
+    { "color": "Kok", "img": "images/IMG_5537.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "25-1"
+},
+"25-2": {
+  "name": "IKKTALIK SUV IDISH",
+  "price": 79000,
+  "variations": [
+    { "color": "Syohrang", "img": "images/IMG_5473.JPG" },
+    { "color": "Syohrang", "img": "images/IMG_5539.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5472.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5538.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5540.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5474.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "25-2"
+},
+
+  "25-4": {
+  name: "IKKTALIK SUV IDISH",
+  price: 79000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5476.JPG" },
+    { "color": "Kok", "img": "images/IMG_5542.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5479.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5543.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5480.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5544.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5475.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5541.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "25-4"
+},
+
+  "25-6": {
+  "name": "Raqamli suv idish",
+  "price": 69000,
+  "variations": [
+    { "color": "Oq", "img": "images/IMG_5481.JPG" },
+    { "color": "Oq", "img": "images/IMG_5545.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5482.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5546.JPG" },
+    { "color": "Kok", "img": "images/IMG_5484.JPG" },
+    { "color": "Kok", "img": "images/IMG_5547.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "25-6"
+},
+
+  "32-35": {
+  "name": "Muzlik suv idish",
+  "price": 39000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5486.JPG" },
+    { "color": "Kok", "img": "images/IMG_5549.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5548.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5485.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5550.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5487.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-35"
+},
+
+  "32-78": {
+  "name": "Disney suv idishi",
+  "price": 39000,
+  "variations": [
+    { "color": "Qizil", "img": "images/IMG_5493.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5556.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5492.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5555.JPG" },
+    { "color": "Kok", "img": "images/IMG_5495.JPG" },
+    { "color": "Kok", "img": "images/IMG_5558.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-78"
+},
+
+  "32-79": {
+  "name": "Ponchik suv idishi",
+  "price": 39000,
+  "variations": [
+    { "color": "Yashil", "img": "images/IMG_5496.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5559.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5498.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5560.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-79"
+},
+
+  "32-80": {
+  "name": "Mishka suv idishi",
+  "price": 39000,
+  "variations": [
+    { "color": "Sariq", "img": "images/IMG_5500.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5562.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5501.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5564.JPG" },
+    { "color": "Kok", "img": "images/IMG_5503.JPG" },
+    { "color": "Kok", "img": "images/IMG_5566.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-80"
+},
+
+  "25-8": {
+  "name": "Maroshnilik suv idish",
+  "price": 79000,
+  "variations": [
+    { "color": "Pushti", "img": "images/IMG_5506.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5569.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5504.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5567.JPG" },
+    { "color": "Kok", "img": "images/IMG_5505.JPG" },
+    { "color": "Kok", "img": "images/IMG_5568.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "25-8"
+},
+
+  "25-7": {
+  "name": "Oreolik suv idish",
+  "price": 79000,
+  "variations": [
+    { "color": "Pushti", "img": "images/IMG_5508.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5571.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5507.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5570.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5509.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5572.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "25-7"
+},
+
+  "32-33": {
+  "name": "Stitch suv idish",
+  "price": 39000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5511.JPG" },
+    { "color": "Kok", "img": "images/IMG_5574.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5513.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5575.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-33"
+},
+
+  "32-34": {
+  "name": "Panda suv idish",
+  "price": 39000,
+  "variations": [
+    { "color": "Pushti", "img": "images/IMG_5517.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5578.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5576.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5515.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5516.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5577.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-34"
+},
+
+"25-5": {
+  "name": "Airup suv idishi",
+  "price": 149000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5521.JPG" },
+    { "color": "Kok", "img": "images/IMG_5580.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5522.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5581.JPG" },
+    { "color": "Syohrang", "img": "images/IMG_5523.JPG" },
+    { "color": "Syohrang", "img": "images/IMG_5582.JPG" },
+    { "color": "Qora", "img": "images/IMG_5524.JPG" },
+    { "color": "Qora", "img": "images/IMG_5584.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "25-5"
+},
+
+
+
+
+
+
+
+
+  "A-8": {
+  "name": "Disney",
+  "price": 59000,
+  "variations": [
+    { "color": "Pushti", "img": "images/IMG_5662.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5602.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-8"
+},
+
+"A-9": {
+  "name": "Chaqmoq makvin",
+  "price": 59000,
+  "variations": [
+    { "color": "Sariq", "img": "images/IMG_5659.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5604.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-9"
+},
+
+"A-11": {
+  "name": "Hello Kitty",
+  "price": 59000,
+  "variations": [
+    { "color": "Pushti", "img": "images/IMG_5658.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5605.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-11"
+},
+
+"A-3": {
+  "name": "Stitch",
+  "price": 59000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5657.JPG" },
+    { "color": "Kok", "img": "images/IMG_5598.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-3"
+},
+
+"A-6": {
+  "name": "Makvin",
+  "price": 59000,
+  "variations": [
+    { "color": "Sariq", "img": "images/IMG_5656.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5599.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-6"
+},
+
+"A-10": {
+  "name": "Super Mario",
+  "price": 59000,
+  "variations": [
+    { "color": "Qizil", "img": "images/IMG_5655.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5600.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-10"
+},
+"A-12": {
+  "name": "Frozen",
+  "price": 59000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5654.JPG" },
+    { "color": "Kok", "img": "images/IMG_5601.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-12"
+},
+
+"A-7": {
+  "name": "Spiderman",
+  "price": 59000,
+  "variations": [
+    { "color": "Qizil", "img": "images/IMG_5651.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5589.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-7"
+},
+
+"A-4": {
+  "name": "Malika Sofia",
+  "price": 59000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5652.JPG" },
+    { "color": "Kok", "img": "images/IMG_5591.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-4"
+},
+
+"A-1": {
+  "name": "Disney Minnte",
+  "price": 59000,
+  "variations": [
+    { "color": "Pushti", "img": "images/IMG_5650.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5590.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-1"
+},
+
+"A-2": {
+  "name": "Kuromi",
+  "price": 59000,
+  "variations": [
+    { "color": "Syohrang", "img": "images/IMG_5649.JPG" },
+    { "color": "Syohrang", "img": "images/IMG_5588.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "A-2"
+},
+
+
+
+
+
+
+
+"32-24": {
+  "name": "Launch box",
+  "price": 44000,
+  "variations": [
+    { "color": "Pushti", "img": "images/IMG_5607.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5666.JPG" },
+    { "color": "Kok", "img": "images/IMG_5606.JPG" },
+    { "color": "Kok", "img": "images/IMG_5665.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-24"
+},
+
+
+"32-15": {
+  "name": "Launch box GOURMET",
+  "price": 59000,
+  "variations": [
+    { "color": "Qizil", "img": "images/IMG_5670.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5611.JPG" },
+    { "color": "Qizil", "img": "images/IMG_5668.JPG" },
+    { "color": "Kok", "img": "images/IMG_5613.JPG" },
+    { "color": "Kok", "img": "images/IMG_5672.JPG" },
+    { "color": "Kok", "img": "images/IMG_5671.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-15"
+},
+
+"32-14": {
+  "name": "Ayiq Launch box",
+  "price": 59000,
+  "variations": [
+    { "color": "Oq ayiqlik", "img": "images/IMG_5674.JPG" },
+    { "color": "Oq ayiqlik", "img": "images/IMG_5614.JPG" },
+    { "color": "Jigarang ayiqlik", "img": "images/IMG_5675.JPG" },
+    { "color": "Jigarang ayiqlik", "img": "images/IMG_5615.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-14"
+},
+
+"32-17": {
+  "name": "Panda Launch box",
+  "price": 39000,
+  "variations": [
+    { "color": "Qora", "img": "images/IMG_5676.JPG" },
+    { "color": "Qora", "img": "images/IMG_5616.JPG" },
+    { "color": "Jigarang", "img": "images/IMG_5677.JPG" },
+    { "color": "Jigarang", "img": "images/IMG_5617.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-17"
+},
+
+"32-25": {
+  "name": "Launch box",
+  "price": 39000,
+  "variations": [
+    { "color": "Pushti", "img": "images/IMG_5678.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5618.JPG" },
+    { "color": "Kok", "img": "images/IMG_5679.JPG" },
+    { "color": "Kok", "img": "images/IMG_5619.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5680.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5620.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-25"
+},
+
+"32-27": {
+  "name": "Gobbler Launch box",
+  "price": 36000,
+  "variations": [
+    { "color": "Yashil", "img": "images/IMG_5681.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5621.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5682.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5622.JPG" },
+    { "color": "Kok", "img": "images/IMG_5683.JPG" },
+    { "color": "Kok", "img": "images/IMG_5623.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-27"
+},
+
+"32-3": {
+  "name": "Launch box",
+  "price": 36000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5679.JPG" },
+    { "color": "", "img": "images/IMG_5685.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-3"
+},
+
+"32-6": {
+  "name": "Launch box burger",
+  "price": 39000,
+  "variations": [
+    { "color": "Jigarang", "img": "images/IMG_5684.JPG" },
+    { "color": "Qaymoqrang", "img": "images/IMG_5627.JPG" },
+    { "color": "Qaymoqrang", "img": "images/IMG_5685.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-6"
+},
+
+"32-12": {
+  "name": "Launch box",
+  "price": 39000,
+  "variations": [
+    { "color": "Syohrang", "img": "images/IMG_5688.JPG" },
+    { "color": "Syohrang", "img": "images/IMG_5631.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5686.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5629.JPG" },
+    { "color": "Kok", "img": "images/IMG_5687.JPG" },
+    { "color": "Kok", "img": "images/IMG_5630.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-12"
+},
+
+"32-13": {
+  "name": "Launch box 2x",
+  "price": 39000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5684.JPG" },
+    { "color": "", "img": "images/IMG_5637.JPG" },
+    { "color": "", "img": "" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-13"
+},
+
+"32-5": {
+  "name": "Launch box 2x",
+  "price": 39000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5693.JPG" },
+    { "color": "Kok", "img": "images/IMG_5636.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5637.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5694.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5638.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5695.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-5"
+},
+
+"32-9": {
+  "name": "Launch box 2x",
+  "price": 39000,
+  "variations": [
+    { "color": "Sariq", "img": "images/IMG_5696.JPG" },
+    { "color": "Sariq", "img": "images/IMG_5639.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5641.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5640.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5697.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-9"
+},
+
+"32-10": {
+  "name": "Launch box 2x",
+  "price": 39000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5700.JPG" },
+    { "color": "Kok", "img": "images/IMG_5643.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5699.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5642.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-10"
+},
+
+"32-11": {
+  "name": "Launch box 2x",
+  "price": 39000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5704.JPG" },
+    { "color": "Kok", "img": "images/IMG_5646.JPG" },
+    { "color": "Olovrang", "img": "images/IMG_5706.JPG" },
+    { "color": "Olovrang", "img": "images/IMG_5648.JPG" }
+  ],
+  "description": "",
+  "video": "videomichoq.html",
+  "code": "32-11"
+},
+
+
+
+
+
+
+
+
+
+
+"13-63": {
+  "name": "Chipsi Qora",
+  "price": 16000,
+  "variations": [
+    { "color": "Qora", "img": "images/IMG_5810.JPG" },
+    { "color": "Qora", "img": "images/IMG_6462.JPG" },
+    
+  ],
+  "description": "",
+  "video": "", // If you have a video, add the link here
+  "code": "13-63"
+},
+
+
+"13-58": {
+  "name": "Chipsi Selekon",
+  "price": 15000,
+  "variations": [
+    { "color": "Qizil", "img": "images/IMG_5820.JPG" },
+    { "color": "Qizil", "img": "images/IMG_6466.JPG" },
+    { "color": "Kok", "img": "images/IMG_5821.JPG" },
+    { "color": "Kok", "img": "images/IMG_6467.JPG" },
+    { "color": "Yashil", "img": "images/IMG_5815.JPG" },
+    { "color": "Yashil", "img": "images/IMG_6464.JPG" },
+    { "color": "Oq", "img": "images/IMG_5817.JPG" },
+    { "color": "Oq", "img": "images/IMG_6465.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-58"
+},
+
+"13-89": {
+  "name": "Pizza rezka",
+  "price": 19000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5823.JPG" },
+    { "color": "Standart", "img": "images/IMG_6468.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-89"
+},
+
+"13-96": {
+  "name": "Economka",
+  "price": 16000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5834.JPG" },
+    { "color": "Standart", "img": "images/IMG_6478.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-96"
+},
+
+"13-101": {
+  "name": "Hamir keskich",
+  "price": 18000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5826.JPG" },
+    { "color": "Standart", "img": "images/IMG_6471.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-101"
+},
+
+"13-93": {
+  "name": "Qirgich",
+  "price": 16000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5829.JPG" },
+    { "color": "Standart", "img": "images/IMG_6474.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-93"
+},
+
+"13-98": {
+  "name": "Sita",
+  "price": 16000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5827.JPG" },
+    { "color": "Standart", "img": "images/IMG_6472.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-98"
+},
+
+
+"13-98": {
+  "name": "Sita",
+  "price": 16000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5827.JPG" },
+    { "color": "Standart", "img": "images/IMG_6472.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-98"
+},
+
+"13-90": {
+  "name": "Pitsa shpatel",
+  "price": 18000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5825.JPG" },
+    { "color": "Standart", "img": "images/IMG_6470.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-90"
+},
+
+"13-99": {
+  "name": "Hamir keskich kichkina",
+  "price": 16000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5828.JPG" },
+    { "color": "Standart", "img": "images/IMG_6473.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-99"
+},
+
+"13-94": {
+  "name": "Qirgich",
+  "price": 16000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5830.JPG" },
+    { "color": "Standart", "img": "images/IMG_6475.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-94"
+},
+
+"13-100": {
+  "name": "Buranda",
+  "price": 16000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5833.JPG" },
+    { "color": "Standart", "img": "images/IMG_6477.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-100"
+},
+
+"13-95": {
+  "name": "Economka",
+  "price": 16000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5835.JPG" },
+    { "color": "", "img": "images/IMG_6479.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-95"
+},
+
+"9-16": {
+  "name": "Konserva ochgich",
+  "price": 49000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5841.JPG" },
+    { "color": "Standart", "img": "images/IMG_6485.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "9-16"
+},
+
+"9-13": {
+  "name": "Economka",
+  "price": 27000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5842.JPG" },
+    { "color": "", "img": "images/IMG_6486.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "9-13"
+},
+
+"9-18": {
+  "name": "Bolga",
+  "price": 47000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5843.JPG" },
+    { "color": "", "img": "images/IMG_6487.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "9-18"
+},
+
+"13-96": {
+  "name": "Economka",
+  "price": 16000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5834.JPG" },
+    { "color": "Standart", "img": "images/IMG_6478.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-96"
+},
+
+"9-6": {
+  "name": "Bolga qora rangli",
+  "price": 47000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5845.JPG" },
+    { "color": "", "img": "images/IMG_6490.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "9-6"
+},
+
+
+"13-91": {
+  "name": "Hamir keskich",
+  "price": 27000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5836.JPG" },
+    { "color": "Standart", "img": "images/IMG_6480.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-91"
+},
+
+
+"13-75": {
+  "name": "Vinchik rangli 24sm",
+  "price": 9000,
+  "variations": [
+    { "color": "Siyohrang", "img": "images/IMG_5791.JPG" },
+    { "color": "Siyohrang", "img": "images/IMG_6443.JPG" },
+    { "color": "Pushti", "img": "images/IMG_6445.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5794.JPG" },
+  ],
+  "video": "",
+  "code": "13-75"
+},
+
+"13-67": {
+  "name": "Vinchik",
+  "price": 16000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5787.JPG" },
+    { "color": "Standart", "img": "images/IMG_6440.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-67"
+},
+
+"13-75o": {
+  "name": "Vinchik rangli 30sm",
+  "price": 9000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5801.JPG" },
+    { "color": "Kok", "img": "images/IMG_6452.JPG" },
+    { "color": "Syohrang", "img": "images/IMG_5800.JPG" },
+    { "color": "Syohrang", "img": "images/IMG_6451.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5799.JPG" },
+    { "color": "Pushti", "img": "images/IMG_6450.JPG" },
+
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-75o"
+},
+
+"9-48": {
+  "name": "Geliviy Vinchik rangli",
+  "price": 15000,
+  "variations": [
+    { "color": "Kulrang", "img": "images/IMG_5802.JPG" },
+    { "color": "Qora", "img": "images/IMG_5803.JPG" },
+    { "color": "Qora", "img": "images/IMG_6454.JPG" },
+    { "color": "Kok", "img": "images/IMG_5804.JPG" },
+    { "color": "Kok", "img": "images/IMG_6455.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "9-48"
+},
+
+"9-50": {
+  "name": "Vinchik Temir",
+  "price": 20000,
+  "variations": [
+    { "color": "Kulrang", "img": "images/IMG_5805.JPG" },
+    { "color": "Kulrang", "img": "images/IMG_6456.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "9-50"
+},
+
+"13-66": {
+  "name": "Vinchik Purjinalik",
+  "price": 18000,
+  "variations": [
+    { "color": "Qora", "img": "images/IMG_5807.JPG" },
+    { "color": "Qora", "img": "images/IMG_6458.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-66"
+},
+
+
+"20-17": {
+  "name": "Vinchik Tilla",
+  "price": 29000,
+  "variations": [
+    { "color": "Tilla", "img": "images/IMG_5808.JPG" },
+    { "color": "Tilla", "img": "images/IMG_6459.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "20-17"
+},
+"20-20": {
+  "name": "Vinchik Tilla",
+  "price": 19000,
+  "variations": [
+    { "color": "Tilla", "img": "images/IMG_5809.JPG" },
+    { "color": "Tilla", "img": "images/IMG_6461.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "20-20"
+},
+"13-77": {
+  "name": "Vinchik katta",
+  "price": 17000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_5796.JPG" },
+    { "color": "Kok", "img": "images/IMG_6447.JPG" },
+    { "color": "Pushti", "img": "images/IMG_5798.JPG" },
+    { "color": "Pushti", "img": "images/IMG_6449.JPG" },
+
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-77"
+},
+
+"13-79": {
+  "name": "Muz chalar",
+  "price": 15000,
+  "variations": [
+    { "color": "", "img": "images/IMG_6297.JPG" },
+    { "color": "", "img": "images/IMG_6027.JPG" },
+    { "color": "", "img": "images/IMG_6028.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-79"
+},
+"20-48": {
+  "name": "Muz idish",
+  "price": 55000,
+  "variations": [
+  
+    { "color": "", "img": "images/IMG_6012.JPG" },
+    { "color": "", "img": "images/IMG_6015.JPG" },
+    { "color": "", "img": "images/IMG_6013.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "20-48"
+},
+
+"20-46": {
+  "name": "Muz idish",
+  "price": 9000,
+  "variations": [
+    { "color": "", "img": "images/IMG_6017.JPG" },
+
+  ],
+  "description": "",
+  "video": "",
+  "code": "20-46"
+},
+
+"32-67": {
+  "name": "Muz idish",
+  "price": 9000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_6021.JPG" },
+    { "color": "Qizil", "img": "images/IMG_6023.JPG" },
+    { "color": "Yashil", "img": "images/IMG_6025.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "32-67"
+},
+
+"20-39": {
+  "name": "Muzqaymoq Sharik",
+  "price": 35000,
+  "variations": [
+    { "color": "Oq", "img": "images/IMG_6279.JPG" },
+    { "color": "Olovrang", "img": "images/IMG_6278.JPG" }
+
+  ],
+  "description": "",
+  "video": "",
+  "code": "20-39"
+},
+
+
+"20-97": {
+  "name": "Muzqaymoq sharik",
+  "price": 19000,
+  "variations": [
+    { "color": "Katta", "img": "images/IMG_6275.JPG" },
+    { "color": "Ortancha", "img": "images/IMG_6276.JPG" },
+    { "color": "Kichik", "img": "images/IMG_6274.JPG" },
+    
+  ],
+  "description": "",
+  "video": "",
+  "code": "20-97"
+},
+
+"4-20": {
+  "name": "Podchaynik",
+  "price": 15000,
+  "variations": [
+    { "color": "", "img": "images/IMG_6223.JPG" },
+    { "color": "", "img": "images/IMG_6222.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "4-20"
+},
+
+"8-2": {
+  "name": "Podchaynik",
+  "price": 9000,
+  "variations": [
+    { "color": "Sariq", "img": "images/IMG_6202.JPG" },
+    { "color": "Sariq", "img": "images/IMG_6200.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "8-2"
+},
+
+"4-16": {
+  "name": "Podchaynik",
+  "price": 9000,
+  "variations": [
+    { "color": "Qizil", "img": "images/IMG_6211.JPG" },
+    { "color": "Qizil", "img": "images/IMG_6209.JPG" },
+    { "color": "Kok", "img": "images/IMG_6208.JPG" },
+    { "color": "Kok", "img": "images/IMG_6206.JPG" },
+    
+
+  ],
+  "description": "",
+  "video": "",
+  "code": "4-16"
+},
+
+"13-126": {
+  "name": "Podchaynik kvadratlik",
+  "price": 12000,
+  "variations": [
+    { "color": "Kok", "img": "images/IMG_6214.JPG" },
+    { "color": "Qizil", "img": "images/IMG_6217.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-126"
+},
+
+"8-1": {
+  "name": "Podchaynik",
+  "price": 9000,
+  "variations": [
+    { "color": "Sariq", "img": "images/IMG_6203.JPG" },
+    { "color": "Sariq", "img": "images/IMG_6204.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "8-1"
+},
+
+"4-19": {
+  "name": "Podchaynik",
+  "price": 16000,
+  "variations": [
+    { "color": "Sariq", "img": "images/IMG_6226.JPG" },
+    { "color": "Sariq", "img": "images/IMG_6225.JPG" },
+
+  ],
+  "description": "",
+  "video": "",
+  "code": "4-19"
+},
+
+"13-124": {
+  "name": "Podchaynik",
+  "price": 16000,
+  "variations": [
+    { "color": "Yashil", "img": "images/IMG_6227.JPG" },
+    { "color": "Sariq", "img": "images/IMG_6228.JPG" },
+    
+
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-124"
+},
+
+
+"4-15": {
+  "name": "Podchaynik",
+  "price": 16000,
+  "variations": [
+    { "color": "", "img": "images/IMG_4062.JPG" },
+    { "color": "", "img": "images/IMG_6232.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "4-15"
+},
+
+"13-145": {
+  "name": "Chopqi",
+  "price": 89000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5965.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-145"
+},
+
+"13-108": {
+  "name": "Pichoq",
+  "price": 19000,
+  "variations": [
+    { "color": "Katta", "img": "images/IMG_5958.JPG" },
+    { "color": "Ortancha", "img": "images/IMG_5959.JPG" },
+    { "color": "Ortancha", "img": "images/IMG_5960.JPG" },
+    { "color": "Kichik", "img": "images/IMG_5961.JPG" },
+
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-108"
+},
+
+"21-19": {
+  "name": "Chopqi",
+  "price": 124000,
+  "variations": [
+    { "color": "Qora", "img": "images/IMG_5962.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "21-19"
+},
+
+
+"13-138": {
+  "name": "Pichoq nabor",
+  "price": 27000,
+  "variations": [
+    { "color": "Standart", "img": "images/IMG_5955.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-138"
+},
+"13-111": {
+  "name": "Chopqi",
+  "price": 49000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5963.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-111"
+},
+
+
+"9-45": {
+  "name": "Puyrak Ezgich",
+  "price": 45000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5967.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "9-45"
+},
+"20-24": {
+  "name": "Koklet qolib",
+  "price": 25000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5966.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "20-24"
+},
+"9-32": {
+  "name": "Puyrak Ezgich",
+  "price": 45000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5969.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "9-32"
+},
+"13-36": {
+  "name": "Limon ezgich",
+  "price": 22000,
+  "variations": [
+    { "color": "Sariq", "img": "images/IMG_5975.JPG" },
+    { "color": "Kok", "img": "images/IMG_5973.JPG" },
+    { "color": "Kulrang", "img": "images/IMG_5971.JPG" },
+    
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-36"
+},
+
+"13-48": {
+  "name": "Puyrak Ezgich",
+  "price": 22000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5968.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "13-48"
+},
+"9-15": {
+  "name": "Chisnok ezgich",
+  "price": 39000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5837.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "9-15"
+},
+"9-2": {
+  "name": "Chisnok ezgich",
+  "price": 39000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5839.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "9-2"
+},
+"9-17": {
+  "name": "Yong'oq chaqgich",
+  "price": 59000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5840.JPG" }
+  ],
+  "description": "",
+  "video": "",
+  "code": "9-17"
+},
+
+
+
+"20-105": {
+  "name": "Qolqop",
+  "price": 33000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5981.JPG" },
+    { "color": "", "img": "images/IMG_5982.JPG" },
+    { "color": "", "img": "images/IMG_5983.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "20-105"
+},
+"20-106": {
+  "name": "Qolqop",
+  "price": 35000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5984.JPG" },
+    
+  ],
+  "description": "",
+  "video": "",
+  "code": "20-106"
+},
+"9-38": {
+  "name": "Qolqop",
+  "price": 42000,
+  "variations": [
+    { "color": "", "img": "images/IMG_5988.JPG" },
+    { "color": "", "img": "images/IMG_5985.JPG" },
+    { "color": "", "img": "images/IMG_5986.JPG" },
+  ],
+  "description": "",
+  "video": "",
+  "code": "9-38"
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+};
+
+const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
+    
+    
+
+
+const product = productMap[productId];
+const container = document.getElementById("productDetail");
+
+if (!product) {
+  container.innerHTML = "<p>❌ Mahsulot topilmadi.</p>";
+} else {
+  let selectedColor = null;
+
+  let scrollImages = product.variations.map((v, index) => `
+    <img src="${v.img}" onclick="setMainImage('${v.img}', '${v.color}', this)" />
+  `).join("");
+
+  let firstImage = product.variations[0].img;
+  selectedColor = product.variations[0].color;
+
+  container.innerHTML = `
+    <img src="${firstImage}" class="main-image" id="mainImage" />
+    <div class="color-label" id="colorLabel">Rang: ${selectedColor}</div>
+    <div class="image-scroll">${scrollImages}</div>
+    <div class="details">
+      <h1>${product.name}</h1>
+      <p class="price">${product.price.toLocaleString()} so'm</p>
+      <button onclick="addToCart('${product.name}', ${product.price}, '${firstImage}', '${product.code}')">Savatga qo‘shish</button>
+    </div>
+  `;
+}
+
+
+function setMainImage(src, color, el) {
+  document.getElementById("mainImage").src = src;
+  selectedColor = color;
+  document.getElementById("colorLabel").innerText = "Rang: " + color;
+
+  // Aktiv rasmga border berish
+  document.querySelectorAll('.image-scroll img').forEach(img => img.classList.remove('selected-image'));
+  el.classList.add('selected-image');
+}
+
+function addToCart(name, price, img, code) {
+  if (!selectedColor) {
+    alert("❗ Iltimos, mahsulot rangini tanlang!");
+    return;
+  }
+
+  let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+  const fullName = `${name} (${selectedColor})`;
+  cart.push({ name: fullName, price, img, code });
+  localStorage.setItem("cartItems", JSON.stringify(cart));
+  alert("✅ Mahsulot savatga qo‘shildi!");
+}
+
+
+
+
+  </script>
+  
+</body>
+</html>

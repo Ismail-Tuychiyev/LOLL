@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video</title>
+  <style>
+    body {
+      background-color: #f4f4f4;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    video {
+      margin-top: 135px;
+      margin-left: 41px;
+      width: 80%;
+      border-radius: 8px;
+    }
+
+    .logo {
+      width: 60px;
+      position: absolute;
+      left: 43%;
+      margin-top: 70px;
+    }
+
+    .img {
+      width: 40px;
+      position: absolute;
+      left: 10%;
+      margin-top: 34px;
+      border-bottom: none;
+    }
+
+    .savatga {
+      display: block;
+      margin: 30px auto;
+      padding: 20px 40px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #000000;
+      background: linear-gradient(135deg, #ffe606, #e6f81c);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .savatga:hover {
+      background: linear-gradient(135deg, #ede516, #b5cd00);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .savatga:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .savatga.clicked {
+      background: #00ff5e !important;
+      box-shadow: 0 0 10px #00ff5e;
+      color: black !important;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="index.html">
+    <img src="https://cdn-icons-png.flaticon.com/128/93/93634.png" alt="Back" class="img">
+  </a>
+
+  <div>
+    <img src="https://i.pinimg.com/originals/01/ca/da/01cada77a0a7d326d85b7969fe26a728.jpg" class="logo" alt="Logo">
+  </div>
+
+  <div class="videol">
+    <video src="IMG_6650.MOV" controls></video>
+  </div>
+
+  <!-- Only 1 savatga button now -->
+  <button class="savatga" onclick="addToCart('Men', 39900, 'https://image-link-of-men-product.jpg', this)">Savatga</button>
+
+  <script>
+    function addToCart(name = "Mahsulot", price = 39900, img = '', button = null) {
+      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  
+      const index = cartItems.findIndex(item => item.name === name);
+  
+      if (index > -1) {
+        cartItems.splice(index, 1);
+        if (button) {
+          button.textContent = "Savatga";
+          button.classList.remove("clicked");
+        }
+      } else {
+        cartItems.push({ name, price, img, quantity: 1 });
+        if (button) {
+          button.textContent = "Qo‘shildi";
+          button.classList.add("clicked");
+        }
+      }
+  
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }
+  
+    document.addEventListener("DOMContentLoaded", () => {
+      const name = "Men"; // 👈 bu sahifa qaysi mahsulotga tegishli bo‘lsa, shu nom bo‘lishi kerak
+      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      const exists = cartItems.some(item => item.name === name);
+  
+      if (exists) {
+        const button = document.querySelector(".savatga");
+        button.textContent = "Qo‘shildi";
+        button.classList.add("clicked");
+      }
+    });
+  </script>
+  
+
+</body>
+</html>
