@@ -192,9 +192,6 @@ form input, form textarea, form select, form button {
   margin-bottom: 10px;
 }
 
-label{
-  margin-bottom: -10px;
-}
   </style>
 </head>
 <body>
@@ -234,11 +231,28 @@ label{
     <label for="address"><b>Arentir</b></label>
     <textarea id="address"  required></textarea>
     <label for="payment" ><b>Manzil</b></label>
-    <input type="text" id="locationInput" placeholder="Joylashuv linki" readonly required />
-    <button type="button" onclick="openMap()">📍 Xarita orqali tanlash</button>
+   
+    <button type="button" onclick="openMap()" style=" display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 0;
+    background: linear-gradient(90deg, #4fd1c5 0%, #38b2ac 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.08rem;
+    font-weight: 600;
+    box-shadow: 0 3px 12px rgba(72, 187, 120, 0.13);
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: background 0.17s, transform 0.13s;
+  ">📍 Xarita orqali tanlash</button>
     <button type="button" onclick="locateMe()" style="background:#6c63ff; color:white; border:none; padding:0.5rem; border-radius:6px;">
       📡 Joylashuvni aniqlash
     </button>
+    <input type="text" style="height: 10px;" id="locationInput" placeholder="Joylashuv linki" readonly required />
     <div id="map-container">
       <div id="map"></div>
       
