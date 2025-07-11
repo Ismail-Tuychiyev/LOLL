@@ -91,6 +91,13 @@
       border: 1px solid #ccc;
       border-radius: 6px;
     }
+
+    form input {
+      height: 50px;
+    }
+    form textarea {
+      height: 40px;
+    }
     input:focus, textarea:focus, select:focus {
       border-color: #27ae60;
       box-shadow: 0 0 0 2px rgba(39, 174, 96, 0.2);
@@ -181,6 +188,13 @@
   justify-content: center;
 }
 
+form input, form textarea, form select, form button {
+  margin-bottom: 10px;
+}
+
+label{
+  margin-bottom: -10px;
+}
   </style>
 </head>
 <body>
@@ -201,15 +215,25 @@
   <div class="cart-container" id="cart-items"></div>
   <div id="total">Jami: 0 so'm</div>
 
+  <h2 style="font-size:18px; margin-bottom:10px; color:#27ae60 ; margin-top: 30px; text-align: center;">Buyurtma berish uchun</h2>
+
   <form id="orderForm">
-    <input type="text" id="name" placeholder="Ismingiz" required autofocus />
-    <input type="tel" id="phone" placeholder="Telefon raqam (90 123 45 67)" required />
-    <textarea id="address" placeholder="Manzil (arentir bilan)" required></textarea>
+    <label for="name"><b>Ismingiz</b></label>
+    <input type="text" id="name"  required autofocus />
+
+    <label for="phone"><b>Telefon raqamingiz</b></label>
+    <input type="tel" id="phone" placeholder="(90 123 45 67)" required />
+   
+    <label for="payment" ><b>Tolov turi</b></label>
     <select id="payment" required>
       <option value="Naqd">Naqd</option>
       <option value="Karta">Karta</option>
     </select>
+    <label for="date" ><b>Mahsulotni qachonga yetkazaylik</b></label>
     <input type="date" id="date" min="2025-06-17" required />
+    <label for="address"><b>Arentir</b></label>
+    <textarea id="address"  required></textarea>
+    <label for="payment" ><b>Manzil</b></label>
     <input type="text" id="locationInput" placeholder="Joylashuv linki" readonly required />
     <button type="button" onclick="openMap()">📍 Xarita orqali tanlash</button>
     <button type="button" onclick="locateMe()" style="background:#6c63ff; color:white; border:none; padding:0.5rem; border-radius:6px;">
@@ -217,9 +241,8 @@
     </button>
     <div id="map-container">
       <div id="map"></div>
-      <button class="gps-button" onclick="locateMe()">
-        <img src="https://cdn-icons-png.flaticon.com/512/61/61088.png" alt="locate" />
-      </button>
+      
+      
     </div>
     
     
