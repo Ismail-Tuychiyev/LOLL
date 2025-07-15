@@ -211,6 +211,9 @@ body {
 </head>
 <body>
 
+
+ 
+
   <header style="background: #111; color: white; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; position: relative;">
     <div style="font-size: 22px; font-weight: bold; color: #00bfff;">
       HomeEase
@@ -227,7 +230,16 @@ body {
     </div>
   </header>
   
-
+  <button onclick="goBack()" class="ortga" style=" color: white; border-radius: 40px; margin-top: 20px; margin-left: 20px;" >
+    <img src="https://cdn-icons-png.flaticon.com/512/93/93634.png" alt="" style="width: 50px;">
+  </button>
+  
+  <script>
+    function goBack() {
+      // Bu brauzer tarixidagi oldingi sahifaga qaytaradi
+      window.history.back();
+    }
+  </script>
 
   <div class="container">
     <div class="product-detail fade-in" id="productDetail"></div>

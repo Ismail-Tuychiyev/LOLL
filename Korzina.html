@@ -200,8 +200,8 @@ label{
 </head>
 <body>
 
-  <button onclick="goBack()" class="ortga">
-    ⬅
+  <button onclick="goBack()" class="ortga" style=" color: white; border-radius: 40px; margin-top: 20px; margin-left: 0px;" >
+    <img src="https://cdn-icons-png.flaticon.com/512/93/93634.png" alt="" style="width: 50px;">
   </button>
   
   <script>
@@ -210,7 +210,6 @@ label{
       window.history.back();
     }
   </script>
-  
 
   <h1>Savat</h1>
   <div class="cart-container" id="cart-items"></div>
@@ -314,7 +313,7 @@ label{
           </div>`;
       });
 
-      const freeDeliveryThreshold = 150000;
+      const freeDeliveryThreshold = 70000;
       const deliveryText = total >= freeDeliveryThreshold
         ? '🚚 <b>Yetkazib berish:</b> Bepul!'
         : `🛍️ <b>Bepul yetkazib berish uchun:</b> ${(freeDeliveryThreshold - total).toLocaleString()} so'mlik mahsulot qo‘shing`;
