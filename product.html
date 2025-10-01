@@ -48,7 +48,12 @@
   <img src="images/qidiruv icon.png" alt="Qidiruv">
 </a>
         <a href="#"><img src="images/personal.png" alt="Profil"></a>
-        <a href="#"><img src="images/savat.png" alt="Savat"></a>
+       <!-- sening savat linking -->
+<a href="checkout.html" class="nav-cart">
+  <img src="images/savat.png" alt="Savat">
+  <span id="cartBadge" class="cart-badge"></span>
+</a>
+
       </div>
 
 
@@ -448,4 +453,38 @@ function scoreProduct(p, q){
   });
 })();
 </script>
+
+<script src="cart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(location.search);
+  const slug   = (params.get('slug') || '').trim();
+
+  const list = (typeof products !== 'undefined' && Array.isArray(products)) ? products : [];
+  const p = list.find(x => (x.slug || '').toLowerCase() === slug.toLowerCase());
+  if (!p) return;
+
+  function getSelectedColorName(){
+    return document.querySelector('#pColors .swatch.is-active')?.getAttribute('aria-label') || '';
+  }
+  function getSelectedSize(){
+    return document.querySelector('#pSizes .size.is-active')?.textContent.trim() || '';
+  }
+
+  document.getElementById('buyBtn')?.addEventListener('click', () => {
+    addToCart({
+      id:   p.code || p.slug,
+      slug: p.slug,
+      title: p.title,
+      price: Number(p.price || 0),
+      color: getSelectedColorName(),
+      size:  getSelectedSize(),
+      image: p.images?.main || '',
+      qty:   1,
+    });
+    location.href = 'checkout.html';
+  });
+});
+</script>
+
 </body>

@@ -1186,5 +1186,14 @@ body.srch-open{ overflow:hidden; }
     text-align:center;
   }
 }
+.cart-badge{
+  position: relative;
+  top:-10px; left:-14px;
+  min-width:18px; height:18px;
+  padding:0 5px;
+  display:none; align-items:center; justify-content:center;
+  background:#111; color:#fff; border-radius:9px;
+  font-size:12px; font-weight:700;
+}
 
 

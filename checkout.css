@@ -266,3 +266,132 @@ height: 120px;   /* 28px o‘rniga kattaroq qildik */
 .app-tile:hover{ border-color:#111; box-shadow:0 2px 8px rgba(0,0,0,.06); }
 .app-tile:active{ transform: scale(.98); }
 .app-tile img{ width: 72px; height: 24px; object-fit:contain; display:block; }
+.order-card{border:1px solid #eee;border-radius:14px;padding:16px 16px 18px;background:#fff}
+.order-title{font-size:18px;font-weight:800;margin:0 0 12px}
+.order-item{display:flex;gap:12px;align-items:flex-start}
+.order-thumb{width:84px;height:84px;border-radius:10px;object-fit:cover;border:1px solid #eee}
+.order-info{flex:1;min-width:0}
+.order-name{font-weight:800}
+.order-attrs{color:#666;font-size:14px;margin:2px 0 8px}
+.order-row{display:flex;align-items:center;gap:10px}
+.qty{display:inline-flex;align-items:center;border:1px solid #ddd;border-radius:10px;overflow:hidden}
+.qty-btn{width:34px;height:34px;border:0;background:#f7f7f7;cursor:pointer;font-size:18px}
+.qty-input{width:44px;text-align:center;border:0;height:34px;outline:none}
+.order-price{margin-left:auto;font-weight:800;white-space:nowrap}
+.item-remove{border:0;background:#fff;width:34px;height:34px;line-height:34px;border-radius:10px;cursor:pointer}
+.item-remove:hover{background:#f5f5f5}
+.order-sep{border:0;border-top:1px solid #eee;margin:14px 0}
+.order-totals .row{display:flex;justify-content:space-between;margin:6px 0}
+.order-totals .total dt,.order-totals .total dd{font-weight:800}
+.order-edit{display:block;text-align:center;margin-top:12px;padding:12px;border:1px solid #ddd;border-radius:12px;text-decoration:none;font-weight:700}
+.order-edit:hover{border-color:#111}
+@media (max-width:480px){
+  .order-thumb{width:72px;height:72px}
+  .order-price{font-size:15px}
+}
+/* Xulosa ichida mahsulot kartalari konteyneri */
+.sum-items{
+  display: grid;
+  grid-auto-flow: column;           /* mobil: yonma-yon */
+  grid-auto-columns: minmax(200px, 1fr);
+  gap: 12px;
+  overflow-x: auto;
+  padding: 4px 2px 10px;
+  scroll-snap-type: x mandatory;
+}
+
+.sum-items > .order-item{
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 8px;
+  min-width: 200px;                 /* yonma-yon kartaning eni */
+  scroll-snap-align: start;
+}
+
+.order-item .sum-img{
+  width: 64px; height: 64px; object-fit: cover; border-radius: 8px;
+}
+
+.order-item .price-col{
+  text-align: right;
+  display: grid; gap: 6px; align-content: center;
+}
+
+.order-item .qty{ display:flex; align-items:center; gap:6px; }
+.order-item .qty-btn{ width:28px; height:28px; border:1px solid #ddd; border-radius:6px; background:#fafafa; }
+
+.item-remove{ background:none; border:none; cursor:pointer; font-size:18px; line-height:1; }
+
+/* Katta ekranlarda kartalarni ustma-ust joylash */
+@media (min-width: 992px){
+  .sum-items{
+    grid-auto-flow: row;
+    grid-auto-columns: unset;
+    grid-template-columns: 1fr;
+    overflow: visible;
+  }
+  .sum-items > .order-item{ min-width: 0; }
+}
+.sum-row{
+  display: grid;
+  grid-auto-flow: column;          /* mobil: yonma-yon */
+  grid-auto-columns: minmax(220px, 1fr);
+  gap: 12px;
+  overflow-x: auto;
+  padding: 4px 2px 10px;
+  scroll-snap-type: x mandatory;
+}
+.sum-row .order-item{
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  background: #fff;
+  padding: 8px;
+  min-width: 220px;
+  scroll-snap-align: start;
+}
+.sum-row .sum-img{ width:64px; height:64px; object-fit:cover; border-radius:8px; }
+.sum-row .qty{ display:flex; align-items:center; gap:6px; }
+.sum-row .qty-btn{ width:28px; height:28px; border:1px solid #ddd; border-radius:6px; background:#fafafa; }
+.sum-row .price-col{ text-align:right; display:grid; gap:6px; align-content:center; }
+.sum-row .item-remove{ background:none; border:none; cursor:pointer; font-size:18px; line-height:1; }
+
+@media (min-width: 992px){
+  .sum-row{
+    grid-auto-flow: row;           /* desktop: ustma-ust */
+    grid-auto-columns: unset;
+    grid-template-columns: 1fr;
+    overflow: visible;
+  }
+  .sum-row .order-item{ min-width: 0; }
+}
+@media (max-width: 680px){
+  .sum-row{
+    display: grid;
+    grid-auto-flow: row;          /* yonma-yon emas */
+    grid-auto-columns: unset;
+    grid-template-columns: 1fr;   /* bitta ustun */
+    gap: 12px;
+    overflow: visible;            /* balandlik to'silmasin */
+  }
+  .sum-row .order-item{
+    min-width: 0;                 /* konteynerga sig'sin */
+  }
+}
+
+/* Har doim, har ehtimolga qarshi, xulosa blokida 'tiqilib qolish'ni oldini olamiz */
+.chk-right .sum-row{
+  overflow-x: auto;   /* katta ekranda 2-3 dona bo'lsa ham skroll bor */
+  overflow-y: visible;
+}
+
+/* Agar qayta ta'riflangan eski .sum-row = flex qoidasi bo'lsa, shu pastdagisi ustun turadi */
+.sum-row{ display: grid; }
