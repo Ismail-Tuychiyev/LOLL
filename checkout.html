@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHINOVA</title>
+  <link rel="stylesheet" href="checkout.css">
+</head>
+<script src="products.js"></script>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="ann-bar" id="annBar">
+  <div class="ann-inner">
+    <button class="ann-btn ann-prev">‹</button>
+    <div class="ann-viewport">
+      <div class="ann-track" id="annTrack">
+        <div class="ann-item">150 ming so‘mdan <strong>bepul yetkazib berish</strong></div>
+        <div class="ann-item"><strong>7 kun</strong> ichida qaytarish</div>
+        <div class="ann-item">To‘lov: <strong>Naqd / POS / COD</strong></div>
+      </div>
+    </div>
+    <button class="ann-btn ann-next">›</button>
+  </div>
+</div>
+
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-wrapper">
+
+      <!-- Logo -->
+      <a href="index.html" class="logo">
+        <img src="images/logo chinova.png" alt="CHINOVA">
+      </a>
+
+      <!-- Menu links -->
+      <nav class="nav-links">
+        <a href="#"><b>YANGI KELGANLAR</b></a>
+        <a href="#"><b>TANLANGAN</b></a>
+        <a href="#"><b>KYIMLAR</b></a>
+        <a href="#"><b>BOLLALAR UCHUN</b></a>
+      </nav>
+
+    
+      <div class="nav-icons">
+        <a href="#"><img src="images/qidiruv icon.png" alt="Qidiruv"></a>
+        <a href="#"><img src="images/personal.png" alt="Profil"></a>
+        <a href="#"><img src="images/savat.png" alt="Savat"></a>
+      </div>
+
+    </div>
+  </header>
+  
+
+
+
+
+<main class="chk container">
+  <h1 class="chk-title">Buyurtma</h1>
+
+  <div class="chk-grid">
+    <!-- Chap: ma’lumotlar -->
+    <section class="card chk-left">
+      <h2 class="blk-title">Yetkazib berish ma’lumotlari</h2>
+
+      <form id="orderForm" class="form">
+        <input type="hidden" name="qty" id="qtyField" value="1">
+        <div class="grid2">
+          <label class="field">
+            <span>Ism</span>
+            <input class="input" name="name" required placeholder="Ismingiz">
+          </label>
+          <label class="field">
+            <span>Telefon</span>
+            <input class="input" name="phone" required placeholder="+998 90 123 45 67">
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Viloyat / shahar</span>
+          <input class="input" name="region" required placeholder="Masalan: Toshkent shahri">
+        </label>
+
+        <label class="field">
+          <span>Manzil</span>
+          <input class="input" name="address" required placeholder="Ko‘cha, uy, xonadon">
+        </label>
+
+        <div class="grid2">
+          <!-- To‘lov turi -->
+<label class="field">
+  <span>To‘lov turi</span>
+  <select class="select" name="pay" id="payMethod" required>
+    <option value="card">Karta</option>
+    <option value="cash">Naqd</option>
+  </select>
+</label>
+
+<!-- Karta ma'lumotlari (default: ko‘rinadi, chunki "Karta" birinchi) -->
+
+<!-- Ilovalardan to‘lov logotiplari -->
+
+
+
+          <label class="field">
+            <span>Yetkazish</span>
+            <select class="select" name="ship">
+              <option>Standart (1–2 kun)</option>
+              <option>Tezkor (shu kun)</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Izoh (ixtiyoriy)</span>
+          <textarea class="textarea" name="note" placeholder="Masalan: qo‘ng‘iroq qiling, kod…"></textarea>
+        </label>
+
+        <button type="submit" class="btn-solid full">Buyurtmani tasdiqlash</button>
+      </form>
+    </section>
+
+    <!-- O‘ng: xulosa -->
+    <aside class="card chk-right">
+      <h2 class="blk-title">Buyurtma xulosasi</h2>
+
+      <div id="sumItem" class="sum-row">
+        <!-- JS to‘ldiradi -->
+      </div>
+
+      <div class="line"></div>
+
+      <div id="sumPrice">
+        <!-- JS: subtotal / shipping -->
+      </div>
+
+      <div class="tot">
+        <span>Jami</span>
+        <b id="sumTotal">—</b>
+      </div>
+
+      <a id="editLink" class="btn-ghost full" href="index.html">Mahsulotni tahrirlash</a>
+    </aside>
+  </div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+(function(){
+  const paySel    = document.getElementById('payMethod');
+  const cardBox   = document.getElementById('cardFields');
+  const cardNum   = document.getElementById('cardNumber');
+  const cardExp   = document.getElementById('cardExp');
+  const cardCvc   = document.getElementById('cardCvc');
+  const cardName  = document.getElementById('cardName');
+
+  // 1) To‘lov turiga qarab karta maydonlarini ko‘rsat/yashir
+  function toggleCardFields(){
+    const usingCard = paySel.value === 'card';
+    cardBox.classList.toggle('hidden', !usingCard);
+
+    // required bayroqlarini moslash
+    [cardNum, cardExp, cardCvc, cardName].forEach(el => {
+      if (!el) return;
+      el.required = usingCard;
+    });
+  }
+  paySel.addEventListener('change', toggleCardFields);
+  toggleCardFields();
+
+  // 2) Karta raqamini 4 ta-4 ta qilib formatlash
+  cardNum?.addEventListener('input', () => {
+    let v = cardNum.value.replace(/\D/g, '').slice(0,16);
+    cardNum.value = v.replace(/(.{4})/g, '$1 ').trim();
+  });
+
+  // 3) MM/YY format
+  cardExp?.addEventListener('input', () => {
+    let v = cardExp.value.replace(/\D/g,'').slice(0,4);
+    if (v.length >= 3) v = v.slice(0,2) + '/' + v.slice(2);
+    cardExp.value = v;
+  });
+
+  // 4) Yengil Luhn tekshiruv (front-end)
+  function luhnOK(num) {
+    num = (num || '').replace(/\s+/g,'');
+    let s = 0, dbl = false;
+    for (let i = num.length - 1; i >= 0; i--) {
+      let d = parseInt(num[i], 10);
+      if (dbl) { d *= 2; if (d > 9) d -= 9; }
+      s += d; dbl = !dbl;
+    }
+    return (s % 10) === 0 && num.length >= 13;
+  }
+
+  // 5) Form submit (o‘zingizning forma id’ingizni qo‘ying)
+  const checkoutForm = document.querySelector('form'); // kerak bo‘lsa #checkoutForm
+  checkoutForm?.addEventListener('submit', (e) => {
+    if (paySel.value === 'cash') {
+      // Naqd — bevosita davom
+      return;
+    }
+
+    // Karta tekshiruvlari
+    const n = cardNum.value.trim();
+    const eVal = cardExp.value.trim();
+    const cvc = cardCvc.value.trim();
+
+    // Luhn
+    if (!luhnOK(n)) {
+      e.preventDefault();
+      alert('Karta raqami noto‘g‘ri. Iltimos tekshirib kiriting.');
+      cardNum.focus();
+      return;
+    }
+
+    // MM/YY
+    const m = parseInt(eVal.slice(0,2),10), y = parseInt('20' + eVal.slice(-2),10);
+    const now = new Date(), ymNow = now.getFullYear()*12 + (now.getMonth()+1);
+    const ymInp = (y*12) + m;
+    if (!(m>=1 && m<=12) || ymInp < ymNow) {
+      e.preventDefault();
+      alert('Karta muddati (MM/YY) noto‘g‘ri yoki o‘tib ketgan.');
+      cardExp.focus();
+      return;
+    }
+
+    if (cvc.length < 3 || cvc.length > 4 || /\D/.test(cvc)) {
+      e.preventDefault();
+      alert('CVC 3–4 raqam bo‘lishi kerak.');
+      cardCvc.focus();
+      return;
+    }
+
+    // Demo: haqiqiy to‘lov integratsiyasi yo‘q. Hozircha jo‘natamiz.
+    // Backend’ga (yoki to‘lov provayderiga) yuborish sizning keyingi qadamingiz bo‘ladi.
+  });
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+(() => {
+  const bar   = document.getElementById('annBar');
+  const track = document.getElementById('annTrack');
+  const prev  = bar.querySelector('.ann-prev');
+  const next  = bar.querySelector('.ann-next');
+  const close = document.getElementById('annClose');
+  if (!bar || !track) return;
+
+  let i = 0;
+  const items = Array.from(track.children);
+
+ function shiftTo(n){
+  i = (n + items.length) % items.length;
+  const w = bar.querySelector('.ann-viewport').clientWidth; // oynaning kengligi
+  track.style.transform = `translateX(${-i * w}px)`;
+}
+
+
+  // Auto-rotate
+  let timer = setInterval(() => shiftTo(i+1), 4000);
+
+  // Buttons
+  next.addEventListener('click', () => { clearInterval(timer); shiftTo(i+1); });
+  prev.addEventListener('click', () => { clearInterval(timer); shiftTo(i-1); });
+
+  // Pause on hover (desktop)
+  bar.addEventListener('mouseenter', () => clearInterval(timer));
+  bar.addEventListener('mouseleave', () => timer = setInterval(() => shiftTo(i+1), 5000));
+
+  // Close
+  close.addEventListener('click', () => {
+    bar.remove();
+    document.querySelector('.navbar')?.style.setProperty('top','0px');
+  });
+
+  // Touch swipe (mobil uchun qulay)
+  let sx = 0, dx = 0;
+  bar.addEventListener('touchstart', e => sx = e.touches[0].clientX, {passive:true});
+  bar.addEventListener('touchend',   e => {
+    dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 40) {
+      clearInterval(timer);
+      shiftTo(i + (dx < 0 ? 1 : -1));
+    }
+  }, {passive:true});
+
+  // Init & on resize
+  window.addEventListener('load', () => shiftTo(0));
+  window.addEventListener('resize', () => shiftTo(i));
+
+  // Reduced motion: auto-rotate o‘chiriladi
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    clearInterval(timer);
+  }
+})();
+</script>
+
+
+
+
+<script>
+  (function(){
+    const fmt = n => (n||0).toLocaleString('uz-UZ') + " so‘m";
+    const q = new URLSearchParams(location.search);
+    const code  = (q.get('code')  || '').trim();
+    const slugQ = (q.get('slug')  || '').trim();
+    const color = (q.get('color') || '').trim();
+    const size  = (q.get('size')  || '').trim();
+    const qtyQ  = Math.max(1, parseInt(q.get('qty')||'1',10));   // URL dan kelsa, o‘qiymiz
+
+    // product topish
+    const norm = s => (s||'').toString().trim().toLowerCase().replace(/\s+/g,'-');
+    const list = (typeof products !== 'undefined' && Array.isArray(products)) ? products : [];
+    let p = list.find(v => norm(v.slug)===norm(slugQ));
+    if (!p && code) p = list.find(v => (v.code||'')===code);
+
+    // elementlar
+    const sumItem  = document.getElementById('sumItem');
+    const sumPrice = document.getElementById('sumPrice');
+    const sumTotal = document.getElementById('sumTotal');
+    const editLink = document.getElementById('editLink');
+    const qtyField = document.getElementById('qtyField');
+
+    // boshlang‘ich ma’lumotlar
+    let price=0, title='Mahsulot', img='';
+    if (p){ price=p.price||0; title=p.title||'Mahsulot'; img=(p.images&&p.images.main)||''; }
+
+    // qty holati
+    let qty = qtyQ;                 // holat
+    const MIN_QTY = 1, MAX_QTY = 99;
+
+    // Render funksiyasi — hammasini qayta hisoblaydi
+    function render(){
+      // mahsulot qatori (rasm, meta, qty controller, birlik narx)
+      sumItem.innerHTML = `
+        <img class="sum-img" src="${img}" alt="">
+        <div class="sum-meta">
+          <div style="font-weight:600">${title}</div>
+          <div class="muted">Rang: ${color||'—'} • O‘lcham: ${size||'—'}</div>
+
+          <div class="qty" style="margin-top:8px">
+            <button type="button" class="qty-btn" id="dec">−</button>
+            <input class="qty-num" id="qtyNum" value="${qty}" aria-label="Soni" readonly>
+            <button type="button" class="qty-btn" id="inc">+</button>
+          </div>
+        </div>
+        <div style="font-weight:700">${fmt(price)}</div>
+      `;
+
+      // narxlar
+      const subtotal = price * qty;
+      const shipping = subtotal >= 150000 ? 0 : 15000;
+      sumPrice.innerHTML = `
+        <div class="row"><span>Mahsulotlar</span><b>${fmt(subtotal)}</b></div>
+        <div class="row"><span>Yetkazib berish</span><b>${shipping?fmt(shipping):'BEPUL'}</b></div>
+      `;
+      sumTotal.textContent = fmt(subtotal + shipping);
+
+      // formaga yozib qo‘yamiz
+      if (qtyField) qtyField.value = String(qty);
+
+      // tugmalar hodisalari
+      const dec = document.getElementById('dec');
+      const inc = document.getElementById('inc');
+      const qtyNum = document.getElementById('qtyNum');
+
+      function syncBtns(){
+        dec.disabled = qty <= MIN_QTY;
+        inc.disabled = qty >= MAX_QTY;
+        qtyNum.value = String(qty);
+      }
+      dec.addEventListener('click', ()=>{ if(qty>MIN_QTY){ qty--; render(); }});
+      inc.addEventListener('click', ()=>{ if(qty<MAX_QTY){ qty++; render(); }});
+      syncBtns();
+    }
+
+    // “tahrirlash” linki (product sahifasiga qaytish)
+    if (p?.slug){
+      const back = new URLSearchParams({slug: p.slug});
+      editLink.href = `product.html?${back.toString()}`;
+    }
+
+    // form submit – hozircha faqat tekshiruv + alert
+    document.getElementById('orderForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const fd = new FormData(this);
+      if(!fd.get('name') || !fd.get('phone') || !fd.get('address')){
+        alert('Iltimos, ism / telefon / manzilni to‘ldiring.');
+        return;
+      }
+      alert('Rahmat! Buyurtmangiz qabul qilindi.');
+      // Keyinroq: Telegram/WhatsApp yoki backendga yuboramiz
+    });
+
+    // birinchi marta chizish
+    render();
+  })();
+  
+</script>
+
