@@ -1017,5 +1017,174 @@ body.srch-open{ overflow:hidden; }
   .splash__logo, .splash__title{ animation:none; opacity:1; transform:none; }
 }
 
+/* ===== Hero ===== */
+.hero{
+  position: relative;
+  width: 100%;
+  min-height: clamp(420px, 72vh, 760px); /* responsiv balandlik */
+  isolation: isolate;                    /* overlay qatlamlari uchun */
+  overflow: hidden;
+  background: #000;                      /* rasm yuklanmay qolsa */
+}
+
+/* Fon (img yoki video) */
+.hero__bg{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  filter: saturate(1.02);
+  transform: scale(1.04);
+  will-change: transform, opacity;
+  opacity: 0;                          /* soft appear */
+  animation: heroFade 900ms ease forwards;
+}
+
+/* Yengil gradient – matn o‘qilsin */
+.hero__overlay{
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.45) 80%);
+  mix-blend-mode: normal;
+}
+
+/* Markazdagi kontent */
+.hero__inner{
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  max-width: min(1200px, 92vw);
+  margin-inline: auto;
+  display: grid;
+  align-content: center;
+  gap: 14px;
+  padding: clamp(18px, 3vw, 30px);
+  color: #fff;
+  text-align: left;
+}
+
+.hero__title{
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: .01em;
+  font-size: clamp(28px, 6vw, 64px);
+  text-shadow: 0 2px 18px rgba(0,0,0,.35);
+}
+
+.hero__subtitle{
+  font-size: clamp(14px, 2.2vw, 18px);
+  opacity: .95;
+}
+
+.hero__cta{
+  display: inline-block;
+  margin-top: 6px;
+  padding: 12px 22px;
+  border-radius: 10px;
+  border: 1.5px solid #fff;
+  color: #fff; text-decoration: none; font-weight: 700;
+  letter-spacing: .04em;
+  transition: transform .18s ease, background .18s ease, color .18s ease;
+  user-select: none;
+  width: fit-content;
+}
+.hero__cta:hover{ background:#fff; color:#000; transform: translateY(-2px); }
+.hero__cta:active{ transform: translateY(0); }
+
+/* Animatsiya */
+@keyframes heroFade{
+  from{ opacity:0; transform: scale(1.06); }
+  to  { opacity:1; transform: scale(1.02); }
+}
+
+/* Mobilda markazlashtirish */
+@media (max-width: 768px){
+  .hero__inner{
+    align-content: start !important;          /* tepadan boshlasin */
+    padding-top: clamp(60px, 14vh, 120px) !important;  /* ⬇️ pastroqqa */
+    padding-bottom: 6vh !important;           /* pastda ham nafas */
+  }
+  .hero__cta{ margin-top: 10px; }             /* tugma va sarlavha orasiga ozgina joy */
+}
+
+/* Reduce-motion: animlarni o‘chir */
+@media (prefers-reduced-motion: reduce){
+  .hero__bg{ animation:none; opacity:1; transform:none; }
+  .hero__cta{ transition:none; }
+}
+
+.hero{
+  position: relative;
+  width: 100%;
+  height: 75vh;             /* desktop uchun balandroq */
+  min-height: 460px;
+  background:#000;
+  overflow:hidden;
+}
+
+.hero__bg{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  object-position:center;
+}
+
+.hero__overlay{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.55));
+}
+
+.hero__inner{
+  position:relative;
+  z-index:2;
+  height:100%;
+  max-width: 1100px;
+  margin-inline:auto;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;  /* vertikal joylashuv */
+  align-items:flex-start;  /* chapdan joylashuv */
+  padding:0 20px;
+  color:#fff;
+}
+
+.hero__title{
+  font-size:clamp(28px,6vw,56px);
+  font-weight:800;
+  line-height:1.1;
+  margin:0 0 10px;
+  text-shadow:0 2px 14px rgba(0,0,0,.35);
+}
+
+.hero__subtitle{
+  font-size:clamp(14px,2vw,18px);
+  margin:0 0 18px;
+  opacity:.95;
+}
+
+.hero__cta{
+  display:inline-block;
+  padding:12px 22px;
+  border:1.5px solid #fff;
+  border-radius:8px;
+  font-weight:700;
+  letter-spacing:.04em;
+  color:#fff;
+  text-decoration:none;
+  transition:.2s ease;
+}
+.hero__cta:hover{background:#fff;color:#000;transform:translateY(-2px);}
+
+/* Mobil uchun maxsus */
+@media(max-width:768px){
+  .hero{
+    height:55vh;            /* balandlikni kichraytirish */
+    min-height:360px;
+  }
+  .hero__inner{
+    justify-content:flex-end;     /* pastroqqa tushirish */
+    padding-bottom:14vh;          /* quyiroqdan chiqsin */
+    align-items:center;           /* markazlashtirish */
+    text-align:center;
+  }
+}
 
 
