@@ -364,30 +364,50 @@ function scoreProduct(p, q){
 
 
 <script>
-(() => {
-  const SPLASH_DURATION = 4000;   // ~4s
-  const splash = document.getElementById('splash');
-
+(function () {
+  const splash   = document.getElementById('splash');
   if (!splash) return;
 
-  // body scrollni to'smasak ham bo'ladi, lekin xavfsiz tomoni:
-  const prevOverflow = document.documentElement.style.overflow;
-  document.documentElement.style.overflow = 'hidden';
+  // Navigation turi: reload/back-forward bo‘lsa splash kerak emas
+  const nav = performance.getEntriesByType('navigation')[0];
+  const isReload      = nav?.type === 'reload';
+  const isBackForward = nav?.type === 'back_forward';
 
-  // 4 soniyada yumshoq yo'qoladi
-  const hide = () => {
-    splash.classList.add('is-hide');
+  // Referrer tekshiruvi: tashqi domenmi?
+  let showBecauseExternal = false;
+  try {
+    if (document.referrer) {
+      const refOrigin = new URL(document.referrer).origin;
+      showBecauseExternal = refOrigin !== location.origin;
+    }
+  } catch (e) { /* xotirjam, fallback ishlaydi */ }
+
+  // Adrestdan to‘g‘ri kirish (referrer yo‘q): shu TAB sessiyasida 1 marta ko‘rsatamiz
+  const directKey = 'chinova_direct_splash_shown';
+  const isDirectFirstTime = !document.referrer && !sessionStorage.getItem(directKey);
+
+  // Yakuniy qaror
+  const shouldShow =
+    !isReload && !isBackForward && (showBecauseExternal || isDirectFirstTime);
+
+  if (!shouldShow) {
+    // Ko‘rsatmaymiz: darrov olib tashlaymiz (FOUC bo‘lmasin)
+    splash.remove();
+    return;
+  }
+
+  if (isDirectFirstTime) {
+    sessionStorage.setItem(directKey, '1');
+  }
+
+  // Splash 4s => so‘nadi => DOMdan olib tashlaymiz
+  const SPLASH_DURATION = 4000; // ms
+  window.addEventListener('load', () => {
     setTimeout(() => {
-      splash.remove();
-      document.documentElement.style.overflow = prevOverflow || '';
-    }, 650); // CSS fade (0.6s) tugashini kutamiz
-  };
-
-  // Bir oz kutib, avtomatik yopish
-  const t = setTimeout(hide, SPLASH_DURATION);
-
-  // Ixtiyoriy: foydalanuvchi bosib yuborsa ham yopilsin
-  splash.addEventListener('click', () => { clearTimeout(t); hide(); }, { once:true });
+      splash.classList.add('is-hide');
+      setTimeout(() => splash.remove(), 700); // CSS transition bilan mos
+    }, SPLASH_DURATION);
+  });
 })();
 </script>
 
