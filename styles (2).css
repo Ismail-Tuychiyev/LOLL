@@ -186,10 +186,10 @@ height: 120px;   /* 28px o‘rniga kattaroq qildik */
 
 /* Karta */
 .prod-card{
-  display:block; text-decoration:none; color:#111;
+  position: relative;       display:block; text-decoration:none; color:#111;
 }
 .prod-card .badge{
-  position:absolute; z-index:2; margin:10px; padding:6px 10px;
+  position:absolute; z-index:2; top: 10px; ; padding:6px 10px;
   font-size:12px; letter-spacing:.08em; background:#111; color:#fff; border-radius:4px;
 }
 .prod-card .thumb{
@@ -1195,7 +1195,7 @@ body.srch-open{ overflow:hidden; }
   background:#111; color:#fff; border-radius:9px;
   font-size:12px; font-weight:700;
 }
-@media (max-width: 390px){
+@media (max-width: 395px){
   :root{ --ann-h: 42px; }           /* e'lon bar balandligi birozgina */
   .navbar{ top: var(--ann-h); }
 
@@ -1234,3 +1234,6 @@ body.srch-open{ overflow:hidden; }
   .nav-icons img { width: 35px; height: 35px; }
   .nav-icons { gap: 12px; }
 }
+
+
+
