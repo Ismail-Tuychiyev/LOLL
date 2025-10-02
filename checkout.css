@@ -395,3 +395,47 @@ height: 120px;   /* 28px o‘rniga kattaroq qildik */
 
 /* Agar qayta ta'riflangan eski .sum-row = flex qoidasi bo'lsa, shu pastdagisi ustun turadi */
 .sum-row{ display: grid; }
+/* “Boshqa mahsulotlarni ko‘rish” – chiroyli CTA */
+#editLink{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  width:100%;
+  padding:14px 18px;
+  border:2px solid #111;
+  border-radius:14px;
+  background:#fff;
+  color:#111;
+  font-weight:800;
+  text-decoration:none;
+  transition:background .2s,color .2s,box-shadow .2s,transform .06s;
+}
+
+/* o‘ngga uchadigan strelka */
+#editLink::after{
+  content:"→";
+  font-weight:700;
+  translate: 0 0;
+  transition: translate .2s;
+}
+
+/* hover/focus holati */
+#editLink:hover,
+#editLink:focus-visible{
+  background:#111;
+  color:#fff;
+  box-shadow:0 4px 14px rgba(0,0,0,.12);
+}
+#editLink:hover::after,
+#editLink:focus-visible::after{
+  translate: 4px 0; /* strelka biroz o‘ngga siljiydi */
+}
+
+/* bosilganda kichik press-effekt */
+#editLink:active{ transform:scale(.98); }
+
+/* juda kichik ekranlarda biroz kattaroq klik zonasi */
+@media (max-width:380px){
+  #editLink{ padding:16px 18px; border-radius:16px; }
+}
