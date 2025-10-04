@@ -78,29 +78,7 @@
   </header>
 
 
-<section class="hero">
-  <!-- Fon: rasm yoki video (ikkalasidan bittasini ishlat) -->
-  <!-- IMG varianti -->
-  <img class="hero__bg" src="images/IMG_5836.JPG"
-       srcset="images/IMG_5836.JPG 600w, images/IMG_5836.JPG 1200w"
-       sizes="(max-width: 768px) 100vw, 100vw"
-       alt="" loading="eager" decoding="async">
-
-  <!-- VIDEO varianti (agar video ishlatsang, yuqoridagi <img>ni olib tashla) -->
-  <!--
-  <video class="hero__bg" autoplay muted playsinline loop preload="auto">
-    <source src="media/hero.mp4" type="video/mp4">
-  </video>
-  -->
-
-  <!-- Kontent -->
-  <div class="hero__overlay"></div>
-  <div class="hero__inner">
-    <h1 class="hero__title">Yangi mavsum<br>Yengil qatlamlar</h1>
-    <p class="hero__subtitle">Ayollar • Bolalar • Uy & Oshxona</p>
-    <a href="collection.html" class="hero__cta">SHOP NOW</a>
-  </div>
-</section>
+<div id="hero"></div>
 
 
 
@@ -159,7 +137,7 @@
   bar.addEventListener('mouseleave', () => timer = setInterval(() => shiftTo(i+1), 5000));
 
   // Close
-  close.addEventListener('click', () => {
+  close?.addEventListener('click', () => {
     bar.remove();
     document.querySelector('.navbar')?.style.setProperty('top','0px');
   });
@@ -200,9 +178,27 @@
 
 
 <script src="products.js"></script>
+<script src="banners.js"></script>
 
 
+<script>
+  // HERO uchun tayyor HTML generator
 
+
+  (function mountHeroFromBanners(){
+    const host = document.getElementById('hero');
+    const list = (window.banners || []).slice();
+    if (!host || !list.length) return;
+
+    // shuffle va birinchisini olish
+    for (let i=list.length-1; i>0; i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [list[i], list[j]] = [list[j], list[i]];
+    }
+    const b = list[0];
+    host.innerHTML = heroHTML(b);
+  })();
+</script>
 
 <script>
 /* Minimal mahsulot ma’lumotlari */
@@ -229,23 +225,56 @@ function cardHTML(p){
   </a>`;
 }
 
-grid.innerHTML = products.map(cardHTML).join('');
+function bannerHTML(b){
+  return `
+    <a class="inter-banner" href="${b.link}">
+      <img src="${b.image}" alt="${b.title}" loading="lazy">
+      <div class="inter-content">
+        <div class="inter-title">${b.title}</div>
+        <div class="inter-sub">${b.subtitle}</div>
+        <span class="inter-btn">SHOP NOW</span>
+      </div>
+    </a>
+  `;
+}
+
+(function renderGridWithBanners(){
+  const items = window.products || [];
+  const banners = (window.banners || []).slice();
+
+  // Agar bannerlar kam bo‘lsa ham aylantirib ishlatamiz
+  let bIndex = 0;
+  const pickBanner = () => {
+    if (!banners.length) return null;
+    // aylantirish
+    const b = banners[bIndex % banners.length];
+    bIndex++;
+    return b;
+  };
+
+  const out = [];
+  for (let i = 0; i < items.length; i++) {
+    out.push( cardHTML(items[i]) );
+
+    // Har 8 ta kartadan keyin banner
+    const isEndOfBlock = (i+1) % 8 === 0;
+    if (isEndOfBlock) {
+      const b = pickBanner();
+      if (b) out.push( bannerHTML(b) );
+    }
+  }
+  grid.innerHTML = out.join('');
+})();
+
+
+
 
 /* Rang swatch hover/clickda suratni almashtirish */
-grid.addEventListener('mouseenter', onSwatch, true);
-grid.addEventListener('click', onSwatch, true);
 
-function onSwatch(e){
-  const btn = e.target.closest('.swatch');
-  if(!btn) return;
-  const card = btn.closest('.prod-card');
-  const mainImg = card.querySelector('.thumb .img.main');
-  const all = card.querySelectorAll('.swatch');
-  all.forEach(b=>b.removeAttribute('aria-current'));
-  btn.setAttribute('aria-current','true');
-  mainImg.src = btn.dataset.img;
-}
 </script>
+
+
+
 
 
 

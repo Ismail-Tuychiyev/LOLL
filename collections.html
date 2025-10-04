@@ -1,0 +1,38 @@
+<!-- collection.html ichida -->
+<div class="container">
+  <h2 id="colTitle" class="section-title">Kolleksiya</h2>
+  <div id="colGrid" class="prod-grid"></div>
+</div>
+
+<script src="products.js"></script>
+<script>
+  const params = new URLSearchParams(location.search);
+  const cat = params.get('cat');     // masalan ?cat=kids
+
+  // sarlavha
+  const colMap = { kids:"Bolalar uchun", kitchen:"Uy & Oshxona", home:"Uy bezaklari", women:"Ayollar", men:"Erkaklar" };
+  document.getElementById('colTitle').textContent = colMap[cat] || "Kolleksiya";
+
+  // filter
+ const list = (window.products||[]).filter(p => {
+  const t = (p.tags||[]).map(x=>String(x).toLowerCase());
+ if (!cat) return true;
+ if (t.length === 0) return false; // tags bo'lmasa ko'rsatma
+  return t.includes(cat.toLowerCase());
+ });
+
+  const grid = document.getElementById('colGrid');
+  const fmt = n => n.toLocaleString('uz-UZ') + " so'm";
+  const cardHTML = (p) => `
+    <a class="prod-card" href="product.html?slug=${encodeURIComponent(p.slug)}">
+      ${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
+      <div class="thumb">
+        <img src="${p.images.main}" alt="${p.title}" class="img main">
+        <img src="${p.images.hover}" alt="" class="img hover">
+      </div>
+      <h3 class="name">${p.title}</h3>
+      <div class="price">${fmt(p.price)}</div>
+    </a>
+  `;
+  grid.innerHTML = list.map(cardHTML).join('') || '<div class="muted" style="padding:24px;text-align:center;">Bu bo‘limda mahsulot yo‘q</div>';
+</script>

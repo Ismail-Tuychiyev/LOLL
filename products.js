@@ -2,50 +2,53 @@ const products = [
   {
     slug: "termiz-carton",
      code: "A-4",     
-    title: "Termiz carton",
+    title: "chiroylik idishlar",
     price: 16500,
     badge: "NEW",
     images: {
-      main: "images/IMG_5459.JPG",
-      hover: "images/IMG_5460.JPG"
+      main: "images/idish q.png",
+      hover: "images/idish q.png"
     },
     colors: [
       {name:"Black", hex:"#0a0a0a", image:"images/IMG_5459.JPG"},
       {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
     ],
-    sizes: ["S","M","L","XL","XXL"]
+    sizes: ["S","M","L","XL","XXL"],
+      tags: ["kitchen","home"]
   },
 
   {
-    slug: "termiz-ayiq",
+    slug: "meva savati",
     code: "A-3",     
-    title: "Termiz ayiq",
-    price: 16500,
+    title: "meva savati",
+    price: 39500,
     badge: "NEW",
     images: {
-      main: "images/IMG_5462.JPG",
-      hover: "images/IMG_5463.JPG"
+      main: "images/meva savat.png",
+     hover: "images/meva savat.png"
     },
     colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5462.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5463.JPG"}
-    ]
+      {name:"Black", hex:"#f0df45ff", image:"images/meva savat.png"},
+      {name:"Army Green", hex:"#ffffffff", image:"images/lol.png"}
+    ],
+      tags: ["kids","home"]
   },
 
   {
     slug: "termiz-robot",
     code: "A-2",     
-    title: "Termiz robot",
+    title: "meva savat",
     price: 16500,
     badge: "",
     images: {
-      main: "images/IMG_5466.JPG",
-      hover: "images/IMG_5467.JPG"
+      main: "images/meva savat j.png",
+     hover: "images/meva savat j.png"
     },
     colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5466.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ]
+      {name:"qora", hex:"#0a0a0a", image:"images/meva savat q.png", },
+      {name:"jigarrang", hex:"#8a8a6a", image:"images/meva savat j.png"}
+    ],
+      tags: ["kids","home"]
   },
 
   {
@@ -62,7 +65,8 @@ const products = [
       {name:"Black", hex:"#b8b8b8ff", image:"images/IMG_5479.JPG"},
       {name:"Army Green", hex:"#ff2626ff", image:"images/IMG_5480.JPG",},
       {name:"Army Green", hex:"#00ff99ff", image:"images/IMG_5480.JPG",},
-    ]
+    ],
+      tags: ["kitchen","home"]
   },
   {
     slug: "termiz-carton",
@@ -175,6 +179,7 @@ const products = [
       {name:"Black", hex:"#0a0a0a", image:"images/IMG_5466.JPG"},
       {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
     ]
+
   },
 
   {
