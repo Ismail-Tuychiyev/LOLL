@@ -116,7 +116,7 @@
   bar.addEventListener('mouseleave', () => timer = setInterval(() => shiftTo(i+1), 5000));
 
   // Close
-  close.addEventListener('click', () => {
+  close?.addEventListener('click', () => {
     bar.remove();
     document.querySelector('.navbar')?.style.setProperty('top','0px');
   });
@@ -165,7 +165,7 @@
   <span class="product__label">Rang:</span>
   <div class="product__swatches" id="pColors"></div>
 </div>
-
+<div id="pStock" class="stock-note"></div>
 <div class="product__row" id="sizeRow">
   <span class="product__label">O‘lcham:</span>
   <div class="product__sizes" id="pSizes"></div>
@@ -174,12 +174,7 @@
 
 
       <!-- Afzalliklar -->
-      <ul class="product__bullets">
-        <li>Shamol o‘tkazmaydigan softshell mato</li>
-        <li>Ichki issiqlik qatlam</li>
-        <li>Yuvishda rangini yo‘qotmaydi</li>
-      </ul>
-
+     <ul id="pBullets" class="product__bullets"></ul>
       <!-- Tugmalar -->
     <button id="buyBtn" class="btn-solid full">HARID QILISH</button>
 
@@ -203,28 +198,29 @@
 document.addEventListener('DOMContentLoaded', () => {
   const fmt = n => n.toLocaleString('uz-UZ') + " so‘m";
 
-
-
-
-  // URLdan slug va normalizatsiya
+  // URL -> slug
   const params    = new URLSearchParams(location.search);
   const slugParam = (params.get('slug') || '').trim();
   const norm = s => (s||'').toString().trim().toLowerCase().replace(/\s+/g,'-');
 
-  // ⬇️ MUHIM O'ZGARISH: window.products o'rniga to'g'ridan "products" dan foydalanamiz
+  // Ma'lumot
   const list = (typeof products !== 'undefined' && Array.isArray(products)) ? products : [];
-  const p = list.find(x =>
-    norm(x.slug) === norm(slugParam) || norm(x.title) === norm(slugParam)
-  );
+  const p = list.find(x => norm(x.slug) === norm(slugParam) || norm(x.title) === norm(slugParam));
 
-  // DOM elementlar
-  const titleEl  = document.getElementById('pTitle');
-  const priceEl  = document.getElementById('pPrice');
-  const mainImg  = document.getElementById('pMain');
-  const thumbsEl = document.getElementById('pThumbs');
-  const colorsEl = document.getElementById('pColors');
-  const badgeEl  = document.getElementById('pBadge');
+  // DOM
+  const titleEl   = document.getElementById('pTitle');
+  const priceEl   = document.getElementById('pPrice');
+  const mainImg   = document.getElementById('pMain');
+  const thumbsEl  = document.getElementById('pThumbs');
+  const colorsEl  = document.getElementById('pColors');
+  const badgeEl   = document.getElementById('pBadge');
+  const bulletsEl = document.getElementById('pBullets');
+  const stockEl   = document.getElementById('pStock');
+  const sizeRow   = document.getElementById('sizeRow');
+  const sizesEl   = document.getElementById('pSizes');
+  const buyBtn    = document.getElementById('buyBtn');
 
+  // p topilmasa
   if (!p) {
     document.querySelector('.product__grid').innerHTML =
       '<p style="padding:24px;font-size:18px">Mahsulot topilmadi.</p>';
@@ -232,55 +228,27 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-
-  // HARID QILISH tugmasi
-
-  // ... p ni topish qismi allaqachon bor (uni o‘zgartirmaymiz)
-
-  // Tanlangan rang va o‘lchamni olish uchun yordamchi funksiya
-  function getSelectedColorName(){
-    const el = document.querySelector('#pColors .swatch.is-active');
-    return el ? (el.getAttribute('aria-label') || '') : '';
-  }
-  function getSelectedSize(){
-    const el = document.querySelector('#pSizes .size.is-active');
-    return el ? el.textContent.trim() : '';
-  }
-
-  // HARID QILISH bosilganda checkout.htmlga kerakli ma'lumotlarni URL orqali yuboramiz
-  const buyBtn = document.getElementById('buyBtn');
-  buyBtn.addEventListener('click', () => {
-    const params = new URLSearchParams({
-      code: (p.code || ''),       // products.js dagi code
-      slug: (p.slug || ''),       // zaxira sifatida slug
-      color: getSelectedColorName(),
-      size: getSelectedSize(),
-      qty: '1'
-    });
-    location.href = `checkout.html?${params.toString()}`;
-  });
-
-
-  // Asosiy ma’lumotlar
-  document.title = p.title + ' — CHINOVA';
-  titleEl.textContent = p.title;
-  priceEl.textContent = fmt(p.price);
-  mainImg.src = p.images.main;
-  badgeEl.textContent = p.badge || '';
+  // Asosiy ma'lumotlar
+  document.title        = p.title + ' — CHINOVA';
+  titleEl.textContent   = p.title;
+  priceEl.textContent   = fmt(p.price);
+  mainImg.src           = p.images.main;
+  badgeEl.textContent   = p.badge || '';
   badgeEl.style.display = p.badge ? 'inline-block' : 'none';
 
-  // Thumbs (main + hover bo‘lsa)
+  // Afzalliklar
+  const feats = Array.isArray(p.bullets) ? p.bullets : (Array.isArray(p.features) ? p.features : []);
+  if (feats.length) {
+    bulletsEl.innerHTML = feats.map(t => `<li>${t}</li>`).join('');
+  } else {
+    bulletsEl.style.display = 'none';
+  }
+
+  // Thumbs
   const thumbs = [p.images.main, p.images.hover].filter(Boolean);
   thumbsEl.innerHTML = thumbs.map((src, i) =>
     `<img class="${i===0?'is-active':''}" src="${src}" data-large="${src}" alt="">`
   ).join('');
-
-  // Rang swatchlari
-  colorsEl.innerHTML = (p.colors || []).map((c,i)=>`
-    <button class="swatch ${i===0?'is-active':''}" style="--c:${c.hex}" aria-label="${c.name}" data-img="${c.image}"></button>
-  `).join('');
-
-  // Thumbs -> asosiy rasm
   const thumbImgs = thumbsEl.querySelectorAll('img');
   thumbImgs.forEach(t => {
     t.addEventListener('click', () => {
@@ -290,7 +258,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Rang bosilganda asosiy rasm almashtirish
+  // Ranglar
+  colorsEl.innerHTML = (p.colors || []).map((c,i)=>`
+    <button class="swatch ${i===0?'is-active':''}" style="--c:${c.hex}" aria-label="${c.name}" data-img="${c.image}"></button>
+  `).join('');
   const colorBtns = colorsEl.querySelectorAll('.swatch');
   colorBtns.forEach(b=>{
     b.addEventListener('click', ()=>{
@@ -301,30 +272,72 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
- // --- O‘LCHAMLAR (faqat bo‘lsa ko‘rsatamiz) ---
-const sizeRow  = document.getElementById('sizeRow');
-const sizesEl  = document.getElementById('pSizes');
-
-if (Array.isArray(p.sizes) && p.sizes.length) {
-  // tugmalarni yasaymiz
-  sizesEl.innerHTML = p.sizes.map((s, i) =>
-    `<button class="size ${i===0?'is-active':''}" data-size="${s}">${s}</button>`
-  ).join('');
-
-  const sizeBtns = sizesEl.querySelectorAll('.size');
-  sizeBtns.forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      sizeBtns.forEach(x=>x.classList.remove('is-active'));
-      btn.classList.add('is-active');
+  // O‘lchamlar
+  if (Array.isArray(p.sizes) && p.sizes.length) {
+    sizesEl.innerHTML = p.sizes.map((s, i) =>
+      `<button class="size ${i===0?'is-active':''}" data-size="${s}">${s}</button>`
+    ).join('');
+    const sizeBtns = sizesEl.querySelectorAll('.size');
+    sizeBtns.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        sizeBtns.forEach(x=>x.classList.remove('is-active'));
+        btn.classList.add('is-active');
+      });
     });
-  });
-} else {
-  // umuman o‘lcham yo‘q bo‘lsa qatorni yashiramiz
-  sizeRow.style.display = 'none';
-}
+  } else {
+    sizeRow.style.display = 'none';
+  }
 
-}); 
+  // STOCK
+  const stock = Number(p.stock ?? 0);
+  function stockText(n){
+    if (n <= 0) return "Qolmadi";
+    if (n <= 2) return `Yakunlanmoqda — ${n} ta qoldi`;
+    if (n <= 5) return `${n} ta qoldi`;
+    return "Omborda bor";
+  }
+  function stockClass(n){
+    if (n <= 0) return "stock--out";
+    if (n <= 2) return "stock--low";
+    if (n <= 5) return "stock--mid";
+    return "stock--ok";
+  }
+  stockEl.textContent = stockText(stock);
+  stockEl.className   = "stock-note " + stockClass(stock);
+
+  if (stock <= 0) {
+    buyBtn.classList.add('is-disabled');
+    buyBtn.setAttribute('disabled', 'disabled');
+    buyBtn.textContent = "HOZIRCHA YO‘Q";
+  }
+
+  // HARID QILISH
+  function getSelectedColorName(){
+    return document.querySelector('#pColors .swatch.is-active')?.getAttribute('aria-label') || '';
+  }
+  function getSelectedSize(){
+    return document.querySelector('#pSizes .size.is-active')?.textContent.trim() || '';
+  }
+
+   document.getElementById('buyBtn')?.addEventListener('click', () => {
+    // savatga qo‘shish
+    addToCart({
+      id:    p.code || p.slug,
+      slug:  p.slug,
+      title: p.title,
+      price: Number(p.price || 0),
+      color: getSelectedColorName(),
+      size:  getSelectedSize(),
+      image: p.images?.main || '',
+      qty:   1
+    });
+
+    location.href = 'checkout.html';
+
+  });
+});
 </script>
+
 <script>
 // ====== SEARCH RANKER (eski qidiruv skriptini shu bilan almashtiramiz) ======
 const LAT_MAP = {'қ':'q','ў':"o'",'ғ':"g'",'ҳ':'h','ё':'yo','ю':'yu','я':'ya','й':'y','ц':'ts','ч':'ch','ш':'sh','щ':'sh','ъ':'','ь':'','э':'e','ы':'i'};
@@ -455,36 +468,6 @@ function scoreProduct(p, q){
 </script>
 
 <script src="cart.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const params = new URLSearchParams(location.search);
-  const slug   = (params.get('slug') || '').trim();
 
-  const list = (typeof products !== 'undefined' && Array.isArray(products)) ? products : [];
-  const p = list.find(x => (x.slug || '').toLowerCase() === slug.toLowerCase());
-  if (!p) return;
-
-  function getSelectedColorName(){
-    return document.querySelector('#pColors .swatch.is-active')?.getAttribute('aria-label') || '';
-  }
-  function getSelectedSize(){
-    return document.querySelector('#pSizes .size.is-active')?.textContent.trim() || '';
-  }
-
-  document.getElementById('buyBtn')?.addEventListener('click', () => {
-    addToCart({
-      id:   p.code || p.slug,
-      slug: p.slug,
-      title: p.title,
-      price: Number(p.price || 0),
-      color: getSelectedColorName(),
-      size:  getSelectedSize(),
-      image: p.images?.main || '',
-      qty:   1,
-    });
-    location.href = 'checkout.html';
-  });
-});
-</script>
 
 </body>

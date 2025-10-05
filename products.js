@@ -14,7 +14,9 @@ const products = [
       {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
     ],
     sizes: ["S","M","L","XL","XXL"],
-      tags: ["kitchen","home"]
+      tags: ["kitchen","home"],
+      bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+         stock: 3  
   },
 
   {
@@ -31,7 +33,9 @@ const products = [
       {name:"Black", hex:"#f0df45ff", image:"images/meva savat.png"},
       {name:"Army Green", hex:"#ffffffff", image:"images/lol.png"}
     ],
-      tags: ["kids","home"]
+      tags: ["kids","home"],
+      bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+         stock: 3  
   },
 
   {
@@ -48,7 +52,9 @@ const products = [
       {name:"qora", hex:"#0a0a0a", image:"images/meva savat q.png", },
       {name:"jigarrang", hex:"#8a8a6a", image:"images/meva savat j.png"}
     ],
-      tags: ["kids","home"]
+      tags: ["kids","home"],
+      bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+         stock: 3  
   },
 
   {
@@ -66,7 +72,9 @@ const products = [
       {name:"Army Green", hex:"#ff2626ff", image:"images/IMG_5480.JPG",},
       {name:"Army Green", hex:"#00ff99ff", image:"images/IMG_5480.JPG",},
     ],
-      tags: ["kitchen","home"]
+      tags: ["kitchen","home"],
+      bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+       stock: 3  
   },
   {
     slug: "termiz-carton",

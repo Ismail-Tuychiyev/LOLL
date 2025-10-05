@@ -158,98 +158,7 @@
 
 
 
-<script>
-(function(){
-  const paySel    = document.getElementById('payMethod');
-  const cardBox   = document.getElementById('cardFields');
-  const cardNum   = document.getElementById('cardNumber');
-  const cardExp   = document.getElementById('cardExp');
-  const cardCvc   = document.getElementById('cardCvc');
-  const cardName  = document.getElementById('cardName');
 
-  // 1) To‘lov turiga qarab karta maydonlarini ko‘rsat/yashir
-  function toggleCardFields(){
-    const usingCard = paySel.value === 'card';
-    cardBox.classList.toggle('hidden', !usingCard);
-
-    // required bayroqlarini moslash
-    [cardNum, cardExp, cardCvc, cardName].forEach(el => {
-      if (!el) return;
-      el.required = usingCard;
-    });
-  }
-  paySel.addEventListener('change', toggleCardFields);
-  toggleCardFields();
-
-  // 2) Karta raqamini 4 ta-4 ta qilib formatlash
-  cardNum?.addEventListener('input', () => {
-    let v = cardNum.value.replace(/\D/g, '').slice(0,16);
-    cardNum.value = v.replace(/(.{4})/g, '$1 ').trim();
-  });
-
-  // 3) MM/YY format
-  cardExp?.addEventListener('input', () => {
-    let v = cardExp.value.replace(/\D/g,'').slice(0,4);
-    if (v.length >= 3) v = v.slice(0,2) + '/' + v.slice(2);
-    cardExp.value = v;
-  });
-
-  // 4) Yengil Luhn tekshiruv (front-end)
-  function luhnOK(num) {
-    num = (num || '').replace(/\s+/g,'');
-    let s = 0, dbl = false;
-    for (let i = num.length - 1; i >= 0; i--) {
-      let d = parseInt(num[i], 10);
-      if (dbl) { d *= 2; if (d > 9) d -= 9; }
-      s += d; dbl = !dbl;
-    }
-    return (s % 10) === 0 && num.length >= 13;
-  }
-
-  // 5) Form submit (o‘zingizning forma id’ingizni qo‘ying)
-  const checkoutForm = document.querySelector('form'); // kerak bo‘lsa #checkoutForm
-  checkoutForm?.addEventListener('submit', (e) => {
-    if (paySel.value === 'cash') {
-      // Naqd — bevosita davom
-      return;
-    }
-
-    // Karta tekshiruvlari
-    const n = cardNum.value.trim();
-    const eVal = cardExp.value.trim();
-    const cvc = cardCvc.value.trim();
-
-    // Luhn
-    if (!luhnOK(n)) {
-      e.preventDefault();
-      alert('Karta raqami noto‘g‘ri. Iltimos tekshirib kiriting.');
-      cardNum.focus();
-      return;
-    }
-
-    // MM/YY
-    const m = parseInt(eVal.slice(0,2),10), y = parseInt('20' + eVal.slice(-2),10);
-    const now = new Date(), ymNow = now.getFullYear()*12 + (now.getMonth()+1);
-    const ymInp = (y*12) + m;
-    if (!(m>=1 && m<=12) || ymInp < ymNow) {
-      e.preventDefault();
-      alert('Karta muddati (MM/YY) noto‘g‘ri yoki o‘tib ketgan.');
-      cardExp.focus();
-      return;
-    }
-
-    if (cvc.length < 3 || cvc.length > 4 || /\D/.test(cvc)) {
-      e.preventDefault();
-      alert('CVC 3–4 raqam bo‘lishi kerak.');
-      cardCvc.focus();
-      return;
-    }
-
-    // Demo: haqiqiy to‘lov integratsiyasi yo‘q. Hozircha jo‘natamiz.
-    // Backend’ga (yoki to‘lov provayderiga) yuborish sizning keyingi qadamingiz bo‘ladi.
-  });
-})();
-</script>
 
 
 
@@ -329,120 +238,45 @@
 
 
 <script>
-  (function(){
-    const fmt = n => (n||0).toLocaleString('uz-UZ') + " so‘m";
-    const q = new URLSearchParams(location.search);
-    const code  = (q.get('code')  || '').trim();
-    const slugQ = (q.get('slug')  || '').trim();
-    const color = (q.get('color') || '').trim();
-    const size  = (q.get('size')  || '').trim();
-    const qtyQ  = Math.max(1, parseInt(q.get('qty')||'1',10));   // URL dan kelsa, o‘qiymiz
+// --- Telegram sozlamalari (o'zingniki turaversin)
+const TG = {
+  token: '8168640984:AAFh5LdWM4ki-U87tK1KGsOe6KI-FCl5nJk',
+  chat_id: '6623050833'
+};
+const TG_API = `https://api.telegram.org/bot${TG.token}`;
+const fmt = n => (Number(n)||0).toLocaleString('uz-UZ') + " so‘m";
+const shippingCost = subtotal => subtotal >= 150000 ? 0 : 15000;
 
-    // product topish
-    const norm = s => (s||'').toString().trim().toLowerCase().replace(/\s+/g,'-');
-    const list = (typeof products !== 'undefined' && Array.isArray(products)) ? products : [];
-    let p = list.find(v => norm(v.slug)===norm(slugQ));
-    if (!p && code) p = list.find(v => (v.code||'')===code);
-
-    // elementlar
-    const sumItem  = document.getElementById('sumItem');
-    const sumPrice = document.getElementById('sumPrice');
-    const sumTotal = document.getElementById('sumTotal');
-    const editLink = document.getElementById('editLink');
-    const qtyField = document.getElementById('qtyField');
-
-    // boshlang‘ich ma’lumotlar
-    let price=0, title='Mahsulot', img='';
-    if (p){ price=p.price||0; title=p.title||'Mahsulot'; img=(p.images&&p.images.main)||''; }
-
-    // qty holati
-    let qty = qtyQ;                 // holat
-    const MIN_QTY = 1, MAX_QTY = 99;
-
-    // Render funksiyasi — hammasini qayta hisoblaydi
-    function render(){
-      // mahsulot qatori (rasm, meta, qty controller, birlik narx)
-      sumItem.innerHTML = `
-        <img class="sum-img" src="${img}" alt="">
-        <div class="sum-meta">
-          <div style="font-weight:600">${title}</div>
-          <div class="muted">Rang: ${color||'—'} • O‘lcham: ${size||'—'}</div>
-
-          <div class="qty" style="margin-top:8px">
-            <button type="button" class="qty-btn" id="dec">−</button>
-            <input class="qty-num" id="qtyNum" value="${qty}" aria-label="Soni" readonly>
-            <button type="button" class="qty-btn" id="inc">+</button>
-          </div>
-        </div>
-        <div style="font-weight:700">${fmt(price)}</div>
-      `;
-
-      // narxlar
-      const subtotal = price * qty;
-      const shipping = subtotal >= 150000 ? 0 : 15000;
-      sumPrice.innerHTML = `
-        <div class="row"><span>Mahsulotlar</span><b>${fmt(subtotal)}</b></div>
-        <div class="row"><span>Yetkazib berish</span><b>${shipping?fmt(shipping):'BEPUL'}</b></div>
-      `;
-      sumTotal.textContent = fmt(subtotal + shipping);
-
-      // formaga yozib qo‘yamiz
-      if (qtyField) qtyField.value = String(qty);
-
-      // tugmalar hodisalari
-      const dec = document.getElementById('dec');
-      const inc = document.getElementById('inc');
-      const qtyNum = document.getElementById('qtyNum');
-
-      function syncBtns(){
-        dec.disabled = qty <= MIN_QTY;
-        inc.disabled = qty >= MAX_QTY;
-        qtyNum.value = String(qty);
-      }
-      dec.addEventListener('click', ()=>{ if(qty>MIN_QTY){ qty--; render(); }});
-      inc.addEventListener('click', ()=>{ if(qty<MAX_QTY){ qty++; render(); }});
-      syncBtns();
-    }
-
-    // “tahrirlash” linki (product sahifasiga qaytish)
-    if (p?.slug){
-      const back = new URLSearchParams({slug: p.slug});
-      
-    }
-
-    // form submit – hozircha faqat tekshiruv + alert
-    document.getElementById('orderForm').addEventListener('submit', function(e){
-      e.preventDefault();
-      const fd = new FormData(this);
-      if(!fd.get('name') || !fd.get('phone') || !fd.get('address')){
-        alert('Iltimos, ism / telefon / manzilni to‘ldiring.');
-        return;
-      }
-      alert('Rahmat! Buyurtmangiz qabul qilindi.');
-      // Keyinroq: Telegram/WhatsApp yoki backendga yuboramiz
+async function tgSendMessage(text){
+  if(!TG.token || !TG.chat_id) return;
+  try{
+    await fetch(`${TG_API}/sendMessage`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({chat_id:TG.chat_id, text, parse_mode:'HTML'})
     });
+  }catch(e){ console.warn('sendMessage error', e); }
+}
+async function tgSendPhoto(photoUrl, caption){
+  if(!TG.token || !TG.chat_id) return;
+  try{
+    await fetch(`${TG_API}/sendPhoto`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({chat_id:TG.chat_id, photo:photoUrl, caption, parse_mode:'HTML'})
+    });
+  }catch(e){ console.warn('sendPhoto error', e); }
+}
 
-    // birinchi marta chizish
-    render();
-  })();
-  
-</script>
-<script>
+// --- CHECKOUT: SAVATGA ASOSLANGAN KO'RINISH ---
 document.addEventListener('DOMContentLoaded', ()=>{
-
-  // shu satrni o'zgartiring:
-  const listEl = document.getElementById('orderList') 
-              || document.getElementById('sumItem');  // #sumItem’ni konteyner sifatida ishlatamiz
-// oldin orderList edi
-  const sumPrice = document.getElementById('sumPrice');
-  const sumTotal = document.getElementById('sumTotal');
-
-  const fmt = n => (n||0).toLocaleString('uz-UZ') + " so‘m";
-  const shippingCost = (subtotal)=> subtotal>=150000 ? 0 : 15000;
+  const listEl   = document.getElementById('sumItem');     // o'ng blok – itemlar
+  const sumPrice = document.getElementById('sumPrice');    // subtotal / shipping
+  const sumTotal = document.getElementById('sumTotal');    // jami
 
   function render(){
-    const cart = getCart();
-    if(cart.length===0){
+    const cart = getCart(); // cart.js dan
+    if(!cart.length){
       listEl.innerHTML = `<p>Savat hozircha bo‘sh.</p>`;
       sumPrice.innerHTML = `
         <div class="row"><span>Mahsulotlar</span><b>0 so‘m</b></div>
@@ -480,30 +314,100 @@ document.addEventListener('DOMContentLoaded', ()=>{
     sumTotal.textContent = fmt(subtotal + ship);
   }
 
-  listEl.addEventListener('click', (e)=>{
+  // qty +/- va remove
+  listEl.addEventListener('click', e=>{
     const act = e.target.dataset.act;
     if(!act) return;
     const item = e.target.closest('.order-item');
     const key  = item?.dataset.key;
     if(!key) return;
 
-    if(act==='inc') changeQty(key, +1);
-    if(act==='dec') changeQty(key, -1);
+    if(act==='inc')    changeQty(key, +1);
+    if(act==='dec')    changeQty(key, -1);
     if(act==='remove') removeFromCart(key);
 
     render();
   });
 
-  document.getElementById('orderForm')?.addEventListener('submit', e=>{
-    e.preventDefault();
-    alert('Rahmat! Buyurtmangiz qabul qilindi.');
-    clearCart();
-    render();
-  });
+  // Form submit: kartadagi hamma mahsulotni Telegramga yuborish
+  document.getElementById('orderForm')?.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const fd = new FormData(e.target);
 
+  const buyer = {
+    name:   (fd.get('name')||'').trim(),
+    phone:  (fd.get('phone')||'').trim(),
+    region: (fd.get('region')||'').trim(),
+    address:(fd.get('address')||'').trim(),
+    pay:    (fd.get('pay')||'').trim(),
+    ship:   (fd.get('ship')||'').trim(),
+    note:   (fd.get('note')||'').trim()
+  };
+  if(!buyer.name || !buyer.phone || !buyer.address){
+    alert('Iltimos, ism / telefon / manzilni to‘ldiring.');
+    return;
+  }
+
+  const cart = getCart();
+  if(!cart.length){ alert('Savat bo‘sh.'); return; }
+
+  // 1) HAR BIR ITEM: rasm HTTP(S) bo'lsa sendPhoto, bo'lmasa sendMessage
+  for (const it of cart){
+    const cap =
+      `<b>${it.title}</b>\n`+
+      `Kod: <code>${it.id||it.slug||'—'}</code>\n`+
+      `Rang: ${it.color||'—'}\n`+
+      `O‘lcham: ${it.size||'—'}\n`+
+      `Narx: ${fmt(it.price)}\n`+
+      `Soni: ${it.qty}\n`+
+      `Jami: ${fmt((it.price||0)*(it.qty||0))}`;
+
+    const isHttpImage = typeof it.image==='string' && /^https?:\/\//i.test(it.image);
+    if (isHttpImage) {
+      await tgSendPhoto(it.image, cap);
+    } else {
+      await tgSendMessage(cap); // lokal rasm bo‘lsa, matn yuboramiz
+    }
+  }
+
+  // 2) Umumiy xulosa
+  const subtotal = cart.reduce((s,i)=> s + (i.price||0)*(i.qty||0), 0);
+  const ship     = shippingCost(subtotal);
+  const total    = subtotal + ship;
+
+  // (ixtiyoriy) itemlar ro'yxatini ham qo'shib yuborish
+  const itemsText = cart.map((it,idx)=>
+    `${idx+1}) ${it.title} • ${it.color||'—'} • ${it.size||'—'} x${it.qty} = ${fmt((it.price||0)*(it.qty||0))} [kod: ${it.id||it.slug||'—'}]`
+  ).join('\n');
+
+  const summary =
+    `🧾 <b>Buyurtma xulosasi</b>\n\n`+
+    (itemsText ? `${itemsText}\n\n` : '')+
+    `👤 <b>Mijoz:</b> ${buyer.name}\n`+
+    `📞 <b>Telefon:</b> ${buyer.phone}\n`+
+    `📍 <b>Hudud:</b> ${buyer.region}\n`+
+    `🏠 <b>Manzil:</b> ${buyer.address}\n`+
+    `💳 <b>To‘lov:</b> ${buyer.pay==='card'?'Karta':'Naqd'}\n`+
+    `🚚 <b>Yetkazish:</b> ${buyer.ship}\n`+
+    (buyer.note?`📝 <b>Izoh:</b> ${buyer.note}\n`:'')+
+    `\n— — — — —\n`+
+    `Mahsulotlar: ${fmt(subtotal)}\n`+
+    `Yetkazib berish: ${ship?fmt(ship):'BEPUL'}\n`+
+    `✅ <b>Jami:</b> ${fmt(total)}`;
+
+  await tgSendMessage(summary);
+
+  alert('Rahmat! Buyurtmangiz qabul qilindi.');
+  clearCart();
+  location.href = 'index.html';
+});
+
+
+  // birinchi chizish
   render();
 });
 </script>
 
 
 
+</body>

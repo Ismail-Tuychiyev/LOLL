@@ -1,0 +1,193 @@
+<!-- collection.html -->
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CHINOVA — Kolleksiya</title>
+  <link rel="stylesheet" href="styles (2).css" />
+</head>
+<body>
+
+  <!-- ANNOUNCEMENT BAR (index dagidek) -->
+  <div class="ann-bar" id="annBar">
+    <div class="ann-inner">
+      <button class="ann-btn ann-prev">‹</button>
+      <div class="ann-viewport">
+        <div class="ann-track" id="annTrack">
+          <div class="ann-item">150 ming so‘mdan <strong>bepul yetkazib berish</strong></div>
+          <div class="ann-item"><strong>7 kun</strong> ichida qaytarish</div>
+          <div class="ann-item">To‘lov: <strong>Naqd / POS / COD</strong></div>
+        </div>
+      </div>
+      <button class="ann-btn ann-next">›</button>
+    </div>
+  </div>
+
+  <!-- NAVBAR (index dagidek) -->
+  <header class="navbar">
+    <div class="container nav-wrapper">
+      <a href="index.html" class="logo">
+        <img src="images/logo chinova.png" alt="CHINOVA">
+      </a>
+
+      <nav class="nav-links">
+        <a href="#"><b>YANGI KELGANLAR</b></a>
+        <a href="#"><b>TANLANGAN</b></a>
+        <a href="#"><b>KYIMLAR</b></a>
+        <a href="#"><b>BOLLALAR UCHUN</b></a>
+      </nav>
+
+      <div class="nav-icons">
+        <a id="searchBtn" href="#" aria-label="Qidiruv">
+          <img src="images/qidiruv icon.png" alt="Qidiruv">
+        </a>
+        <a href="profil.html"><img src="images/personal.png" alt="Profil"></a>
+        <a href="checkout.html" class="nav-cart">
+          <img src="images/savat.png" alt="Savat">
+          <span id="cartBadge" class="cart-badge"></span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- SEARCH DRAWER (index dagidek, ishlashi uchun) -->
+  <div id="searchOverlay" class="srch-overlay" aria-hidden="true">
+    <div class="srch-backdrop" data-close></div>
+    <aside class="srch-panel" role="dialog" aria-modal="true" aria-labelledby="srchTitle">
+      <button class="srch-close" type="button" title="Yopish" data-close>×</button>
+      <h3 id="srchTitle" class="srch-title">Qidirish</h3>
+      <div class="srch-input-wrap">
+        <input id="srchInput" class="srch-input" type="search" placeholder="Mahsulot nomi..." autocomplete="off">
+      </div>
+      <div id="srchResults" class="srch-results"></div>
+    </aside>
+  </div>
+
+  <!-- KOLLEKSIYA KONTENTI -->
+  <section class="container" style="margin-top:18px;">
+    <h2 id="colTitle" class="section-title">Kolleksiya</h2>
+    <div id="colGrid" class="prod-grid"></div>
+  </section>
+
+  <!-- Skriptlar -->
+  <script src="products.js"></script>
+
+  <!-- Ann-bar slider (index dagidagi bilan aynan bir xil) -->
+  <script>
+  (() => {
+    const bar   = document.getElementById('annBar');
+    const track = document.getElementById('annTrack');
+    const prev  = bar?.querySelector('.ann-prev');
+    const next  = bar?.querySelector('.ann-next');
+    if (!bar || !track) return;
+
+    let i = 0;
+    const items = Array.from(track.children);
+
+    function shiftTo(n){
+      i = (n + items.length) % items.length;
+      const w = bar.querySelector('.ann-viewport').clientWidth;
+      track.style.transform = `translateX(${-i * w}px)`;
+    }
+    let timer = setInterval(() => shiftTo(i+1), 4000);
+    next?.addEventListener('click', () => { clearInterval(timer); shiftTo(i+1); });
+    prev?.addEventListener('click', () => { clearInterval(timer); shiftTo(i-1); });
+    bar.addEventListener('mouseenter', () => clearInterval(timer));
+    bar.addEventListener('mouseleave', () => timer = setInterval(() => shiftTo(i+1), 5000));
+    window.addEventListener('load', () => shiftTo(0));
+    window.addEventListener('resize', () => shiftTo(i));
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){ clearInterval(timer); }
+  })();
+  </script>
+
+  <!-- Search drawer ochish/yopish (index dagidek yengil versiya) -->
+  <script>
+  (function(){
+    const btn   = document.getElementById('searchBtn');
+    const root  = document.getElementById('searchOverlay');
+    const input = document.getElementById('srchInput');
+    const list  = document.getElementById('srchResults');
+    const backdrop = root?.querySelector('.srch-backdrop');
+    const closeEls = root?.querySelectorAll('[data-close]');
+
+    function openDrawer(){
+      if(!root) return;
+      root.classList.add('is-open');
+      setTimeout(()=> input?.focus(), 120);
+      document.body.style.overflow = 'hidden';
+      if (list) list.innerHTML = '<div class="muted" style="padding:8px 2px">Qidirish uchun yozing…</div>';
+    }
+    function closeDrawer(){
+      root?.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+    list?.addEventListener('click', (e)=>{
+      const a = e.target.closest('.srch-item');
+      if (!a) return;
+      root.classList.remove('is-open');
+      document.body.style.overflow = '';
+    });
+    btn?.addEventListener('click', (e)=>{ e.preventDefault(); openDrawer(); });
+    closeEls?.forEach(el => el.addEventListener('click', closeDrawer));
+    backdrop?.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape' && root?.classList.contains('is-open')) closeDrawer();
+    });
+  })();
+  </script>
+
+  <!-- Kolleksiya: filter + grid render -->
+  <script>
+    const params = new URLSearchParams(location.search);
+    const cat = params.get('cat'); // masalan ?cat=kids
+
+    // Sarlavha
+    const colMap = {
+      kids: "Bolalar uchun",
+      kitchen: "Uy & Oshxona",
+      home: "Uy bezaklari",
+      women: "Ayollar",
+      men: "Erkaklar"
+    };
+    document.getElementById('colTitle').textContent = colMap[cat] || "Kolleksiya";
+
+    // Filter
+    const list = (window.products || []).filter(p => {
+      const t = (p.tags || []).map(x => String(x).toLowerCase());
+      if (!cat) return true;
+      if (t.length === 0) return false;
+      return t.includes(cat.toLowerCase());
+    });
+
+    // Grid karta shabloni (index dagidek)
+    const grid = document.getElementById('colGrid');
+    const fmt = n => (n||0).toLocaleString('uz-UZ') + " so'm";
+    function cardHTML(p){
+      return `
+        <a class="prod-card" href="product.html?slug=${encodeURIComponent(p.slug)}">
+          ${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
+          <div class="thumb">
+            <img src="${p.images.main}" alt="${p.title}" class="img main">
+            <img src="${p.images.hover}" alt="" class="img hover">
+          </div>
+          <h3 class="name">${p.title}</h3>
+          <div class="price">${fmt(p.price)}</div>
+          ${Array.isArray(p.colors) ? `
+            <div class="swatches">
+              ${p.colors.map((c,i)=>`
+                <button class="swatch" style="--sw:${c.hex}" aria-label="${c.name}" ${i===0?'aria-current="true"':''}></button>
+              `).join('')}
+            </div>` : ``}
+        </a>
+      `;
+    }
+    grid.innerHTML = list.length
+      ? list.map(cardHTML).join('')
+      : '<div class="muted" style="padding:24px;text-align:center;">Bu bo‘limda mahsulot yo‘q</div>';
+  </script>
+
+  <!-- Savat badji uchun -->
+  <script src="cart.js"></script>
+</body>
+</html>
