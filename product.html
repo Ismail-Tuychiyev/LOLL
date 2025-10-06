@@ -282,11 +282,24 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.addEventListener('click', ()=>{
         sizeBtns.forEach(x=>x.classList.remove('is-active'));
         btn.classList.add('is-active');
+        updatePrice();   
       });
     });
   } else {
     sizeRow.style.display = 'none';
   }
+
+  function getSelectedSize(){
+  return document.querySelector('#pSizes .size.is-active')?.textContent.trim() || '';
+}
+function priceFor(size){
+  return (p.sizePrices && p.sizePrices[size]) || p.price;
+}
+function updatePrice(){
+  const s = getSelectedSize();
+  priceEl.textContent = fmt(priceFor(s));
+}
+
 
   // STOCK
   const stock = Number(p.stock ?? 0);
@@ -320,19 +333,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
    document.getElementById('buyBtn')?.addEventListener('click', () => {
-    // savatga qo‘shish
-    addToCart({
-      id:    p.code || p.slug,
-      slug:  p.slug,
-      title: p.title,
-      price: Number(p.price || 0),
-      color: getSelectedColorName(),
-      size:  getSelectedSize(),
-      image: p.images?.main || '',
-      qty:   1
-    });
+  const size = getSelectedSize();
+  addToCart({
+    id:    p.code || p.slug,
+    slug:  p.slug,
+    title: p.title,
+    price: Number(priceFor(size)),    // <-- YANGI
+    color: getSelectedColorName(),
+    size:  size,
+    image: p.images?.main || '',
+    qty:   1
+  });
+  location.href = 'checkout.html';
 
-    location.href = 'checkout.html';
 
   });
 });

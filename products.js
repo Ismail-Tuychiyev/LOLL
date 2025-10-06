@@ -1,915 +1,180 @@
 const products = [
-  {
-    slug: "termiz-carton",
-     code: "A-4",     
-    title: "chiroylik idishlar",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/idish q.png",
-      hover: "images/idish q.png"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5459.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ],
-    sizes: ["S","M","L","XL","XXL"],
-      tags: ["kitchen","home"],
-      bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
-         stock: 3  
-  },
+
 
   {
-    slug: "meva savati",
-    code: "A-3",     
-    title: "meva savati",
-    price: 39500,
-    badge: "NEW",
-    images: {
-      main: "images/meva savat.png",
-     hover: "images/meva savat.png"
-    },
-    colors: [
-      {name:"Black", hex:"#f0df45ff", image:"images/meva savat.png"},
-      {name:"Army Green", hex:"#ffffffff", image:"images/lol.png"}
-    ],
-      tags: ["kids","home"],
-      bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
-         stock: 3  
-  },
+  slug: "un-elak",
+  code: "20-2",
+  title: "Un elak",
+  price: 33500,
+  images: { main: "images/un elak.jpg", hover: "images/un elak 2.jpg" },
+  sizes: ["kichik","katta"],
+  sizePrices: { kichik: 33500, katta: 39500 },
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
 
-  {
-    slug: "termiz-robot",
-    code: "A-2",     
-    title: "meva savat",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/meva savat j.png",
-     hover: "images/meva savat j.png"
-    },
-    colors: [
-      {name:"qora", hex:"#0a0a0a", image:"images/meva savat q.png", },
-      {name:"jigarrang", hex:"#8a8a6a", image:"images/meva savat j.png"}
-    ],
-      tags: ["kids","home"],
-      bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
-         stock: 3  
-  },
+{
+  slug: "tuzdon",
+  code: "24-60",
+  title: "Tuz, murich, salfetka idish",
+  price: 69500,
+  images: { main: "images/qora tuzdon24-60.jpeg", hover: "images/metal tuzdon60-59.jpeg" },
+ 
+  colors: [
+  { name: "Kmushrang", hex: "#646464ff", image: "images/metal tuzdon60-59.jpeg" },
+  { name: "Qora", hex: "#000000ff", image: "images/qora tuzdon24-60.jpeg" },
+],         
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
 
-  {
-    slug: "termiz-cool",
-    code: "A-1",     
-    title: "Termiz cool",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5479.JPG",
-      hover: "images/IMG_5480.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#b8b8b8ff", image:"images/IMG_5479.JPG"},
-      {name:"Army Green", hex:"#ff2626ff", image:"images/IMG_5480.JPG",},
-      {name:"Army Green", hex:"#00ff99ff", image:"images/IMG_5480.JPG",},
-    ],
-      tags: ["kitchen","home"],
-      bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
-       stock: 3  
-  },
-  {
-    slug: "termiz-carton",
-     code: "A-4",     
-    title: "Termiz carton",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5459.JPG",
-      hover: "images/IMG_5460.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5459.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ],
-    sizes: ["S","M","L","XL","XXL"]
-  },
 
-  {
-    slug: "termiz-ayiq",
-    code: "A-3",     
-    title: "Termiz ayiq",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5462.JPG",
-      hover: "images/IMG_5463.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5462.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5463.JPG"}
-    ]
-  },
+{
+  slug: "tuz don",
+  code: "24-63",
+  title: "Zravorlar uchun idish",
+  price: 33500,
+  images: { main: "images/3tuz.jpeg", hover: "images/tuz idish.jpeg" },
+  sizes: ["kichik","ortancha","katta"],
+  sizePrices: { kichik: 33500, ortancha: 34500, katta: 39500 },
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
 
-  {
-    slug: "termiz-robot",
-    code: "A-2",     
-    title: "Termiz robot",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5466.JPG",
-      hover: "images/IMG_5467.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5466.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ]
-  },
+{
+  slug: "yog' idish",
+  code: "24-91",
+  title: "yog' idish",
+  price: 33500,
+  images: { main: "images/yog idish.jpeg", hover: "images/yog idish 2.jpeg" },
+  sizes: ["cheti qayirilgan","cheti tekis"],
+  sizePrices: { chetiqayirilgan: 39500, katta: 39500 },
+colors: [
+  { name: "qora", hex: "#111111ff", image: "images/yog idish.jpeg" },
+   { name: "pushti", hex: "#ff8888ff", image: "images/pushti.jpeg" },
+],                        // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+{
+  slug: "Kartoshka free pishirgich",
+  code: "24-46",
+  title: "Kartoshka free pishirgich",
+  price: 33500,
+  images: { main: "images/free maker1.jpeg", hover: "images/free.jpeg" },
+ 
+  colors: [
+  { name: "qora", hex: "#111111ff", image: "images/free.jpeg" },
+  { name: "pushti", hex: "#ff8888ff", image: "images/pushti.jpeg" },
+],                    
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
 
-  {
-    slug: "termiz-cool",
-    code: "A-1",     
-    title: "Termiz cool",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5479.JPG",
-      hover: "images/IMG_5480.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#b8b8b8ff", image:"images/IMG_5479.JPG"},
-      {name:"Army Green", hex:"#ff2626ff", image:"images/IMG_5480.JPG",},
-      {name:"Army Green", hex:"#00ff99ff", image:"images/IMG_5480.JPG",},
-    ]
-  },{
-    slug: "termiz-carton",
-     code: "A-4",     
-    title: "Termiz carton",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5459.JPG",
-      hover: "images/IMG_5460.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5459.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ],
-    sizes: ["S","M","L","XL","XXL"]
-  },
+{
+  slug: "pyoz ezgich",
+  code: "24-30",
+  title: "Piyoz ezgich",
+  price: 33500,
+  images: { main: "images/piyoz ezgich.jpeg", hover: "images/piyoz.jpeg" },
+ 
+  colors: [
+  { name: "qora", hex: "#111111ff", image: "images/piyoz ezgich.jpeg" },
+  { name: "sariq", hex: "#e6c803ff", image: "images/sariq p.jpeg" },
+],                    // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+{
+  slug: "yong'oq ochkich ",
+  code: "24-31",
+  title: "yong'oq ochkich ",
+  price: 33500,
+  images: { main: "images/yongoq ochkich.jpeg", hover: "images/yongoq ochgich.jpeg" },
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
 
-  {
-    slug: "termiz-ayiq",
-    code: "A-3",     
-    title: "Termiz ayiq",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5462.JPG",
-      hover: "images/IMG_5463.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5462.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5463.JPG"}
-    ]
-  },
+{
+  slug: "artgich",
+  code: "24-32",
+  title: "Postlog' artgich",
+  price: 33500,
+  images: { main: "images/artadigan.jpeg", hover: "images/postlog'.jpeg" },
+  sizes: ["kichik","katta"],
+  sizePrices: { kichik: 33500, katta: 39500 },
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
 
-  {
-    slug: "termiz-robot",
-    code: "A-2",     
-    title: "Termiz robot",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5466.JPG",
-      hover: "images/IMG_5467.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5466.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ]
+{
+  slug: "postlog",
+  code: "24-33",
+  title: "Un elak",
+  price: 33500,
+  images: { main: "images/postlog.jpeg", hover: "images/kartoshkabn.jpeg" },
+  sizes: ["kichik","katta"],
+  sizePrices: { kichik: 33500, katta: 39500 },
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
 
-  },
+{
+  slug: "un-elak",
+  code: "20-2",
+  title: "Un elak",
+  price: 33500,
+  images: { main: "images/un elak.jpg", hover: "images/un elak 2.jpg" },
+  sizes: ["kichik","katta"],
+  sizePrices: { kichik: 33500, katta: 39500 },
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
 
-  {
-    slug: "termiz-cool",
-    code: "A-1",     
-    title: "Termiz cool",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5479.JPG",
-      hover: "images/IMG_5480.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#b8b8b8ff", image:"images/IMG_5479.JPG"},
-      {name:"Army Green", hex:"#ff2626ff", image:"images/IMG_5480.JPG",},
-      {name:"Army Green", hex:"#00ff99ff", image:"images/IMG_5480.JPG",},
-    ]
-  },{
-    slug: "termiz-carton",
-     code: "A-4",     
-    title: "Termiz carton",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5459.JPG",
-      hover: "images/IMG_5460.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5459.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ],
-    sizes: ["S","M","L","XL","XXL"]
-  },
+{
+  slug: "un-elak",
+  code: "20-2",
+  title: "Un elak",
+  price: 33500,
+  images: { main: "images/un elak.jpg", hover: "images/un elak 2.jpg" },
+  sizes: ["kichik","katta"],
+  sizePrices: { kichik: 33500, katta: 39500 },
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
 
-  {
-    slug: "termiz-ayiq",
-    code: "A-3",     
-    title: "Termiz ayiq",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5462.JPG",
-      hover: "images/IMG_5463.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5462.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5463.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-robot",
-    code: "A-2",     
-    title: "Termiz robot",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5466.JPG",
-      hover: "images/IMG_5467.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5466.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-cool",
-    code: "A-1",     
-    title: "Termiz cool",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5479.JPG",
-      hover: "images/IMG_5480.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#b8b8b8ff", image:"images/IMG_5479.JPG"},
-      {name:"Army Green", hex:"#ff2626ff", image:"images/IMG_5480.JPG",},
-      {name:"Army Green", hex:"#00ff99ff", image:"images/IMG_5480.JPG",},
-    ]
-  },{
-    slug: "termiz-carton",
-     code: "A-4",     
-    title: "Termiz carton",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5459.JPG",
-      hover: "images/IMG_5460.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5459.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ],
-    sizes: ["S","M","L","XL","XXL"]
-  },
-
-  {
-    slug: "termiz-ayiq",
-    code: "A-3",     
-    title: "Termiz ayiq",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5462.JPG",
-      hover: "images/IMG_5463.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5462.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5463.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-robot",
-    code: "A-2",     
-    title: "Termiz robot",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5466.JPG",
-      hover: "images/IMG_5467.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5466.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-cool",
-    code: "A-1",     
-    title: "Termiz cool",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5479.JPG",
-      hover: "images/IMG_5480.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#b8b8b8ff", image:"images/IMG_5479.JPG"},
-      {name:"Army Green", hex:"#ff2626ff", image:"images/IMG_5480.JPG",},
-      {name:"Army Green", hex:"#00ff99ff", image:"images/IMG_5480.JPG",},
-    ]
-  },{
-    slug: "termiz-carton",
-     code: "A-4",     
-    title: "Termiz carton",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5459.JPG",
-      hover: "images/IMG_5460.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5459.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ],
-    sizes: ["S","M","L","XL","XXL"]
-  },
-
-  {
-    slug: "termiz-ayiq",
-    code: "A-3",     
-    title: "Termiz ayiq",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5462.JPG",
-      hover: "images/IMG_5463.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5462.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5463.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-robot",
-    code: "A-2",     
-    title: "Termiz robot",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5466.JPG",
-      hover: "images/IMG_5467.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5466.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-cool",
-    code: "A-1",     
-    title: "Termiz cool",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5479.JPG",
-      hover: "images/IMG_5480.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#b8b8b8ff", image:"images/IMG_5479.JPG"},
-      {name:"Army Green", hex:"#ff2626ff", image:"images/IMG_5480.JPG",},
-      {name:"Army Green", hex:"#00ff99ff", image:"images/IMG_5480.JPG",},
-    ]
-  },{
-    slug: "termiz-carton",
-     code: "A-4",     
-    title: "Termiz carton",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5459.JPG",
-      hover: "images/IMG_5460.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5459.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ],
-    sizes: ["S","M","L","XL","XXL"]
-  },
-
-  {
-    slug: "termiz-ayiq",
-    code: "A-3",     
-    title: "Termiz ayiq",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5462.JPG",
-      hover: "images/IMG_5463.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5462.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5463.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-robot",
-    code: "A-2",     
-    title: "Termiz robot",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5466.JPG",
-      hover: "images/IMG_5467.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5466.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-cool",
-    code: "A-1",     
-    title: "Termiz cool",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5479.JPG",
-      hover: "images/IMG_5480.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#b8b8b8ff", image:"images/IMG_5479.JPG"},
-      {name:"Army Green", hex:"#ff2626ff", image:"images/IMG_5480.JPG",},
-      {name:"Army Green", hex:"#00ff99ff", image:"images/IMG_5480.JPG",},
-    ]
-  },{
-    slug: "termiz-carton",
-     code: "A-4",     
-    title: "Termiz carton",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5459.JPG",
-      hover: "images/IMG_5460.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5459.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ],
-    sizes: ["S","M","L","XL","XXL"]
-  },
-
-  {
-    slug: "termiz-ayiq",
-    code: "A-3",     
-    title: "Termiz ayiq",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5462.JPG",
-      hover: "images/IMG_5463.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5462.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5463.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-robot",
-    code: "A-2",     
-    title: "Termiz robot",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5466.JPG",
-      hover: "images/IMG_5467.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5466.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-cool",
-    code: "A-1",     
-    title: "Termiz cool",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5479.JPG",
-      hover: "images/IMG_5480.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#b8b8b8ff", image:"images/IMG_5479.JPG"},
-      {name:"Army Green", hex:"#ff2626ff", image:"images/IMG_5480.JPG",},
-      {name:"Army Green", hex:"#00ff99ff", image:"images/IMG_5480.JPG",},
-    ]
-  },{
-    slug: "termiz-carton",
-     code: "A-4",     
-    title: "Termiz carton",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5459.JPG",
-      hover: "images/IMG_5460.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5459.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ],
-    sizes: ["S","M","L","XL","XXL"]
-  },
-
-  {
-    slug: "termiz-ayiq",
-    code: "A-3",     
-    title: "Termiz ayiq",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5462.JPG",
-      hover: "images/IMG_5463.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5462.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5463.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-robot",
-    code: "A-2",     
-    title: "Termiz robot",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5466.JPG",
-      hover: "images/IMG_5467.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5466.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-cool",
-    code: "A-1",     
-    title: "Termiz cool",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5479.JPG",
-      hover: "images/IMG_5480.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#b8b8b8ff", image:"images/IMG_5479.JPG"},
-      {name:"Army Green", hex:"#ff2626ff", image:"images/IMG_5480.JPG",},
-      {name:"Army Green", hex:"#00ff99ff", image:"images/IMG_5480.JPG",},
-    ]
-  },{
-    slug: "termiz-carton",
-     code: "A-4",     
-    title: "Termiz carton",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5459.JPG",
-      hover: "images/IMG_5460.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5459.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ],
-    sizes: ["S","M","L","XL","XXL"]
-  },
-
-  {
-    slug: "termiz-ayiq",
-    code: "A-3",     
-    title: "Termiz ayiq",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5462.JPG",
-      hover: "images/IMG_5463.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5462.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5463.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-robot",
-    code: "A-2",     
-    title: "Termiz robot",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5466.JPG",
-      hover: "images/IMG_5467.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5466.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-cool",
-    code: "A-1",     
-    title: "Termiz cool",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5479.JPG",
-      hover: "images/IMG_5480.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#b8b8b8ff", image:"images/IMG_5479.JPG"},
-      {name:"Army Green", hex:"#ff2626ff", image:"images/IMG_5480.JPG",},
-      {name:"Army Green", hex:"#00ff99ff", image:"images/IMG_5480.JPG",},
-    ]
-  },{
-    slug: "termiz-carton",
-     code: "A-4",     
-    title: "Termiz carton",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5459.JPG",
-      hover: "images/IMG_5460.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5459.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ],
-    sizes: ["S","M","L","XL","XXL"]
-  },
-
-  {
-    slug: "termiz-ayiq",
-    code: "A-3",     
-    title: "Termiz ayiq",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5462.JPG",
-      hover: "images/IMG_5463.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5462.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5463.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-robot",
-    code: "A-2",     
-    title: "Termiz robot",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5466.JPG",
-      hover: "images/IMG_5467.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5466.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-cool",
-    code: "A-1",     
-    title: "Termiz cool",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5479.JPG",
-      hover: "images/IMG_5480.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#b8b8b8ff", image:"images/IMG_5479.JPG"},
-      {name:"Army Green", hex:"#ff2626ff", image:"images/IMG_5480.JPG",},
-      {name:"Army Green", hex:"#00ff99ff", image:"images/IMG_5480.JPG",},
-    ]
-  },{
-    slug: "termiz-carton",
-     code: "A-4",     
-    title: "Termiz carton",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5459.JPG",
-      hover: "images/IMG_5460.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5459.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ],
-    sizes: ["S","M","L","XL","XXL"]
-  },
-
-  {
-    slug: "termiz-ayiq",
-    code: "A-3",     
-    title: "Termiz ayiq",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5462.JPG",
-      hover: "images/IMG_5463.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5462.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5463.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-robot",
-    code: "A-2",     
-    title: "Termiz robot",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5466.JPG",
-      hover: "images/IMG_5467.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5466.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-cool",
-    code: "A-1",     
-    title: "Termiz cool",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5479.JPG",
-      hover: "images/IMG_5480.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#b8b8b8ff", image:"images/IMG_5479.JPG"},
-      {name:"Army Green", hex:"#ff2626ff", image:"images/IMG_5480.JPG",},
-      {name:"Army Green", hex:"#00ff99ff", image:"images/IMG_5480.JPG",},
-    ]
-  },{
-    slug: "termiz-carton",
-     code: "A-4",     
-    title: "Termiz carton",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5459.JPG",
-      hover: "images/IMG_5460.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5459.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ],
-    sizes: ["S","M","L","XL","XXL"]
-  },
-
-  {
-    slug: "termiz-ayiq",
-    code: "A-3",     
-    title: "Termiz ayiq",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5462.JPG",
-      hover: "images/IMG_5463.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5462.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5463.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-robot",
-    code: "A-2",     
-    title: "Termiz robot",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5466.JPG",
-      hover: "images/IMG_5467.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5466.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-cool",
-    code: "A-1",     
-    title: "Termiz cool",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5479.JPG",
-      hover: "images/IMG_5480.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#b8b8b8ff", image:"images/IMG_5479.JPG"},
-      {name:"Army Green", hex:"#ff2626ff", image:"images/IMG_5480.JPG",},
-      {name:"Army Green", hex:"#00ff99ff", image:"images/IMG_5480.JPG",},
-    ]
-  },{
-    slug: "termiz-carton",
-     code: "A-4",     
-    title: "Termiz carton",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5459.JPG",
-      hover: "images/IMG_5460.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5459.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ],
-    sizes: ["S","M","L","XL","XXL"]
-  },
-
-  {
-    slug: "termiz-ayiq",
-    code: "A-3",     
-    title: "Termiz ayiq",
-    price: 16500,
-    badge: "NEW",
-    images: {
-      main: "images/IMG_5462.JPG",
-      hover: "images/IMG_5463.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5462.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5463.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-robot",
-    code: "A-2",     
-    title: "Termiz robot",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5466.JPG",
-      hover: "images/IMG_5467.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#0a0a0a", image:"images/IMG_5466.JPG"},
-      {name:"Army Green", hex:"#8a8a6a", image:"images/IMG_5467.JPG"}
-    ]
-  },
-
-  {
-    slug: "termiz-cool",
-    code: "A-1",     
-    title: "Termiz cool",
-    price: 16500,
-    badge: "",
-    images: {
-      main: "images/IMG_5479.JPG",
-      hover: "images/IMG_5480.JPG"
-    },
-    colors: [
-      {name:"Black", hex:"#b8b8b8ff", image:"images/IMG_5479.JPG"},
-      {name:"Army Green", hex:"#ff2626ff", image:"images/IMG_5480.JPG",},
-      {name:"Army Green", hex:"#00ff99ff", image:"images/IMG_5480.JPG",},
-    ]
-  },
+{
+  slug: "un-elak",
+  code: "20-2",
+  title: "Un elak",
+  price: 33500,
+  images: { main: "images/un elak.jpg", hover: "images/un elak 2.jpg" },
+  sizes: ["kichik","katta"],
+  sizePrices: { kichik: 33500, katta: 39500 },
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+ 
   
 ];
 
