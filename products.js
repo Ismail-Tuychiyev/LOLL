@@ -185,11 +185,11 @@ colors: [
 },
 
 {
-  slug: "Qirgich temir",
-  code: "24-25",
-  title: "Qirgich",
+  slug: "Ushlagich",
+  code: "24-24",
+  title: "Ushlagich",
   price: 33500,
-  images: { main: "images/qirgich temr.jpeg", hover: "images/qirtem.jpeg" },
+  images: { main: "images/percha.jpeg", hover: "images/perchat.jpg" },
   sizes: ["kichik","katta"],
   sizePrices: { kichik: 33500, katta: 39500 },
   colors: [],                // <-- shu qator yetadi
