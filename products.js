@@ -98,7 +98,7 @@ colors: [
   code: "24-31",
   title: "yong'oq ochkich ",
   price: 33500,
-  images: { main: "images/yongoq ochkich.jpeg", hover: "images/yongoq ochgich.jpeg" },
+  images: { main: "images/yongoq ochgich.jpeg", hover: "images/yongoq ochkich.jpeg" },
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
   bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
@@ -122,9 +122,74 @@ colors: [
 {
   slug: "postlog",
   code: "24-33",
-  title: "Un elak",
+  title: "Postlog' artgich",
   price: 33500,
   images: { main: "images/postlog.jpeg", hover: "images/kartoshkabn.jpeg" },
+
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "piyoz ezgich1",
+  code: "24-36",
+  title: "Piyoz ezgich",
+  price: 33500,
+  images: { main: "images/qayirilgan.jpeg", hover: "images/pyoz..jpeg" },
+
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "qirgich tegi qora",
+  code: "24-27",
+  title: "Sirlar uchun Qirgich",
+  price: 33500,
+  images: { main: "images/qirgich1.jpeg", hover: "images/qirgich.jpeg" },
+
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "Qirgich temir",
+  code: "24-25",
+  title: "Qirgich",
+  price: 33500,
+  images: { main: "images/qirgich temr.jpeg", hover: "images/qirtem.jpeg" },
+  
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "Qirgich aylana",
+  code: "24-7",
+  title: "aylanalik qirgich",
+  price: 33500,
+  images: { main: "images/ish.jpeg", hover: "images/dumolo.jpeg" },
+
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "Qirgich temir",
+  code: "24-25",
+  title: "Qirgich",
+  price: 33500,
+  images: { main: "images/qirgich temr.jpeg", hover: "images/qirtem.jpeg" },
   sizes: ["kichik","katta"],
   sizePrices: { kichik: 33500, katta: 39500 },
   colors: [],                // <-- shu qator yetadi
@@ -134,39 +199,11 @@ colors: [
 },
 
 {
-  slug: "un-elak",
-  code: "20-2",
-  title: "Un elak",
+  slug: "Qirgich temir",
+  code: "24-25",
+  title: "Qirgich",
   price: 33500,
-  images: { main: "images/un elak.jpg", hover: "images/un elak 2.jpg" },
-  sizes: ["kichik","katta"],
-  sizePrices: { kichik: 33500, katta: 39500 },
-  colors: [],                // <-- shu qator yetadi
-  tags: ["kitchen","home"],
-  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
-  stock: 2
-},
-
-{
-  slug: "un-elak",
-  code: "20-2",
-  title: "Un elak",
-  price: 33500,
-  images: { main: "images/un elak.jpg", hover: "images/un elak 2.jpg" },
-  sizes: ["kichik","katta"],
-  sizePrices: { kichik: 33500, katta: 39500 },
-  colors: [],                // <-- shu qator yetadi
-  tags: ["kitchen","home"],
-  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
-  stock: 2
-},
-
-{
-  slug: "un-elak",
-  code: "20-2",
-  title: "Un elak",
-  price: 33500,
-  images: { main: "images/un elak.jpg", hover: "images/un elak 2.jpg" },
+  images: { main: "images/qirgich temr.jpeg", hover: "images/qirtem.jpeg" },
   sizes: ["kichik","katta"],
   sizePrices: { kichik: 33500, katta: 39500 },
   colors: [],                // <-- shu qator yetadi
