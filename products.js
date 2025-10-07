@@ -190,22 +190,42 @@ colors: [
   title: "Ushlagich",
   price: 33500,
   images: { main: "images/percha.jpeg", hover: "images/perchat.jpg" },
-  sizes: ["kichik","katta"],
-  sizePrices: { kichik: 33500, katta: 39500 },
-  colors: [],                // <-- shu qator yetadi
+ 
+   colors: [
+  { name: "Ko'k", hex: "#00a4fcff", image: "images/perchat.jpg" },
+  { name: "sariq", hex: "#e6c803ff", image: "images/perchat.jpg" },
+   { name: "Yashil", hex: "#16e603ff", image: "images/perchat.jpg" },
+    { name: "Temirrang", hex: "#606060ff", image: "images/perchat.jpg" },
+     { name: "Syohrang", hex: "#9303e6ff", image: "images/perchat.jpg" },
+      { name: "Qo'ra", hex: "#000000ff", image: "images/perchat.jpg" },
+       { name: "O'lovrang", hex: "#000000ff", image: "images/perchat.jpg" },
+],                 // <-- shu qator yetadi
   tags: ["kitchen","home"],
-  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  bullets: ["Rangi ochib ketmaydi", "Yuvish oson", "Yengil va qulay"],
   stock: 2
 },
 
 {
-  slug: "Qirgich temir",
-  code: "24-25",
-  title: "Qirgich",
+  slug: "Quruq narsalar uchun idishlar",
+  code: "24-19",
+  title: "Quruq narsalar uchun idishlar",
   price: 33500,
-  images: { main: "images/qirgich temr.jpeg", hover: "images/qirtem.jpeg" },
-  sizes: ["kichik","katta"],
-  sizePrices: { kichik: 33500, katta: 39500 },
+  images: { main: "images/salt.jpeg", hover: "images/salt.jpeg" },
+  sizes: ["kichik","orta","katta"],
+  sizePrices: { kichik: 31500, orta: 33500, katta: 39500 },
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 4
+},
+
+{
+  slug: "idishl",
+  code: "2-77",
+  title: "Quruq mahsulotlar uchun idish",
+  price: 33500,
+  images: { main: "images/3.jpeg", hover: "images/gapyo.jpeg" },
+
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
   bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
