@@ -111,8 +111,7 @@ colors: [
   title: "Postlog' artgich",
   price: 33500,
   images: { main: "images/artadigan.jpeg", hover: "images/postlog'.jpeg" },
-  sizes: ["kichik","katta"],
-  sizePrices: { kichik: 33500, katta: 39500 },
+
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
   bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
