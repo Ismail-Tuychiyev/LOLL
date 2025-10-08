@@ -183,26 +183,7 @@ colors: [
   stock: 2
 },
 
-{
-  slug: "Ushlagich",
-  code: "24-24",
-  title: "Ushlagich",
-  price: 33500,
-  images: { main: "images/percha.jpeg", hover: "images/perchat.jpg" },
- 
-   colors: [
-  { name: "Ko'k", hex: "#00a4fcff", image: "images/perchat.jpg" },
-  { name: "sariq", hex: "#e6c803ff", image: "images/perchat.jpg" },
-   { name: "Yashil", hex: "#16e603ff", image: "images/perchat.jpg" },
-    { name: "Temirrang", hex: "#606060ff", image: "images/perchat.jpg" },
-     { name: "Syohrang", hex: "#9303e6ff", image: "images/perchat.jpg" },
-      { name: "Qo'ra", hex: "#000000ff", image: "images/perchat.jpg" },
-       { name: "O'lovrang", hex: "#000000ff", image: "images/perchat.jpg" },
-],                 // <-- shu qator yetadi
-  tags: ["kitchen","home"],
-  bullets: ["Rangi ochib ketmaydi", "Yuvish oson", "Yengil va qulay"],
-  stock: 2
-},
+
 
 {
   slug: "Quruq narsalar uchun idishlar",
