@@ -19,7 +19,7 @@ const products = [
   slug: "tuzdon",
   code: "24-60",
   title: "Tuz, murich, salfetka idish",
-  price: 69500,
+  price: 74000,
   images: { main: "images/qora tuzdon24-60.jpeg", hover: "images/metal tuzdon60-59.jpeg" },
  
   colors: [
@@ -39,7 +39,7 @@ const products = [
   price: 33500,
   images: { main: "images/3tuz.jpeg", hover: "images/tuz idish.jpeg" },
   sizes: ["kichik","ortancha","katta"],
-  sizePrices: { kichik: 33500, ortancha: 34500, katta: 39500 },
+  sizePrices: { kichik: 36000, ortancha: 39000, katta: 41000 },
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
   bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
@@ -50,13 +50,13 @@ const products = [
   slug: "yog' idish",
   code: "24-91",
   title: "yog' idish",
-  price: 33500,
+  price: 46000,
   images: { main: "images/yog idish.jpeg", hover: "images/yog idish 2.jpeg" },
   sizes: ["cheti qayirilgan","cheti tekis"],
-  sizePrices: { chetiqayirilgan: 39500, katta: 39500 },
+  sizePrices: { chetiqayirilgan: 46000, katta: 46000 },
 colors: [
   { name: "qora", hex: "#111111ff", image: "images/yog idish.jpeg" },
-   { name: "pushti", hex: "#ff8888ff", image: "images/pushti.jpeg" },
+   { name: "stalnoy", hex: "#c2c2c2ff", image: "images/yog idish.jpeg" },
 ],                        // <-- shu qator yetadi
   tags: ["kitchen","home"],
   bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
@@ -66,7 +66,7 @@ colors: [
   slug: "Kartoshka free pishirgich",
   code: "24-46",
   title: "Kartoshka free pishirgich",
-  price: 33500,
+  price: 39000,
   images: { main: "images/free maker1.jpeg", hover: "images/free.jpeg" },
  
   colors: [
@@ -82,7 +82,7 @@ colors: [
   slug: "pyoz ezgich",
   code: "24-30",
   title: "Piyoz ezgich",
-  price: 33500,
+  price: 39000,
   images: { main: "images/piyoz ezgich.jpeg", hover: "images/piyoz.jpeg" },
  
   colors: [
@@ -97,7 +97,7 @@ colors: [
   slug: "yong'oq ochkich ",
   code: "24-31",
   title: "yong'oq ochkich ",
-  price: 33500,
+  price: 49000,
   images: { main: "images/yongoq ochgich.jpeg", hover: "images/yongoq ochkich.jpeg" },
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
@@ -109,7 +109,7 @@ colors: [
   slug: "artgich",
   code: "24-32",
   title: "Postlog' artgich",
-  price: 33500,
+  price: 26000,
   images: { main: "images/artadigan.jpeg", hover: "images/postlog'.jpeg" },
 
   colors: [],                // <-- shu qator yetadi
@@ -122,7 +122,7 @@ colors: [
   slug: "postlog",
   code: "24-33",
   title: "Postlog' artgich",
-  price: 33500,
+  price: 26000,
   images: { main: "images/postlog.jpeg", hover: "images/kartoshkabn.jpeg" },
 
   colors: [],                // <-- shu qator yetadi
@@ -135,7 +135,7 @@ colors: [
   slug: "piyoz ezgich1",
   code: "24-36",
   title: "Piyoz ezgich",
-  price: 33500,
+  price: 39000,
   images: { main: "images/qayirilgan.jpeg", hover: "images/pyoz..jpeg" },
 
   colors: [],                // <-- shu qator yetadi
@@ -148,7 +148,7 @@ colors: [
   slug: "qirgich tegi qora",
   code: "24-27",
   title: "Sirlar uchun Qirgich",
-  price: 33500,
+  price: 39000,
   images: { main: "images/qirgich1.jpeg", hover: "images/qirgich.jpeg" },
 
   colors: [],                // <-- shu qator yetadi
@@ -161,7 +161,7 @@ colors: [
   slug: "Qirgich temir",
   code: "24-25",
   title: "Qirgich",
-  price: 33500,
+  price: 39000,
   images: { main: "images/qirgich temr.jpeg", hover: "images/qirtem.jpeg" },
   
   colors: [],                // <-- shu qator yetadi
@@ -173,26 +173,26 @@ colors: [
 {
   slug: "Qirgich aylana",
   code: "24-7",
-  title: "aylanalik qirgich",
-  price: 33500,
+  title: "Aylanalik qirgich",
+  price: 34000,
   images: { main: "images/ish.jpeg", hover: "images/dumolo.jpeg" },
 
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
   bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
-  stock: 2
+  stock: 4
 },
 
 
 
 {
   slug: "Quruq narsalar uchun idishlar",
-  code: "24-19",
+  code: "24-5,4,6",
   title: "Quruq narsalar uchun idishlar",
-  price: 33500,
+  price: 49000,
   images: { main: "images/salt.jpeg", hover: "images/salt.jpeg" },
   sizes: ["kichik","orta","katta"],
-  sizePrices: { kichik: 31500, orta: 33500, katta: 39500 },
+  sizePrices: { kichik: 49000, orta: 54000, katta: 61000 },
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
   bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
@@ -203,20 +203,20 @@ colors: [
   slug: "idishl",
   code: "2-77",
   title: "Quruq mahsulotlar uchun idish",
-  price: 33500,
+  price: 52000,
   images: { main: "images/3.jpeg", hover: "images/gapyo.jpeg" },
 
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
   bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
-  stock: 2
+  stock: 1
 },
 
 {
   slug: "puter",
   code: "2-76",
   title: "Quruq mahsulotlar uchun idish",
-  price: 33500,
+  price: 52000,
   images: { main: "images/ismail.jpeg", hover: "images/2.jpeg" },
 
   colors: [],                // <-- shu qator yetadi
@@ -229,7 +229,7 @@ colors: [
   slug: "egg",
   code: "2-74",
   title: "Tuhum qoyish uchun savat",
-  price: 33500,
+  price: 55000,
   images: { main: "images/ror.jpeg", hover: "images/2.jpg" },
 
   colors: [],                // <-- shu qator yetadi
@@ -243,7 +243,7 @@ colors: [
   slug: "3",
   code: "2-70",
   title: "Sabzavotlar uchun idish",
-  price: 33500,
+  price: 59000,
   images: { main: "images/kok.jpeg", hover: "images/pp.jpeg" },
 
   colors: [],                // <-- shu qator yetadi
@@ -256,7 +256,7 @@ colors: [
   slug: "50",
   code: "2-69",
   title: "Sabzavotlar uchun idish",
-  price: 33500,
+  price: 24000,
   images: { main: "images/toza.jpeg", hover: "images/joj.jpeg" },
 
   colors: [],                // <-- shu qator yetadi
@@ -269,7 +269,7 @@ colors: [
   slug: "s",
   code: "2-65",
   title: "Karom va barglar yuvuchi idish",
-  price: 33500,
+  price: 39000,
   images: { main: "images/spin.jpeg", hover: "images/3.jpg" },
 
   colors: [],                // <-- shu qator yetadi
@@ -283,7 +283,31 @@ colors: [
   slug: "shv",
   code: "2-64",
   title: "Shvabra",
-  price: 33500,
+  price: 41000,
+  images: { main: "images/shvabr.jpeg", hover: "images/2shv.jpeg" },
+
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+{
+  slug: "shv",
+  code: "2-64",
+  title: "Shvabra",
+  price: 41000,
+  images: { main: "images/shvabr.jpeg", hover: "images/2shv.jpeg" },
+
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+{
+  slug: "shv",
+  code: "2-64",
+  title: "Shvabra",
+  price: 41000,
   images: { main: "images/shvabr.jpeg", hover: "images/2shv.jpeg" },
 
   colors: [],                // <-- shu qator yetadi
