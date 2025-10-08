@@ -230,8 +230,90 @@ colors: [
   bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
   stock: 2
 },
+
+{
+  slug: "puter",
+  code: "2-76",
+  title: "Quruq mahsulotlar uchun idish",
+  price: 33500,
+  images: { main: "images/ismail.jpeg", hover: "images/2.jpeg" },
+
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
  
-  
+  {
+  slug: "egg",
+  code: "2-74",
+  title: "Tuhum qoyish uchun savat",
+  price: 33500,
+  images: { main: "images/ror.jpeg", hover: "images/2.jpg" },
+
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+
+
+{
+  slug: "3",
+  code: "2-70",
+  title: "Sabzavotlar uchun idish",
+  price: 33500,
+  images: { main: "images/kok.jpeg", hover: "images/pp.jpeg" },
+
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "50",
+  code: "2-69",
+  title: "Sabzavotlar uchun idish",
+  price: 33500,
+  images: { main: "images/toza.jpeg", hover: "images/joj.jpeg" },
+
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "s",
+  code: "2-65",
+  title: "Karom va barglar yuvuchi idish",
+  price: 33500,
+  images: { main: "images/spin.jpeg", hover: "images/3.jpg" },
+
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+
+
+{
+  slug: "shv",
+  code: "2-64",
+  title: "Shvabra",
+  price: 33500,
+  images: { main: "images/shvabr.jpeg", hover: "images/2shv.jpeg" },
+
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+
+
+
+
 ];
 
 window.products = products;
