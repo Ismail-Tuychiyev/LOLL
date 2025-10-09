@@ -292,11 +292,11 @@ colors: [
   stock: 2
 },
 {
-  slug: "shv",
-  code: "2-64",
-  title: "Shvabra",
+  slug: "shvc",
+  code: "2-59",
+  title: "kiyimlar uchun yuvish mashinasi",
   price: 41000,
-  images: { main: "images/shvabr.jpeg", hover: "images/2shv.jpeg" },
+  images: { main: "images/wosh.jpeg", hover: "images/wosh2.jpeg" },
 
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
@@ -304,18 +304,31 @@ colors: [
   stock: 2
 },
 {
-  slug: "shv",
-  code: "2-64",
-  title: "Shvabra",
+  slug: "muz",
+  code: "2-13,14",
+  title: "Suv idish",
   price: 41000,
-  images: { main: "images/shvabr.jpeg", hover: "images/2shv.jpeg" },
-
+  images: { main: "images/freeze.jpeg", hover: "images/muzo.jpeg" },
+  sizes: ["COLLA","FANTA",],
+  sizePrices: { COLLA: 36000, FANTA: 39000 },
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
   bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
   stock: 2
 },
-
+{
+  slug: "yog'ff",
+  code: "2-11,12",
+  title: "Yog' dish",
+  price: 41000,
+  images: { main: "images/yogidish.jpeg", hover: "images/roto.jpeg",},
+  sizes: ["kichik","Katta",],
+  sizePrices: { kichik: 36000, Katta: 39000 },
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
 
 
 
