@@ -1,19 +1,7 @@
 const products = [
 
 
-  {
-  slug: "un-elak",
-  code: "20-2",
-  title: "Un elak",
-  price: 33500,
-  images: { main: "images/un elak.jpg", hover: "images/un elak 2.jpg" },
-  sizes: ["kichik","katta"],
-  sizePrices: { kichik: 33500, katta: 39500 },
-  colors: [],                // <-- shu qator yetadi
-  tags: ["kitchen","home"],
-  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
-  stock: 2
-},
+  
 
 {
   slug: "tuzdon",
@@ -294,7 +282,7 @@ colors: [
 {
   slug: "shvc",
   code: "2-59",
-  title: "kiyimlar uchun yuvish mashinasi",
+  title: "kiyimlar yuvish mashinasi",
   price: 41000,
   images: { main: "images/wosh.jpeg", hover: "images/wosh2.jpeg" },
 
@@ -327,6 +315,194 @@ colors: [
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
   bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "yoff",
+  code: "2-8",
+  title: "Don mahsulotlari uchun kontenier",
+  price: 41000,
+  images: { main: "images/don mahsulotlari uchun kontenir.jpeg", hover: "images/uouo.jpeg",},
+  
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "non",
+  code: "2-4",
+  title: "Nonlarni qoyish uchun idish",
+  price: 41000,
+  images: { main: "images/non.jpeg", hover: "images/non2.jpeg",},
+  
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+
+
+
+
+{
+  slug: "non o",
+  code: "2-3",
+  title: "Nonlarni qoyish uchun dumoloq idish",
+  price: 41000,
+  images: { main: "images/domolo1.jpeg", hover: "images/dumolo2.jpeg",},
+  
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "qurt",
+  code: "4-41,42",
+  title: "Quruq mahsulotlar uchun idish",
+  price: 41000,
+  images: { main: "images/qurt1.jpeg", hover: "images/big.jpeg",},
+   sizes: ["Katta","Kichik",],
+  sizePrices: { Katta: 36000, Kichigi: 39000 },
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Kattasi 30sm, kichigi 25sm", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "krush",
+  code: "4-40",
+  title: "Chashka ilgich",
+  price: 41000,
+  images: { main: "images/kursh1.jpeg", hover: "images/krush.jpeg",},
+ 
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Natural tahtali korpus", "5ta chaska ilsa boladi", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "salfet",
+  code: "4-39",
+  title: "Salfetka tutgich",
+  price: 41000,
+  images: { main: "images/salfet1.jpeg", hover: "images/salfet2.jpeg",},
+ 
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Natural tahtali korpus", "5ta chaska ilsa boladi", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "hleb",
+  code: "4-32",
+  title: "Nonlar uchun idish",
+  price: 41000,
+  images: { main: "images/hleb1.jpeg", hover: "images/hleb2.jpeg",},
+ 
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Natural tahtali korpus", "5ta chaska ilsa boladi", "Yengil va mustahkam"],
+  stock: 2
+},
+
+
+
+
+ { slug: "cup",
+  code: "4-18",
+  title: "Yog'och chaskalar",
+  price: 41000,
+  images: { main: "images/cup1.jpeg", hover: "images/cup2.jpeg",},
+ 
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Natural tahtali korpus", "5ta chaska ilsa boladi", "Yengil va mustahkam"],
+  stock: 2
+},
+
+
+ { slug: "zirvor",
+  code: "4-17",
+  title: "Yog'och chaskalar",
+  price: 41000,
+  images: { main: "images/cups1.jpeg", hover: "images/cups2.jpeg",},
+ 
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Natural tahtali korpus", "5ta chaska ilsa boladi", "Yengil va mustahkam"],
+  stock: 2
+},
+
+
+
+ { slug: "bowl",
+  code: "4-16",
+  title: "Yog'och kosa",
+  price: 41000,
+  images: { main: "images/bowl1.jpeg", hover: "images/bowl.jpeg",},
+ 
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Natural tahtali korpus", "5ta chaska ilsa boladi", "Yengil va mustahkam"],
+  stock: 2
+},
+
+
+
+ { slug: "tahta",
+  code: "4-9",
+  title: "Nabor tahtakach",
+  price: 41000,
+  images: { main: "images/tahtakach1.jpeg", hover: "images/tahtakach.jpeg",},
+ 
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Natural tahtali korpus", "3ta tahtakach bitada", "Yengil va mustahkam"],
+  stock: 2
+},
+
+ { slug: "tahtakacok",
+  code: "4-6,7,8",
+  title: "Tahtakach",
+  price: 41000,
+  images: { main: "images/small.jpeg", hover: "images/tahta1.jpg",},
+   sizes: ["Katta","Ortancha","kichik"],
+  sizePrices: { Katta: 46000,Ortancha: 60000, kichik: 46000 },
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Natural tahtali korpus", "", "Yengil va mustahkam"],
+  stock: 2
+},
+ 
+
+ { slug: "6,1",
+  badge : "yangi",
+  code: "7-13",
+  title: "Pishiriqlar uchun qolip",
+  price: 41000,
+  images: { main: "images/6:1.jpeg", hover: "images/6:1 2.jpeg",},
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["6tasi bita", "Zangga chidamli korpus", "Yengil va mustahkam"],
+  stock: 2
+},
+
+ { slug: "3,1",
+  code: "14-3,4,5",
+  title: "Pishiriqlar uchun qolip",
+  price: 41000,
+  images: { main: "images/cake1.jpeg", hover: "images/6:1 2.jpeg",},
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["6tasi bita", "Zangga chidamli korpus", "Yengil va mustahkam"],
   stock: 2
 },
 
