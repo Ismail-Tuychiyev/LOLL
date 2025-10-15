@@ -5,7 +5,7 @@ window.banners = [
     id: "kids",
     title: "Bolalar uchun",
     subtitle: "Shirin dizaynlar, qulay hajmlar",
-    image: "images/IMG_5684.JPG",
+    image: "images/banner.png",
     link: "collection.html?cat=kids"
   },
   {

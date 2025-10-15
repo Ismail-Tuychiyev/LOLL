@@ -570,6 +570,147 @@ colors: [
   stock: 2
 },
 
+{
+  slug: "termiz",
+  badge : "yangi",
+  code: "9-22",
+  title: "Choy va coffe uchun termiz",
+  price: 41000,
+  images: { main: "images/termiz1.jpeg", hover: "images/termiz2.jpeg" },
+  colors: [
+  { name: "Sariq", hex: "#fffa6dff", image: "images/termiz1.jpeg" },
+   { name: "Ko'k", hex: "#04fcb6ff", image: "images/termiz1.jpeg" },
+    { name: "Kulrang", hex: "#727272ff", image: "images/termiz1.jpeg" },
+     { name: "Pushti", hex: "#e66969ff", image: "images/termiz1.jpeg" },
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Hajmi 380 ml", "12 soat davomida issiq", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "termiz1",
+  badge : "yangi",
+  code: "9-21",
+  title: "Choy va suv uchun termiz",
+  price: 41000,
+  images: { main: "images/sport termiz.jpeg", hover: "images/sport termiz1.jpeg" },
+  colors: [
+  { name: "Yashil", hex: "#006516ff", image: "images/sport termiz.jpeg" },
+   { name: "Qizil", hex: "#fc0404ff", image: "images/sport termiz.jpeg" },
+    { name: "Och yashil", hex: "#49a300ff", image: "images/sport termiz.jpeg" },
+     { name: "Qora", hex: "#000000ff", image: "images/sport termiz.jpeg" },
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Hajmi 680 ml", "12 soat davomida issiq", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "termiz2",
+  badge : "yangi",
+  code: "9-20",
+  title: "Choy va suv uchun termiz",
+  price: 41000,
+  images: { main: "images/6 1.jpeg", hover: "images/6 2.jpeg" },
+  colors: [
+    { name: "Qora", hex: "#000000ff", image: "images/6 1.jpeg" },
+    { name: "Qizil", hex: "#ff0000ff", image: "images/6 1.jpeg" },
+  { name: "Yashil", hex: "#bcb000ff", image: "images/6 1.jpeg" },
+   { name: "Ko'k", hex: "#0c00b1ff", image: "images/6 1.jpeg" },
+    { name: "yashil", hex: "#49a300ff", image: "images/6 1.jpeg" },
+     
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Hajmi 500 ml", "12 soat davomida issiq", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "termiz3",
+  badge : "yangi",
+  code: "9-19",
+  title: "Bolalar uchun termiz",
+  price: 41000,
+  images: { main: "images/4 ta1.jpeg", hover: "images/4 ta2.jpeg" },
+  colors: [
+    { name: "Ko'k", hex: "#003f6cff", image: "images/4 ta1.jpeg" },
+  { name: "Sariq", hex: "#fffab4ff", image: "images/4 ta1.jpeg" },
+   { name: "Och ko'k", hex: "#259596ff", image: "images/4 ta1.jpeg" },
+    { name: "Pushti", hex: "#fe8c8cff", image: "images/4 ta1.jpeg" },
+     
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Hajmi 500 ml", "12 soat davomida issiq", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "termiz4",
+  badge : "yangi",
+  code: "9-18",
+  title: "Bolalar uchun termiz",
+  price: 41000,
+  images: { main: "images/ter1.jpeg", hover: "images/ter2.jpeg" },
+  colors: [
+    { name: "Pushti", hex: "#fe8c8cff", image: "images/ter1.jpeg" },
+    { name: "Sariq", hex: "#eafc72ff", image: "images/ter1.jpeg" },
+  { name: "Qora", hex: "#000000ff", image: "images/ter1.jpeg" },
+   { name: "Kul rang", hex: "#737373ff", image: "images/ter1.jpeg" },
+    
+     
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Hajmi 500 ml", "12 soat davomida issiq", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "termiz5",
+  badge : "yangi",
+  code: "9-17",
+  title: "Coffee va choy solib yurish uchun termiz",
+  price: 41000,
+  images: { main: "images/tmz1.jpeg", hover: "images/miz1.jpeg" },
+  colors: [
+    { name: "Qora", hex: "#000000ff", image: "images/tmz1.jpeg" },
+    { name: "Oq", hex: "#fdffe8ff", image: "images/tmz1.jpeg" },
+    { name: "Pushti", hex: "#ffc5ddff", image: "images/tmz1.jpeg" },
+   { name: "Kul rang", hex: "#737373ff", image: "images/tmz1.jpeg" },
+    
+     
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Hajmi 500 ml", "12 soat davomida issiq", "Yengil va mustahkam"],
+  stock: 2
+},
+
+
+{
+  slug: "termiz6",
+  badge : "yangi",
+  code: "9-16",
+  title: "Coffee va choy solib yurish uchun termiz",
+  price: 41000,
+  images: { main: "images/mrz1.jpeg", hover: "images/mrz2.jpeg" },
+  colors: [
+     { name: "Pushti", hex: "#fb92beff", image: "images/mrz1.jpeg" },
+     { name: "Kul rang", hex: "#737373ff", image: "images/mrz1.jpeg" },
+    { name: "Yashil", hex: "#207a1bff", image: "images/mrz1.jpeg" },
+    { name: "Oq", hex: "#f9ffb1ff", image: "images/mrz1.jpeg" },
+   
+   
+    
+     
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Hajmi 500 ml", "12 soat davomida issiq", "Yengil va mustahkam"],
+  stock: 2
+},
+
+
+
+
 ];
 
 window.products = products;
