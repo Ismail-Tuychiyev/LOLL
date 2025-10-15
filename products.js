@@ -1,8 +1,4 @@
 const products = [
-
-
-  
-
 {
   slug: "tuzdon",
   code: "24-60",
@@ -543,6 +539,34 @@ colors: [
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
   bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+
+
+{
+  slug: "food",
+  code: "12-4",
+  title: "Ovqat solish uchun container",
+  price: 41000,
+  images: { main: "images/food 1.jpeg", hover: "images/food 2.jpeg" },
+
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Hajmi 2 litr", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
+
+
+{
+  slug: "ovqat",
+  code: "12-3",
+  title: "Ovqat solish uchun container",
+  price: 41000,
+  images: { main: "images/ovqat1.jpeg", hover: "images/ovqat 2.jpeg" },
+
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Hajmi 1,5 litr", "Yuvish oson", "Yengil va mustahkam"],
   stock: 2
 },
 

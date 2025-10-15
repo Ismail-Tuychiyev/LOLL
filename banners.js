@@ -15,11 +15,5 @@ window.banners = [
     image: "images/osh.jpeg",
     link: "collection.html?cat=kitchen"
   },
-  {
-    id: "home",
-    title: "Uy bezaklari",
-    subtitle: "Praktik va chiroyli tanlovlar",
-    image: "images/banners/home-hero.jpg",
-    link: "collection.html?cat=home"
-  }
+
 ];

@@ -73,6 +73,42 @@
   <!-- Skriptlar -->
   <script src="products.js"></script>
 
+  <!-- RANDOM tartib helperlari (sessiya/daily deterministik) -->
+<script>
+function mulberry32(a){
+  return function(){
+    let t = a += 0x6D2B79F5;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  }
+}
+function strSeed(s){
+  let h = 2166136261 >>> 0;
+  for (let i=0;i<s.length;i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return h >>> 0;
+}
+function shuffleDet(arr, rand){
+  for (let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(rand() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+function getSessionRng(){
+  const key = 'prd_seed_v1';
+  let seed = sessionStorage.getItem(key);
+  if (!seed){
+    const daily = new Date().toDateString();
+    const rnd   = Math.random().toString(36).slice(2);
+    seed = strSeed(daily + '|' + rnd).toString();
+    sessionStorage.setItem(key, seed);
+  }
+  return mulberry32(parseInt(seed,10) || 1);
+}
+</script>
+
+
   <!-- Ann-bar slider (index dagidagi bilan aynan bir xil) -->
   <script>
   (() => {
@@ -139,53 +175,49 @@
 
   <!-- Kolleksiya: filter + grid render -->
   <script>
-    const params = new URLSearchParams(location.search);
-    const cat = params.get('cat'); // masalan ?cat=kids
+  const params = new URLSearchParams(location.search);
+  const cat = params.get('cat');
 
-    // Sarlavha
-    const colMap = {
-      kids: "Bolalar uchun",
-      kitchen: "Uy & Oshxona",
-      home: "Uy bezaklari",
-      women: "Ayollar",
-      men: "Erkaklar"
-    };
-    document.getElementById('colTitle').textContent = colMap[cat] || "Kolleksiya";
+  const colMap = { kids:"Bolalar uchun", kitchen:"Uy & Oshxona", home:"Uy bezaklari", women:"Ayollar", men:"Erkaklar" };
+  document.getElementById('colTitle').textContent = colMap[cat] || "Kolleksiya";
 
-    // Filter
-    const list = (window.products || []).filter(p => {
-      const t = (p.tags || []).map(x => String(x).toLowerCase());
-      if (!cat) return true;
-      if (t.length === 0) return false;
-      return t.includes(cat.toLowerCase());
-    });
+  // Avval filter
+  const filtered = (window.products || []).filter(p => {
+    const t = (p.tags || []).map(x => String(x).toLowerCase());
+    if (!cat) return true;
+    return t.includes(cat.toLowerCase());
+  });
 
-    // Grid karta shabloni (index dagidek)
-    const grid = document.getElementById('colGrid');
-    const fmt = n => (n||0).toLocaleString('uz-UZ') + " so'm";
-    function cardHTML(p){
-      return `
-        <a class="prod-card" href="product.html?slug=${encodeURIComponent(p.slug)}">
-          ${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
-          <div class="thumb">
-            <img src="${p.images.main}" alt="${p.title}" class="img main">
-            <img src="${p.images.hover}" alt="" class="img hover">
-          </div>
-          <h3 class="name">${p.title}</h3>
-          <div class="price">${fmt(p.price)}</div>
-          ${Array.isArray(p.colors) ? `
-            <div class="swatches">
-              ${p.colors.map((c,i)=>`
-                <button class="swatch" style="--sw:${c.hex}" aria-label="${c.name}" ${i===0?'aria-current="true"':''}></button>
-              `).join('')}
-            </div>` : ``}
-        </a>
-      `;
-    }
-    grid.innerHTML = list.length
-      ? list.map(cardHTML).join('')
-      : '<div class="muted" style="padding:24px;text-align:center;">Bu bo‘limda mahsulot yo‘q</div>';
-  </script>
+  // Keyin deterministik shuffle
+  const items = shuffleDet(filtered.slice(), getSessionRng());
+
+  const grid = document.getElementById('colGrid');
+  const fmt = n => (n||0).toLocaleString('uz-UZ') + " so'm";
+  function cardHTML(p){
+    return `
+      <a class="prod-card" href="product.html?slug=${encodeURIComponent(p.slug)}">
+        ${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
+        <div class="thumb">
+          <img src="${p.images.main}" alt="${p.title}" class="img main">
+          <img src="${p.images.hover}" alt="" class="img hover">
+        </div>
+        <h3 class="name">${p.title}</h3>
+        <div class="price">${fmt(p.price)}</div>
+        ${Array.isArray(p.colors) ? `
+          <div class="swatches">
+            ${p.colors.map((c,i)=>`
+              <button class="swatch" style="--sw:${c.hex}" aria-label="${c.name}" ${i===0?'aria-current="true"':''}></button>
+            `).join('')}
+          </div>` : ``}
+      </a>
+    `;
+  }
+
+  grid.innerHTML = items.length
+    ? items.map(cardHTML).join('')
+    : '<div class="muted" style="padding:24px;text-align:center;">Bu bo‘limda mahsulot yo‘q</div>';
+</script>
+
 
   <!-- Savat badji uchun -->
   <script src="cart.js"></script>
