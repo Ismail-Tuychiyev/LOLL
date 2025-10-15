@@ -12,7 +12,7 @@ window.banners = [
     id: "kitchen",
     title: "Uy & Oshxona",
     subtitle: "Idish-tovoqlar, savatlar va ko‘proq",
-    image: "images/IMG_6461.JPG",
+    image: "images/osh.jpeg",
     link: "collection.html?cat=kitchen"
   },
   {

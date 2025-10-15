@@ -262,7 +262,7 @@ colors: [
 
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
-  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  bullets: ["Zangga schidamli korpu", "Yuvish oson", "Yengil va mustahkam"],
   stock: 2
 },
 
@@ -499,14 +499,52 @@ colors: [
   code: "14-3,4,5",
   title: "Pishiriqlar uchun qolip",
   price: 41000,
-  images: { main: "images/cake1.jpeg", hover: "images/6:1 2.jpeg",},
+  images: { main: "images/cake1.jpeg", hover: "images/cake2.jpeg",},
+   sizes: ["Katta","Ortancha","Kichik",],
+  sizePrices: { Katta: 36000,Ortancha: 324234, Kichigi: 39000 },
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
-  bullets: ["6tasi bita", "Zangga chidamli korpus", "Yengil va mustahkam"],
+  bullets: ["Zangga schidamli korpu", "Zangga chidamli korpus", "Yengil va mustahkam"],
   stock: 2
 },
 
 
+ { slug: "tahatchak",
+  code: "14-2",
+  title: "rangli tahtakach",
+  price: 41000,
+  images: { main: "images/qizl1.jpeg", hover: "images/qizil2.jpeg",},
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga schidamli korpu", "Zangga chidamli korpus", "Yengil va mustahkam"],
+  stock: 2
+},
+
+ { slug: "tahatchakkok",
+  code: "14-1",
+  title: "rangli tahtakach",
+  price: 41000,
+  images: { main: "images/kok1.jpeg", hover: "images/kok2.jpeg",},
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga schidamli korpu", "Zangga chidamli korpus", "Yengil va mustahkam"],
+  stock: 2
+},
+
+
+{
+  slug: "salat1",
+  code: "12-7,6",
+  title: "Salat tayorlash uchun temir idish",
+  price: 41000,
+  images: { main: "images/salat1.jpeg", hover: "images/size.jpeg" },
+  sizes: ["Katta","Kichik",],
+  sizePrices: { Katta: 36000, Kichik: 39000 },
+  colors: [],                // <-- shu qator yetadi
+  tags: ["kitchen","home"],
+  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  stock: 2
+},
 
 ];
 
