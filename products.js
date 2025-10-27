@@ -798,6 +798,77 @@ colors: [
 
 
 
+
+{
+  slug: "termiz12",
+  badge : "yangi",
+  code: "9-11",
+  title: "rangli termiz",
+  price: 41000,
+  images: { main: "images/12 2.jpeg", hover: "images/12 3.jpeg" },
+  colors: [
+      { name: "Ko'k", hex: "#000970ff", image: "images/12 2.jpeg" },
+     { name: "Yashil", hex: "#003e06ff", image: "images/12 2.jpeg" },
+     { name: "Pushti", hex: "#ffffffff", image: "images/12 2.jpeg" },
+     { name: "Och sariq", hex: "#ff9500ff", image: "images/12 2.jpeg" },
+  
+     
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Hajmi 500 ml", "12 soat davomida issiq", "Yengil va mustahkam"],
+  stock: 2
+},
+
+
+{
+  slug: "termiz13",
+  badge : "yangi",
+  code: "9-10",
+  title: "chiroyli termiz",
+  price: 41000,
+  images: { main: "images/uh.jpeg", hover: "images/uh2.jpeg" },
+  colors: [
+      { name: "Ko'k", hex: "#4fd0ffff", image: "images/uh.jpeg" },
+     { name: "Jigar rang", hex: "#585634ff", image: "images/uh.jpeg" },
+     { name: "Yashil", hex: "#81d74cff", image: "images/uh.jpeg" },
+     { name: "Pushti", hex: "#ff9bd0ff", image: "images/uh.jpeg" },
+  
+     
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Hajmi 500 ml", "12 soat davomida issiq", "Yengil va mustahkam"],
+  stock: 2
+},
+
+
+{
+  slug: "termiz11",
+  badge : "yangi",
+  code: "9-8",
+  title: "Pandalik termiz",
+  price: 41000,
+  images: { main: "images/it.jpeg", hover: "images/it2.jpeg" },
+  colors: [
+      { name: "Oq", hex: "#dededeff", image: "images/it.jpeg" },
+     { name: "Ko'k", hex: "#5ea4ffff", image: "images/it.jpeg" },
+     { name: "Yashil", hex: "#53c44eff", image: "images/it.jpeg" },
+     { name: "Qora", hex: "#000000ff", image: "images/it.jpeg" },
+  
+     
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Hajmi 500 ml", "12 soat davomida issiq", "Yengil va mustahkam"],
+  stock: 2
+},
+
+
+
+
+
+
+
+
+
 ];
 
 window.products = products;
