@@ -926,14 +926,12 @@ colors: [
   code: "9-5",
   title: "Hayvonlik termiz",
   price: 41000,
-  images: { main: "images/panda.jpeg", hover: "images/it2.jpeg" },
+  images: { main: "images/panda.jpeg", hover: "images/panda3.jpeg" },
   colors: [
-      { name: "Oq", hex: "#dededeff", image: "images/it.jpeg" },
-     { name: "Ko'k", hex: "#5ea4ffff", image: "images/it.jpeg" },
-     { name: "Yashil", hex: "#53c44eff", image: "images/it.jpeg" },
-     { name: "Qora", hex: "#000000ff", image: "images/it.jpeg" },
-  
-     
+      { name: "Sheep", hex: "#f0afd1ff", image: "images/panda.jpeg" },
+      { name: "Deel", hex: "#fdffe0ff", image: "images/panda.jpeg" },
+      { name: "Rabit", hex: "rgba(255, 200, 226, 1)", image: "images/panda.jpeg" },
+       { name: "Panda", hex: "#4d4d4dff", image: "images/panda.jpeg" },
 ],                // <-- shu qator yetadi
   tags: ["kids","kids"],
   bullets: ["Hajmi 500 ml", "12 soat davomida issiq", "Yengil va mustahkam"],
@@ -941,6 +939,106 @@ colors: [
 },
 
 
+{
+  slug: "termiz18",
+  badge : "yangi",
+  code: "9-4",
+  title: "Termiz",
+  price: 41000,
+  images: { main: "images/money1.jpeg", hover: "images/money2.jpeg" },
+  colors: [
+      { name: "Ko'k", hex: "#65f7ffff", image: "images/money1.jpeg" },
+      { name: "Qaymoqrang", hex: "#fdffdbff", image: "images/money1.jpeg" },
+      { name: "Pushti", hex: "rgba(255, 167, 212, 1)", image: "images/money1.jpeg" },
+       { name: "Qo'ra", hex: "#000000ff", image: "images/money1.jpeg" },
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Hajmi 500 ml", "12 soat davomida issiq", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "termiz19",
+  badge : "yangi",
+  code: "9-3",
+  title: "Termiz",
+  price: 41000,
+  images: { main: "images/luck1.jpeg", hover: "images/luck2.jpeg" },
+  colors: [
+      { name: "Pushti", hex: "#f791b5ff", image: "images/luck1.jpeg" },
+      { name: "Oq", hex: "#ffffffff", image: "images/luck1.jpeg" },
+       { name: "Ko'k", hex: "#6577ffff", image: "images/luck1.jpeg" },
+        { name: "Qo'ra", hex: "#000000ff", image: "images/luck1.jpeg" },
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Hajmi 500 ml", "12 soat davomida issiq", "Yengil va mustahkam"],
+  stock: 2
+},
+
+
+{
+  slug: "termiz20",
+  badge : "yangi",
+  code: "9-2",
+  title: "Termiz",
+  price: 41000,
+  images: { main: "images/hu1.jpeg", hover: "images/hu2.jpeg" },
+  colors: [
+    { name: "Qo'ra", hex: "#000000ff", image: "images/hu1.jpeg" },
+     { name: "Ko'k", hex: "#6577ffff", image: "images/hu1.jpeg" },
+      { name: "Oq", hex: "#ffffffff", image: "images/hu1.jpeg" },
+      { name: "Pushti", hex: "#f791b5ff", image: "images/hu1.jpeg" },
+     
+      
+       
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Hajmi 500 ml", "12 soat davomida issiq", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "termiz21",
+  badge : "yangi",
+  code: "9-1",
+  title: "Termiz",
+  price: 41000,
+  images: { main: "images/pusht2.jpeg", hover: "images/pusht1.jpeg" },
+  colors: [
+    { name: "Jigarang", hex: "#955c17ff", image: "images/pusht2.jpeg" },
+    { name: "Pushti", hex: "#f791b5ff", image: "images/pusht2.jpeg" },
+     { name: "Ko'k", hex: "#000a55ff", image: "images/pusht2.jpeg" },
+      { name: "Oq", hex: "#ffffffff", image: "images/pusht2.jpeg" },
+      
+     
+      
+       
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Hajmi 500 ml", "12 soat davomida issiq", "Yengil va mustahkam"],
+  stock: 2
+},
+{
+  slug: "termiz21",
+  badge : "yangi",
+  code: "9-1",
+  title: "Termiz",
+  price: 41000,
+  images: { main: "images/pusht2.jpeg", hover: "images/pusht1.jpeg" },
+  colors: [
+    { name: "Jigarang", hex: "#955c17ff", image: "images/pusht2.jpeg" },
+    { name: "Pushti", hex: "#f791b5ff", image: "images/pusht2.jpeg" },
+     { name: "Ko'k", hex: "#000a55ff", image: "images/pusht2.jpeg" },
+      { name: "Oq", hex: "#ffffffff", image: "images/pusht2.jpeg" },
+      
+     
+      
+       
+],                // <-- shu qator yetadi
+  tags: ["lounchbox",""],
+  bullets: ["Hajmi 500 ml", "12 soat davomida issiq", "Yengil va mustahkam"],
+  stock: 2
+},
 
 
 

@@ -15,5 +15,15 @@ window.banners = [
     image: "images/osh.jpeg",
     link: "collection.html?cat=kitchen"
   },
+{
+    id: "lounchbox",
+    title: "Ovqat Idishlar",
+    subtitle: "Ovqat idishlar, 2tasi 1da bolganlari",
+    image: "images/osh.jpeg",
+    link: "collection.html?cat=lounchbox"
+  },
+
+
+
 
 ];
