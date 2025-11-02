@@ -1092,7 +1092,7 @@ colors: [
   slug: "lounchbox4",
   badge : "yangi",
   code: "2-51",
-  title: "Bolalar uchun lounch box",
+  title: "Bolalar uchun 2tasi birda lounch box",
   price: 41000,
   images: { main: "images/sovu1.jpeg", hover: "images/sovu2.jpeg" },
   colors: [
@@ -1100,9 +1100,7 @@ colors: [
     
    { name: "Yashil", hex: "#a9ffadff", image: "images/sovu1.jpeg" },
     { name: "Pushti", hex: "#feb5b5ff", image: "images/sovu1.jpeg" },
-     
-    
-      
+  
      
       
        
@@ -1114,10 +1112,90 @@ colors: [
 
 
 
+{
+  slug: "lounchbox5",
+  badge : "yangi",
+  code: "2-48",
+  title: "Bolalar uchun 2tasi birda lounch box",
+  price: 41000,
+  images: { main: "images/uh4.jpeg", hover: "images/uh1.jpeg" },
+  colors: [
+
+    
+   { name: "Yashil", hex: "#a9ffadff", image: "images/uh4.jpeg" },
+    { name: "Pushti", hex: "#feb5b5ff", image: "images/uh4.jpeg" },
+  
+     
+      
+       
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Lounch box + suv idish", "Ovqatni barra saqlab beradi", "Yengil va mustahkam"],
+  stock: 2
+},
 
 
+{
+  slug: "lounchbox6",
+  badge : "yangi",
+  code: "2-47",
+  title: "Bolalar uchun 2tasi birda lounch box",
+  price: 41000,
+  images: { main: "images/solve1.jpeg", hover: "images/solve2.jpeg" },
+  colors: [
+
+     { name: "Pushti", hex: "#feb5b5ff", image: "images/solve1.jpeg" },
+   { name: "Qaymoqrang", hex: "#fffd96ff", image: "images/solve1.jpeg" },
+     
+      
+       
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Lounch box + suv idish", "Ovqatni barra saqlab beradi", "Yengil va mustahkam"],
+  stock: 2
+},
+
+{
+  slug: "lounchbox7",
+  badge : "yangi",
+  code: "2-46",
+  title: "Bolalar uchun 2tasi birda lounch box",
+  price: 41000,
+  images: { main: "images/re1.jpeg", hover: "images/re2.jpeg" },
+  colors: [
+
+     { name: "Qaymoqrang", hex: "#faf6afff", image: "images/re1.jpeg" },
+   { name: "Yashil", hex: "#003107ff", image: "images/re1.jpeg" },
+      { name: "Pushti", hex: "#ff9e9eff", image: "images/re1.jpeg" },
+      
+       
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Lounch box + suv idish", "Ovqatni barra saqlab beradi", "Yengil va mustahkam"],
+  stock: 2
+},
 
 
+{
+  slug: "lounchbox8",
+  badge : "yangi",
+  code: "2-45",
+  title: "Bolalar uchun 2tasi birda lounch box",
+  price: 41000,
+  images: { main: "images/sariq2.jpeg", hover: "images/sariq1.jpeg" },
+  colors: [
+
+     { name: "Sariq", hex: "#faf6afff", image: "images/sariq2.jpeg" },
+        { name: "Pushti", hex: "#ff9e9eff", image: "images/sariq2.jpeg" },
+   { name: "Ko'k", hex: "#009689ff", image: "images/sariq2.jpeg" },
+   
+      
+       
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Lounch box + suv idish", "Ovqatni barra saqlab beradi", "Yengil va mustahkam"],
+  stock: 2
+},
 
 
 
