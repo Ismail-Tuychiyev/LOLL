@@ -588,23 +588,6 @@ colors: [
   stock: 2
 },
 
-{
-  slug: "termiz1",
-  badge : "yangi",
-  code: "9-21",
-  title: "Choy va suv uchun termiz",
-  price: 41000,
-  images: { main: "images/sport termiz.jpeg", hover: "images/sport termiz1.jpeg" },
-  colors: [
-  { name: "Yashil", hex: "#006516ff", image: "images/sport termiz.jpeg" },
-   { name: "Qizil", hex: "#fc0404ff", image: "images/sport termiz.jpeg" },
-    { name: "Och yashil", hex: "#49a300ff", image: "images/sport termiz.jpeg" },
-     { name: "Qora", hex: "#000000ff", image: "images/sport termiz.jpeg" },
-],                // <-- shu qator yetadi
-  tags: ["kids","kids"],
-  bullets: ["Hajmi 680 ml", "12 soat davomida issiq", "Yengil va mustahkam"],
-  stock: 2
-},
 
 {
   slug: "termiz2",
