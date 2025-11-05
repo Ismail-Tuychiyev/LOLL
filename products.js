@@ -279,7 +279,7 @@ colors: [
   slug: "shvc",
   code: "2-59",
   title: "kiyimlar yuvish mashinasi",
-  price: 41000,
+  price: 189000,
   images: { main: "images/wosh.jpeg", hover: "images/wosh2.jpeg" },
 
   colors: [],                // <-- shu qator yetadi
@@ -291,10 +291,10 @@ colors: [
   slug: "muz",
   code: "2-13,14",
   title: "Suv idish",
-  price: 41000,
+  price: 35000,
   images: { main: "images/freeze.jpeg", hover: "images/muzo.jpeg" },
   sizes: ["COLLA","FANTA",],
-  sizePrices: { COLLA: 36000, FANTA: 39000 },
+  sizePrices: { COLLA: 35000, FANTA: 35000 },
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
   bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
@@ -304,10 +304,10 @@ colors: [
   slug: "yog'ff",
   code: "2-11,12",
   title: "Yog' dish",
-  price: 41000,
+  price: 44000,
   images: { main: "images/yogidish.jpeg", hover: "images/roto.jpeg",},
   sizes: ["kichik","Katta",],
-  sizePrices: { kichik: 36000, Katta: 39000 },
+  sizePrices: { kichik: 44000, Katta: 49000 },
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
   bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
@@ -318,7 +318,7 @@ colors: [
   slug: "yoff",
   code: "2-8",
   title: "Don mahsulotlari uchun kontenier",
-  price: 41000,
+  price: 189000,
   images: { main: "images/don mahsulotlari uchun kontenir.jpeg", hover: "images/uouo.jpeg",},
   
   colors: [],                // <-- shu qator yetadi
@@ -331,7 +331,7 @@ colors: [
   slug: "non",
   code: "2-4",
   title: "Nonlarni qoyish uchun idish",
-  price: 41000,
+  price: 69000,
   images: { main: "images/non.jpeg", hover: "images/non2.jpeg",},
   
   colors: [],                // <-- shu qator yetadi
@@ -347,12 +347,12 @@ colors: [
   slug: "non o",
   code: "2-3",
   title: "Nonlarni qoyish uchun dumoloq idish",
-  price: 41000,
+  price: 68000,
   images: { main: "images/domolo1.jpeg", hover: "images/dumolo2.jpeg",},
   
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
-  bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
+  bullets: ["5talik", "25sm", "Yengil va mustahkam"],
   stock: 2
 },
 
@@ -360,13 +360,13 @@ colors: [
   slug: "qurt",
   code: "4-41,42",
   title: "Quruq mahsulotlar uchun idish",
-  price: 41000,
+  price: 33000,
   images: { main: "images/qurt1.jpeg", hover: "images/big.jpeg",},
    sizes: ["Katta","Kichik",],
-  sizePrices: { Katta: 36000, Kichigi: 39000 },
+  sizePrices: { Katta: 33000, Kichigi: 43000 },
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
-  bullets: ["Zangga chidamli korpus", "Kattasi 30sm, kichigi 25sm", "Yengil va mustahkam"],
+  bullets: ["Kichigi 25sm", "Kattasi 30sm, kichigi 25sm", "Yengil va mustahkam"],
   stock: 2
 },
 
@@ -374,7 +374,7 @@ colors: [
   slug: "krush",
   code: "4-40",
   title: "Chashka ilgich",
-  price: 41000,
+  price: 32000,
   images: { main: "images/kursh1.jpeg", hover: "images/krush.jpeg",},
  
   colors: [],                // <-- shu qator yetadi
@@ -387,7 +387,7 @@ colors: [
   slug: "salfet",
   code: "4-39",
   title: "Salfetka tutgich",
-  price: 41000,
+  price: 29000,
   images: { main: "images/salfet1.jpeg", hover: "images/salfet2.jpeg",},
  
   colors: [],                // <-- shu qator yetadi
@@ -400,7 +400,7 @@ colors: [
   slug: "hleb",
   code: "4-32",
   title: "Nonlar uchun idish",
-  price: 41000,
+  price: 199000,
   images: { main: "images/hleb1.jpeg", hover: "images/hleb2.jpeg",},
  
   colors: [],                // <-- shu qator yetadi
@@ -415,7 +415,7 @@ colors: [
  { slug: "cup",
   code: "4-18",
   title: "Yog'och chaskalar",
-  price: 41000,
+  price: 39000,
   images: { main: "images/cup1.jpeg", hover: "images/cup2.jpeg",},
  
   colors: [],                // <-- shu qator yetadi
@@ -428,7 +428,7 @@ colors: [
  { slug: "zirvor",
   code: "4-17",
   title: "Yog'och chaskalar",
-  price: 41000,
+  price: 39000,
   images: { main: "images/cups1.jpeg", hover: "images/cups2.jpeg",},
  
   colors: [],                // <-- shu qator yetadi
@@ -442,7 +442,7 @@ colors: [
  { slug: "bowl",
   code: "4-16",
   title: "Yog'och kosa",
-  price: 41000,
+  price: 49000,
   images: { main: "images/bowl1.jpeg", hover: "images/bowl.jpeg",},
  
   colors: [],                // <-- shu qator yetadi
@@ -456,7 +456,7 @@ colors: [
  { slug: "tahta",
   code: "4-9",
   title: "Nabor tahtakach",
-  price: 41000,
+  price: 69000,
   images: { main: "images/tahtakach1.jpeg", hover: "images/tahtakach.jpeg",},
  
   colors: [],                // <-- shu qator yetadi
@@ -468,13 +468,13 @@ colors: [
  { slug: "tahtakacok",
   code: "4-6,7,8",
   title: "Tahtakach",
-  price: 41000,
+  price: 45000,
   images: { main: "images/small.jpeg", hover: "images/tahta1.jpg",},
    sizes: ["Katta","Ortancha","kichik"],
-  sizePrices: { Katta: 46000,Ortancha: 60000, kichik: 46000 },
+  sizePrices: { Katta: 51000,Ortancha: 48000, kichik: 45000 },
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
-  bullets: ["Natural tahtali korpus", "", "Yengil va mustahkam"],
+  bullets: ["kattasi: 26x36", "Ortanchasi: 28x38", "Kattasi: 30x40"],
   stock: 2
 },
  
@@ -483,7 +483,7 @@ colors: [
   badge : "yangi",
   code: "7-13",
   title: "Pishiriqlar uchun qolip",
-  price: 41000,
+  price: 79000,
   images: { main: "images/6:1.jpeg", hover: "images/6:1 2.jpeg",},
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
@@ -494,10 +494,10 @@ colors: [
  { slug: "3,1",
   code: "14-3,4,5",
   title: "Pishiriqlar uchun qolip",
-  price: 41000,
+  price: 19000,
   images: { main: "images/cake1.jpeg", hover: "images/cake2.jpeg",},
    sizes: ["Katta","Ortancha","Kichik",],
-  sizePrices: { Katta: 36000,Ortancha: 324234, Kichigi: 39000 },
+  sizePrices: { Katta: 25000,Ortancha: 21000, Kichigi: 19000 },
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
   bullets: ["Zangga schidamli korpu", "Zangga chidamli korpus", "Yengil va mustahkam"],
@@ -508,7 +508,7 @@ colors: [
  { slug: "tahatchak",
   code: "14-2",
   title: "rangli tahtakach",
-  price: 41000,
+  price: 79000,
   images: { main: "images/qizl1.jpeg", hover: "images/qizil2.jpeg",},
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
@@ -519,7 +519,7 @@ colors: [
  { slug: "tahatchakkok",
   code: "14-1",
   title: "rangli tahtakach",
-  price: 41000,
+  price: 79000,
   images: { main: "images/kok1.jpeg", hover: "images/kok2.jpeg",},
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
@@ -535,7 +535,7 @@ colors: [
   price: 41000,
   images: { main: "images/salat1.jpeg", hover: "images/size.jpeg" },
   sizes: ["Katta","Kichik",],
-  sizePrices: { Katta: 36000, Kichik: 39000 },
+  sizePrices: { Katta: 27000, Kichik: 25000 },
   colors: [],                // <-- shu qator yetadi
   tags: ["kitchen","home"],
   bullets: ["Zangga chidamli korpus", "Yuvish oson", "Yengil va mustahkam"],
@@ -547,7 +547,7 @@ colors: [
   slug: "food",
   code: "12-4",
   title: "Ovqat solish uchun container",
-  price: 41000,
+  price: 69000,
   images: { main: "images/food 1.jpeg", hover: "images/food 2.jpeg" },
 
   colors: [],                // <-- shu qator yetadi
@@ -561,7 +561,7 @@ colors: [
   slug: "ovqat",
   code: "12-3",
   title: "Ovqat solish uchun container",
-  price: 41000,
+  price: 79000,
   images: { main: "images/ovqat1.jpeg", hover: "images/ovqat 2.jpeg" },
 
   colors: [],                // <-- shu qator yetadi
@@ -575,7 +575,7 @@ colors: [
   badge : "yangi",
   code: "9-22",
   title: "Choy va coffe uchun termiz",
-  price: 41000,
+  price: 49000,
   images: { main: "images/termiz1.jpeg", hover: "images/termiz2.jpeg" },
   colors: [
   { name: "Sariq", hex: "#fffa6dff", image: "images/termiz1.jpeg" },
@@ -594,7 +594,7 @@ colors: [
   badge : "yangi",
   code: "9-20",
   title: "Choy va suv uchun termiz",
-  price: 41000,
+  price: 57000,
   images: { main: "images/6 1.jpeg", hover: "images/6 2.jpeg" },
   colors: [
     { name: "Qora", hex: "#000000ff", image: "images/6 1.jpeg" },
@@ -633,7 +633,7 @@ colors: [
   badge : "yangi",
   code: "9-18",
   title: "Bolalar uchun termiz",
-  price: 41000,
+  price: 59000,
   images: { main: "images/ter1.jpeg", hover: "images/ter2.jpeg" },
   colors: [
     { name: "Pushti", hex: "#fe8c8cff", image: "images/ter1.jpeg" },
@@ -1225,8 +1225,46 @@ colors: [
   stock: 2
 },
 
+{
+  slug: "lounchbox11",
+  badge : "yangi",
+  code: "2-33",
+  title: "Bolalar uchun 2tasi birda lounch box",
+  price: 41000,
+  images: { main: "images/lol3.jpeg", hover: "images/lol4.jpeg" },
+  colors: [
+    { name: "Yashil", hex: "#008248ff", image: "images/lol3.jpeg" },
+    { name: "Qizil", hex: "#8c0000ff", image: "images/lol3.jpeg" },
+ { name: "Siyohrang", hex: "#0084dcff", image: "images/lol3.jpeg" },
+   
+      
+       
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Lounch box + suv idish", "Ovqatni barra saqlab beradi", "Yengil va mustahkam"],
+  stock: 2
+},
 
 
+{
+  slug: "lounchbox12",
+  badge : "yangi",
+  code: "2-32",
+  title: "Bolalar uchun 2tasi birda lounch box",
+  price: 41000,
+  images: { main: "images/lol3.jpeg", hover: "images/lol4.jpeg" },
+  colors: [
+    { name: "Yashil", hex: "#008248ff", image: "images/lol3.jpeg" },
+    { name: "Qizil", hex: "#8c0000ff", image: "images/lol3.jpeg" },
+ { name: "Siyohrang", hex: "#0084dcff", image: "images/lol3.jpeg" },
+   
+      
+       
+],                // <-- shu qator yetadi
+  tags: ["kids","kids"],
+  bullets: ["Lounch box + suv idish", "Ovqatni barra saqlab beradi", "Yengil va mustahkam"],
+  stock: 2
+},
 
 
 
