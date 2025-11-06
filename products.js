@@ -633,7 +633,7 @@ colors: [
   badge : "yangi",
   code: "9-18",
   title: "Bolalar uchun termiz",
-  price: 59000,
+  price: 64000,
   images: { main: "images/ter1.jpeg", hover: "images/ter2.jpeg" },
   colors: [
     { name: "Pushti", hex: "#fe8c8cff", image: "images/ter1.jpeg" },
@@ -653,7 +653,7 @@ colors: [
   badge : "yangi",
   code: "9-17",
   title: "Coffee va choy solib yurish uchun termiz",
-  price: 41000,
+  price: 69000,
   images: { main: "images/tmz1.jpeg", hover: "images/miz1.jpeg" },
   colors: [
     { name: "Qora", hex: "#000000ff", image: "images/tmz1.jpeg" },
@@ -674,7 +674,7 @@ colors: [
   badge : "yangi",
   code: "9-16",
   title: "Coffee va choy solib yurish uchun termiz",
-  price: 41000,
+  price: 69000,
   images: { main: "images/mrz1.jpeg", hover: "images/mrz2.jpeg" },
   colors: [
      { name: "Pushti", hex: "#fb92beff", image: "images/mrz1.jpeg" },
@@ -699,7 +699,7 @@ colors: [
   badge : "yangi",
   code: "9-15",
   title: "Kosmanaftlik termiz",
-  price: 41000,
+  price: 69000,
   images: { main: "images/kosms1.jpeg", hover: "images/kosms2.jpeg" },
   colors: [
      { name: "Oq otirgan kosmanaft", hex: "#fafafaff", image: "images/kosms1.jpeg" },
@@ -724,7 +724,7 @@ colors: [
   badge : "yangi",
   code: "9-14",
   title: "Kosmanaftlik termiz",
-  price: 41000,
+  price: 69000,
   images: { main: "images/happy2.jpeg", hover: "images/happy1.jpeg" },
   colors: [
      { name: "Yashil", hex: "#6fae6cff", image: "images/happy2.jpeg" },
@@ -743,7 +743,7 @@ colors: [
   badge : "yangi",
   code: "9-13",
   title: "Chiroylik termiz",
-  price: 41000,
+  price: 69000,
   images: { main: "images/3 1.jpeg", hover: "images/3 2.jpeg" },
   colors: [
      { name: "Yashil", hex: "#6fae6cff", image: "images/happy2.jpeg" },
@@ -763,7 +763,7 @@ colors: [
   badge : "yangi",
   code: "9-12",
   title: "Pandalik termiz",
-  price: 41000,
+  price: 69000,
   images: { main: "images/2 2.jpeg", hover: "images/2 1.jpeg" },
   colors: [
       { name: "Qaymoq rang", hex: "#dfc900ff", image: "images/2 2.jpeg" },
@@ -787,7 +787,7 @@ colors: [
   badge : "yangi",
   code: "9-11",
   title: "rangli termiz",
-  price: 41000,
+  price: 69000,
   images: { main: "images/12 2.jpeg", hover: "images/12 3.jpeg" },
   colors: [
       { name: "Ko'k", hex: "#000970ff", image: "images/12 2.jpeg" },
@@ -808,7 +808,7 @@ colors: [
   badge : "yangi",
   code: "9-10",
   title: "chiroyli termiz",
-  price: 41000,
+  price: 69000,
   images: { main: "images/uh.jpeg", hover: "images/uh2.jpeg" },
   colors: [
       { name: "Ko'k", hex: "#4fd0ffff", image: "images/uh.jpeg" },
@@ -828,7 +828,7 @@ colors: [
   badge : "yangi",
   code: "9-9",
   title: "rangli termiz",
-  price: 41000,
+  price: 69000,
   images: { main: "images/thri 2.jpeg", hover: "images/thri 1.jpeg" },
   colors: [
      { name: "Pushti", hex: "#ff9bd0ff", image: "images/thri 2.jpeg" },
@@ -847,7 +847,7 @@ colors: [
   badge : "yangi",
   code: "9-7",
   title: "rangli termiz",
-  price: 41000,
+  price: 69000,
   images: { main: "images/shu1.jpeg", hover: "images/shu2.jpeg" },
   colors: [
      { name: "Pushti", hex: "#ff9bd0ff", image: "images/shu1.jpeg" },
@@ -866,7 +866,7 @@ colors: [
   badge : "yangi",
   code: "9-6",
   title: "rangli termiz",
-  price: 41000,
+  price: 69000,
   images: { main: "images/yon.jpeg", hover: "images/panda2.jpeg" },
   colors: [
      { name: "Pushti", hex: "#ff9bd0ff", image: "images/yon.jpeg" },
@@ -887,7 +887,7 @@ colors: [
   badge : "yangi",
   code: "9-8",
   title: "Pandalik termiz",
-  price: 41000,
+  price: 69000,
   images: { main: "images/it.jpeg", hover: "images/it2.jpeg" },
   colors: [
       { name: "Oq", hex: "#dededeff", image: "images/it.jpeg" },
@@ -908,7 +908,7 @@ colors: [
   badge : "yangi",
   code: "9-5",
   title: "Hayvonlik termiz",
-  price: 41000,
+  price: 69000,
   images: { main: "images/panda.jpeg", hover: "images/panda3.jpeg" },
   colors: [
       { name: "Sheep", hex: "#f0afd1ff", image: "images/panda.jpeg" },
@@ -927,7 +927,7 @@ colors: [
   badge : "yangi",
   code: "9-4",
   title: "Termiz",
-  price: 41000,
+  price: 69000,
   images: { main: "images/money1.jpeg", hover: "images/money2.jpeg" },
   colors: [
       { name: "Ko'k", hex: "#65f7ffff", image: "images/money1.jpeg" },
@@ -945,7 +945,7 @@ colors: [
   badge : "yangi",
   code: "9-3",
   title: "Termiz",
-  price: 41000,
+  price: 69000,
   images: { main: "images/luck1.jpeg", hover: "images/luck2.jpeg" },
   colors: [
       { name: "Pushti", hex: "#f791b5ff", image: "images/luck1.jpeg" },
@@ -964,7 +964,7 @@ colors: [
   badge : "yangi",
   code: "9-2",
   title: "Termiz",
-  price: 41000,
+  price: 69000,
   images: { main: "images/hu1.jpeg", hover: "images/hu2.jpeg" },
   colors: [
     { name: "Qo'ra", hex: "#000000ff", image: "images/hu1.jpeg" },
@@ -985,7 +985,7 @@ colors: [
   badge : "yangi",
   code: "9-1",
   title: "Termiz",
-  price: 41000,
+  price: 69000,
   images: { main: "images/pusht2.jpeg", hover: "images/pusht1.jpeg" },
   colors: [
     { name: "Jigarang", hex: "#955c17ff", image: "images/pusht2.jpeg" },
@@ -1007,7 +1007,7 @@ colors: [
   badge : "yangi",
   code: "2-53",
   title: "Bolalar uchun 2tasi birda lounch box",
-  price: 41000,
+  price: 44000,
   images: { main: "images/box3.jpeg", hover: "images/box1.jpeg" },
   colors: [
     { name: "Yashil", hex: "#3aff1cff", image: "images/box1.jpeg" },
@@ -1025,7 +1025,7 @@ colors: [
   badge : "yangi",
   code: "2-52",
   title: "Bolalar uchun 2tasi birda lounch box",
-  price: 41000,
+  price: 44000,
   images: { main: "images/olov2.jpeg", hover: "images/olov1.jpeg" },
   colors: [
    
@@ -1050,7 +1050,7 @@ colors: [
   badge : "yangi",
   code: "2-51",
   title: "Bolalar uchun lounch box",
-  price: 41000,
+  price: 49000,
   images: { main: "images/muz1.jpeg", hover: "images/muz2.jpeg" },
   colors: [
 
@@ -1076,7 +1076,7 @@ colors: [
   badge : "yangi",
   code: "2-51",
   title: "Bolalar uchun 2tasi birda lounch box",
-  price: 41000,
+  price: 49000,
   images: { main: "images/sovu1.jpeg", hover: "images/sovu2.jpeg" },
   colors: [
 
@@ -1100,7 +1100,7 @@ colors: [
   badge : "yangi",
   code: "2-48",
   title: "Bolalar uchun 2tasi birda lounch box",
-  price: 41000,
+  price: 44000,
   images: { main: "images/uh4.jpeg", hover: "images/uh1.jpeg" },
   colors: [
 
@@ -1123,7 +1123,7 @@ colors: [
   badge : "yangi",
   code: "2-47",
   title: "Bolalar uchun 2tasi birda lounch box",
-  price: 41000,
+  price: 44000,
   images: { main: "images/solve1.jpeg", hover: "images/solve2.jpeg" },
   colors: [
 
@@ -1143,7 +1143,7 @@ colors: [
   badge : "yangi",
   code: "2-46",
   title: "Bolalar uchun 2tasi birda lounch box",
-  price: 41000,
+  price: 44000,
   images: { main: "images/re1.jpeg", hover: "images/re2.jpeg" },
   colors: [
 
@@ -1164,7 +1164,7 @@ colors: [
   badge : "yangi",
   code: "2-45",
   title: "Bolalar uchun 2tasi birda lounch box",
-  price: 41000,
+  price: 44000,
   images: { main: "images/sariq2.jpeg", hover: "images/sariq1.jpeg" },
   colors: [
 
@@ -1185,7 +1185,7 @@ colors: [
   badge : "yangi",
   code: "2-35",
   title: "Bolalar uchun 2tasi birda lounch box",
-  price: 41000,
+  price: 49000,
   images: { main: "images/ot1.jpeg", hover: "images/ot2.jpeg" },
   colors: [
 
@@ -1208,7 +1208,7 @@ colors: [
   badge : "yangi",
   code: "2-34",
   title: "Bolalar uchun 2tasi birda lounch box",
-  price: 41000,
+  price: 49000,
   images: { main: "images/uh5.jpeg", hover: "images/uh3.jpeg" },
   colors: [
  { name: "Siyohrang", hex: "#400094ff", image: "images/uh5.jpeg" },
@@ -1230,7 +1230,7 @@ colors: [
   badge : "yangi",
   code: "2-33",
   title: "Bolalar uchun 2tasi birda lounch box",
-  price: 41000,
+  price: 49000,
   images: { main: "images/lol3.jpeg", hover: "images/lol4.jpeg" },
   colors: [
     { name: "Yashil", hex: "#008248ff", image: "images/lol3.jpeg" },
@@ -1251,7 +1251,7 @@ colors: [
   badge : "yangi",
   code: "2-32",
   title: "Bolalar uchun 2tasi birda lounch box",
-  price: 41000,
+  price: 49000,
   images: { main: "images/lol3.jpeg", hover: "images/lol4.jpeg" },
   colors: [
     { name: "Yashil", hex: "#008248ff", image: "images/lol3.jpeg" },
