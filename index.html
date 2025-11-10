@@ -168,7 +168,17 @@
 
 <section class="intro-products container">
   <h2 class="section-title">Yangi kelganlar</h2>
-  <div id="prodGrid" class="prod-grid"></div>
+  <div id="prodGrid" class="prod-grid">
+  <!-- Skeleton placeholders -->
+  <div class="prod-card skeleton"></div>
+  <div class="prod-card skeleton"></div>
+  <div class="prod-card skeleton"></div>
+  <div class="prod-card skeleton"></div>
+  <div class="prod-card skeleton"></div>
+  <div class="prod-card skeleton"></div>
+  <div class="prod-card skeleton"></div>
+  <div class="prod-card skeleton"></div>
+</div>
 </section>
 
 
@@ -287,34 +297,30 @@ function bannerHTML(b){
 }
 
 (function renderGridWithBanners(){
-  // Asl ma’lumotni buzmaymiz — nusxa olamiz
+  const grid = document.getElementById('prodGrid');
+  grid.classList.add('loading'); // show skeletons first
+
   const src = Array.isArray(window.products) ? window.products : [];
   const banners = (window.banners || []).slice();
 
-  // Debug uchun shuffle’ni o‘chirib ko‘rish: ?noshuffle=1
   const noShuffle = location.search.includes('noshuffle=1');
-
-  // Deterministik shuffle (sessiya bo‘yicha)
   const items = noShuffle ? src.slice() : shuffleDet(src.slice(), getSessionRng());
 
-  // Banner aylantirgich
   let bIndex = 0;
-  const pickBanner = () => {
-    if (!banners.length) return null;
-    const b = banners[bIndex % banners.length];
-    bIndex++;
-    return b;
-  };
-
+  const pickBanner = () => banners[bIndex++ % banners.length];
   const out = [];
+
   for (let i = 0; i < items.length; i++) {
     out.push(cardHTML(items[i]));
-    if ((i+1) % 8 === 0) {
+    if ((i + 1) % 8 === 0) {
       const b = pickBanner();
       if (b) out.push(bannerHTML(b));
     }
   }
+
+  // Replace skeletons with real products
   grid.innerHTML = out.join('');
+  grid.classList.remove('loading');
 })();
 
 
