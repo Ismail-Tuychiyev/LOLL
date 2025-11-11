@@ -11,14 +11,7 @@
 <body>
 
 
-<!-- Splash (full screen) -->
-<div id="splash" class="splash" aria-hidden="true">
-  <div class="splash__inner">
-    <!-- LOGO joyi: bu <img>ni o'zingni logong bilan almashtirasan -->
-    <img class="splash__logo" src="images/logo chinova.png" alt="CHINOVA">
-    <div class="splash__title">Xush kelibsiz!</div>
-  </div>
-</div>
+
 
 
 <!-- ANNOUNCEMENT BAR -->
@@ -490,53 +483,7 @@ function scoreProduct(p, q){
 </script>
 
 
-<script>
-(function () {
-  const splash   = document.getElementById('splash');
-  if (!splash) return;
 
-  // Navigation turi: reload/back-forward bo‘lsa splash kerak emas
-  const nav = performance.getEntriesByType('navigation')[0];
-  const isReload      = nav?.type === 'reload';
-  const isBackForward = nav?.type === 'back_forward';
-
-  // Referrer tekshiruvi: tashqi domenmi?
-  let showBecauseExternal = false;
-  try {
-    if (document.referrer) {
-      const refOrigin = new URL(document.referrer).origin;
-      showBecauseExternal = refOrigin !== location.origin;
-    }
-  } catch (e) { /* xotirjam, fallback ishlaydi */ }
-
-  // Adrestdan to‘g‘ri kirish (referrer yo‘q): shu TAB sessiyasida 1 marta ko‘rsatamiz
-  const directKey = 'chinova_direct_splash_shown';
-  const isDirectFirstTime = !document.referrer && !sessionStorage.getItem(directKey);
-
-  // Yakuniy qaror
-  const shouldShow =
-    !isReload && !isBackForward && (showBecauseExternal || isDirectFirstTime);
-
-  if (!shouldShow) {
-    // Ko‘rsatmaymiz: darrov olib tashlaymiz (FOUC bo‘lmasin)
-    splash.remove();
-    return;
-  }
-
-  if (isDirectFirstTime) {
-    sessionStorage.setItem(directKey, '1');
-  }
-
-  // Splash 4s => so‘nadi => DOMdan olib tashlaymiz
-  const SPLASH_DURATION = 0; // ms
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      splash.classList.add('is-hide');
-      setTimeout(() => splash.remove(), 700); // CSS transition bilan mos
-    }, SPLASH_DURATION);
-  });
-})();
-</script>
 
 <script src="cart.js"></script>
 
