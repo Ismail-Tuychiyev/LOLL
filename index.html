@@ -296,32 +296,41 @@ function bannerHTML(b){
   `;
 }
 
-(function renderGridWithBanners(){
+window.addEventListener('DOMContentLoaded', () => {
   const grid = document.getElementById('prodGrid');
-  grid.classList.add('loading'); // show skeletons first
 
-  const src = Array.isArray(window.products) ? window.products : [];
-  const banners = (window.banners || []).slice();
+  // keep skeletons until products are ready
+  grid.classList.add('loading');
 
-  const noShuffle = location.search.includes('noshuffle=1');
-  const items = noShuffle ? src.slice() : shuffleDet(src.slice(), getSessionRng());
+  // wait for products.js to be ready
+  const checkProducts = setInterval(() => {
+    if (Array.isArray(window.products) && window.products.length > 0) {
+      clearInterval(checkProducts);
 
-  let bIndex = 0;
-  const pickBanner = () => banners[bIndex++ % banners.length];
-  const out = [];
+      const src = window.products.slice();
+      const banners = (window.banners || []).slice();
 
-  for (let i = 0; i < items.length; i++) {
-    out.push(cardHTML(items[i]));
-    if ((i + 1) % 8 === 0) {
-      const b = pickBanner();
-      if (b) out.push(bannerHTML(b));
+      const noShuffle = location.search.includes('noshuffle=1');
+      const items = noShuffle ? src : shuffleDet(src, getSessionRng());
+
+      let bIndex = 0;
+      const pickBanner = () => banners[bIndex++ % banners.length];
+      const out = [];
+
+      for (let i = 0; i < items.length; i++) {
+        out.push(cardHTML(items[i]));
+        if ((i + 1) % 8 === 0) {
+          const b = pickBanner();
+          if (b) out.push(bannerHTML(b));
+        }
+      }
+
+      // show real products
+      grid.innerHTML = out.join('');
+      grid.classList.remove('loading');
     }
-  }
-
-  // Replace skeletons with real products
-  grid.innerHTML = out.join('');
-  grid.classList.remove('loading');
-})();
+  }, 100); // checks every 100ms until products.js is ready
+});
 
 
 
